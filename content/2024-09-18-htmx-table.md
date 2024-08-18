@@ -12,7 +12,18 @@ I recently tried HTMX for my new project - [ghstats](https://github.com/vladkens
 
 To demonstrate table sorting and pagination, I'll be using the same stack I used for my service: `axum` as a backend framework and `maud` for HTML templating (it's a DSL over Rust templates).
 
-Let's create new project with: `cargo init htmx-example && cd-html-example`. Then install dependencies: `cargo add tokio axum maud --features tokio/full,maud/axum` and do initial setup in `src/main.rs` file:
+Let's create new project with:
+
+```sh
+cargo init htmx-example && cd-html-example
+```
+
+Then install dependencies:
+```sh
+cargo add tokio axum maud --features tokio/full,maud/axum
+```
+
+and do initial setup in `src/main.rs` file:
 
 ```rust
 use axum::{response::IntoResponse, routing::get, Router};
@@ -36,7 +47,13 @@ Then we cant run this with `cargo watch -x run` and open `http://127.0.0.1:8080`
 
 ## Creating a static table
 
-Let's add crates to generate random data: `cargo add fake rand rand_chacha --features fake/derive` and define simple `Contact` struct (like our application is simple CMS).
+Let's add crates to generate random data:
+
+```sh
+cargo add fake rand rand_chacha --features fake/derive
+```
+
+and define simple `Contact` struct (like our application is simple CMS).
 
 ```rust
 use fake::faker::company::en::*;
