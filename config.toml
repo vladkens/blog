@@ -1,4 +1,4 @@
-base_url = "https://example.com"
+base_url = "/"
 title = "notes"
 compile_sass = false
 build_search_index = false
