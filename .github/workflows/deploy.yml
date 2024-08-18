@@ -1,0 +1,31 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.19.1
+
+      - run: |
+          git submodule add https://github.com/not-matthias/apollo themes/apollo
+          zola build
+
+      - uses: cloudflare/pages-action@v1
+        if: github.ref == 'refs/heads/main'
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: timewiz
+          directory: public
