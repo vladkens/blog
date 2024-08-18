@@ -19,7 +19,7 @@ jobs:
           tool: zola@0.19.1
 
       - run: |
-          git submodule add https://github.com/not-matthias/apollo themes/apollo
+          git submodule add -f https://github.com/not-matthias/apollo themes/apollo
           zola build
 
       - uses: cloudflare/pages-action@v1
