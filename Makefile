@@ -1,2 +1,2 @@
 dev:
-	zola build && zola server
+	zola build && zola serve

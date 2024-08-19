@@ -3,7 +3,7 @@ title: REST API Deployment on AWS Lambda with Terraform (2023)
 slug: aws-python-lambda
 date: 2023-10-12
 taxonomies:
-  tags: ["aws", "python", "lambda"]
+  tags: ["aws", "devops", "terraform", "python"]
 ---
 
 In this article I will show the way how to deploy AWS Lambda using Terraform, with support for code updates in a single workflow.

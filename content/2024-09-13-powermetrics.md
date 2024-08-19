@@ -3,7 +3,7 @@ title: How to get macOS power metrics with Rust?
 slug: powermetrics-macos
 date: 2024-09-13
 taxonomies:
-  tags: ["rust", "macos", "cli", "powermetrics"]
+  tags: ["rust", "macos", "cli"]
 ---
 
 In this post, I’m going to talk about how [macmon](https://github.com/vladkens/macmon) works, specifically where it gets system metrics.
