@@ -3,7 +3,7 @@ title: REST API Deployment on AWS Lambda with Terraform (2023)
 slug: aws-python-lambda
 date: 2023-10-12
 taxonomies:
-  tags: ["aws", "devops", "terraform", "python"]
+  tags: ["aws", "tutorial", "terraform", "python"]
 ---
 
 In this article I will show the way how to deploy AWS Lambda using Terraform, with support for code updates in a single workflow.
@@ -13,6 +13,7 @@ The problem with AWS Lambda is that at the time of its creation we need to have 
 In this article I will use the Docker image as source for AWS Lambda, as it is essentially the only one normal way to run any complex applications in Lambda that have external dependencies (libraries). There is a way to package the dependencies in a zip archive too, but if the architecture of the computer where the dependencies were built is different from the one where AWS Lambda runs, there will be problems. That’s why Docker is the most clear and reliable option.
 
 So this article will explore the creation of such resources:
+
 - Simple HTTP server on Python with FastAPI
 - Docker image to that application
 - Creating ECR storage
@@ -79,6 +80,7 @@ if __name__ == "__main__":
 This code runs the `FastAPI` service, so we can write basically as much complex API as we want. `Mangum` is a wrapper for the Lambda API, it does all the request processing logic in Lambda internally, allowing `FastAPI` to work normally. The code in the `__name__ == "__main__"` section is needed to run the application during development — we can write our API locally as usual.
 
 The following library should be added to `requirements.txt`:
+
 ```
 fastapi==0.103.2
 mangum==0.17.0

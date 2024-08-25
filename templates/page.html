@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<article>
+  <header>
+    <h1>{{ page.title }}</h1>
+    <div>
+      Posted at <time>{{ page.date | date(format="%Y-%m-%d") }}</time> ({{ page.word_count }} words, {{ page.reading_time }} minute{{ page.reading_time | pluralize }} to read)
+
+      {% if page.taxonomies.tags | length > 0 %}
+        <br />Tags:
+        {%- for tag in page.taxonomies.tags -%}
+          {% if not loop.first %}, {% endif %}
+          <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="post-tag">{{ tag }}</a>
+        {%- endfor -%}
+      {% endif %}
+
+      {% if page.extra | length > 0 %}
+        <br />Also read on:
+        {%- for key, value in page.extra -%}
+          {% if not loop.first %}, {% endif %}
+          <a target="_blank" href="{{ value }}">{{ key }}</a>
+        {%- endfor -%}
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.toc %}
+  <details>
+    <summary>Table of Contents</summary>
+    <ul>
+    {% for h1 in page.toc %}
+    <li>
+      <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+    </li>
+    {% endfor %}
+    </ul>
+  </details>
+  {% endif %}
+
+  {{ page.content | safe }}
+</article>
+{% endblock main_content %}

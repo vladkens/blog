@@ -3,10 +3,13 @@ title: Table sorting and pagination with HTMX
 slug: htmx-table-sorting
 date: 2024-09-18
 taxonomies:
-  tags: ["htmx", "rust"]
+  tags: ["tutorial", "rust", "htmx", "webdev"]
+extra:
+  medium: https://medium.com/p/7af8416f2b30
+  devto: https://dev.to/vladkens/table-sorting-and-pagination-with-htmx-3dh8
 ---
 
-I recently tried HTMX for my new project - [ghstats](https://github.com/vladkens/ghstats) - a dashboard of Github repository traffic in a single interface for longer than 14 days. This project was planned as a self-hosted service, so I was thinking about a really simple and memory-less tech stack. Last time I played with Rust, so I decided to use it instead of NodeJS / Python. Of course, if I'm generating static HTML on the server side, I have two options for implementing table sorting and pagination: use query parameters and do everything on backend, or use some JavaScript to call data from the backend and render the table on the client side. But HTMX offers a new, third way: write all the logic on the backend and replace the necessary parts of HTML with just a few tag attributes. Let's see how it works.
+I recently tried HTMX for my new project – [ghstats](https://github.com/vladkens/ghstats) – a dashboard of Github repository traffic in a single interface for longer than 14 days. This project was planned as a self-hosted service, so I was thinking about a really simple and memory-less tech stack. Last time I played with Rust, so I decided to use it instead of NodeJS / Python. Of course, if I'm generating static HTML on the server side, I have two options for implementing table sorting and pagination: use query parameters and do everything on backend, or use some JavaScript to call data from the backend and render the table on the client side. But HTMX offers a new, third way: write all the logic on the backend and replace the necessary parts of HTML with just a few tag attributes. Let's see how it works.
 
 ## Initial setup
 
@@ -19,6 +22,7 @@ cargo init htmx-example && cd-html-example
 ```
 
 Then install dependencies:
+
 ```sh
 cargo add tokio axum maud --features tokio/full,maud/axum
 ```
@@ -279,6 +283,7 @@ async fn index_page(req: Request) -> impl IntoResponse {
 ```
 
 That's it! Now we can sort our table by clicking on the column header. HTMX will send a request to the server with sorting parameters and replace the table with the new sorted data. Let's me explain HTMX attributes:
+
 - `hx-trigger` - event which will trigger the request, in our case it's `click`
 - `hx-get` - URL to send the request and HTTP method (can be GET or POST)
 - `hx-target` - CSS selector to replace with new data
@@ -326,7 +331,7 @@ fn calc_pagination(page: usize, total: usize, len: usize) -> Vec<Option<usize>> 
 }
 ```
 
-Let's defina two more helper function which will render pagination link and delimiter (like `...`):
+Let's define two more helper function which will render pagination link and delimiter (like `...`):
 
 ```rust
 fn pagination_link(qs: &TableFilter, i: u32) -> maud::Markup {
@@ -379,13 +384,13 @@ async fn index_page(req: Request) -> impl IntoResponse {
 		// ..
 		// add pagination call after table
 		(pagination(pages, &qs))
-	}
+	})
 }
 ```
 
 ## Partial HTML updates
 
-Before this step, we always replaced the whole page with new HTML content. This can be done without HTMX at all, so what the point of using it? It's right, we have very simple layout before. Let's make it more complex to show nice feature of HTMX - partial updates.
+Before this step, we always replaced the whole page with new HTML content. This can be done without HTMX at all, so what the point of using it? It's right, we have very simple layout before. Let's make it more complex to show nice feature of HTMX – partial updates.
 
 First of all let's move table generation into separate function:
 
@@ -473,7 +478,9 @@ async fn index_page(req: Request) -> impl IntoResponse {
 }
 ```
 
-So in this code we check if `hx-target` header is present. If not - we return full page. If it's present and equal to `contacts_table` - we return only table. This is how partial updates works in HTMX. We can split page to smaller parts and update it independently.
+So in this code we check if `hx-target` header is present. If not – we return full page. If it's present and equal to `contacts_table` – we return only table. This is how partial updates works in HTMX. We can split page to smaller parts and update it independently.
+
+Full code from this article can be found [here](https://github.com/vladkens/blog_code/tree/main/rust-htmx-table-sorting).
 
 ## Conclusion
 

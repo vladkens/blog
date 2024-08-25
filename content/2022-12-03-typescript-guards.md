@@ -88,14 +88,14 @@ type AnyObject = Record<string, any>;
 
 // https://stackoverflow.com/a/52991061
 type RequiredKeys<T> = {
-  [K in keyof T]-?: AnyObject extends Pick<T, K> ? never : K
+  [K in keyof T]-?: AnyObject extends Pick<T, K> ? never : K;
 }[keyof T];
 
 const createShapeGuard = <T extends AnyObject>(...keys: RequiredKeys<T>[]) => {
   return (obj: unknown): obj is T => {
     if (typeof obj !== "object" || obj === null) return false;
 
-    for (const key of (keys as string[])) {
+    for (const key of keys as string[]) {
       if (!(key in obj)) return false;
     }
 
@@ -107,8 +107,8 @@ const createShapeGuard = <T extends AnyObject>(...keys: RequiredKeys<T>[]) => {
 Now let’s rewrite our Type Guards in a new way:
 
 ```tsx
-const isLooseTea = createShapeGuard<LooseTea>("weight")
-const isBaggedTea = createShapeGuard<BaggedTea>("bags", "weightPerBag")
+const isLooseTea = createShapeGuard<LooseTea>("weight");
+const isBaggedTea = createShapeGuard<BaggedTea>("bags", "weightPerBag");
 ```
 
 Everything works fine now. If we change the data structure again in the future, TypeScript will check and tell us that there is now an error in our Type Guard:
@@ -117,7 +117,7 @@ Everything works fine now. If we change the data structure again in the future, 
 type BaggedTea = Tea & { bags: number; bagWeight: number };
 
 // Argument of type '"weightPerBag"' is not assignable to parameter of type 'RequiredKeys<BaggedTea>'.ts(2345)
-const isBaggedTea = createShapeGuard<BaggedTea>("bags", "weightPerBag")
+const isBaggedTea = createShapeGuard<BaggedTea>("bags", "weightPerBag");
 ```
 
 ---

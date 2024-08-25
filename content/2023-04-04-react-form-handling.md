@@ -83,10 +83,13 @@ To do this, we first need to write some TypeScript helpers to get a list of fiel
 import { Primitive } from "react-hook-form";
 
 type NestedImpl<K extends string | number, V, T> = V extends T
-  ? K : V extends Primitive | Array<infer V> ? never : `${K}.${NestedByType<V, T>}`;
+  ? K
+  : V extends Primitive | Array<infer V>
+    ? never
+    : `${K}.${NestedByType<V, T>}`;
 
 export type NestedByType<O, T> = {
-  [K in keyof O]-?: K extends string ? NestedImpl<K, O[K], T> : never
+  [K in keyof O]-?: K extends string ? NestedImpl<K, O[K], T> : never;
 }[keyof O];
 
 // test code

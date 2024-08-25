@@ -11,6 +11,7 @@ In this post, I’m going to talk about how [macmon](https://github.com/vladkens
 MacOS has a built-in `powermetics` utility that can show the current CPU core frequencies, utilisation, and power consumption. This program should take these values from the system somewhere. So the first thing to check is what shared libraries and function calls (symbols) are used.
 
 There are several programs can do this:
+
 - `otool` — show list of shared libraries
 - `nm` — see the list of used symbols
 - `strings` — just prints all strings from a binary file, but it may be useful to understand what is going on in the program.
@@ -95,6 +96,7 @@ _Note: For CPU I get values separately for each core. In general, there is also 
 `IOReportCreateSamplesDelta` returns an object with one `IOReportChannels` field, which containts array of metrics objects. Each metrics object have `group` and `subgroup` (on which subscription was created), and extra fields: `channel` name, value `unit` and `value` itself.
 
 The values for “CPU Stats” / “GPU Stats” are returned in array of tuples (string, int):
+
 - string: frequency level name (first always IDLE)
 - int: time been on this level (should be in nanoseconds, but not sure)
 

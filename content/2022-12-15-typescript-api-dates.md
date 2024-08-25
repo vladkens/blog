@@ -34,7 +34,7 @@ type UserDto = {
   id: number;
   username: string;
   createdAt: string;
-}
+};
 
 const decodeUser = (dto: UserDto): User => {
   return {
@@ -42,15 +42,15 @@ const decodeUser = (dto: UserDto): User => {
     username: dto.username,
     createdAt: new Date(dto.createdAt),
   };
-}
+};
 
 const getCurrentUser = async (): Promise<User> => {
-  const user = await get<UserDto>('/api/users/current');
+  const user = await get<UserDto>("/api/users/current");
   return decodeUser(user);
-}
+};
 
-const u = await getCurrentUser()
-console.log(typeof u.createdAt, u.createdAt instanceof Date) // string, false
+const u = await getCurrentUser();
+console.log(typeof u.createdAt, u.createdAt instanceof Date); // string, false
 ```
 
 Basically, if the API only has a few methods, it’s not a problem to write decoders from DTO models. But usually the API is much bigger. And why should we do it if we can do not? :)
@@ -76,7 +76,7 @@ const handleDates = (data: unknown) => {
     else if (typeof val === "object") handleDates(val);
   }
 
-  return data
+  return data;
 };
 ```
 
@@ -89,14 +89,14 @@ const http = <T>(url: string, config?: RequestInit) => {
 
 const get = <T>(url: string) => {
   return http<T>(url);
-}
+};
 
 const getCurrentUser = (): Promise<User> => {
   return http<User>("/api/users/current");
 };
 
-const u = await getCurrentUser()
-console.log(typeof u.createdAt, u.createdAt instanceof Date) // object, true
+const u = await getCurrentUser();
+console.log(typeof u.createdAt, u.createdAt instanceof Date); // object, true
 
 // or if you use axios you can make it event better
 

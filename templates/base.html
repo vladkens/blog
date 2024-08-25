@@ -1,0 +1,45 @@
+{% import "abc.html" as abc %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ [page.title | default(value=""), config.title] | join(sep=" :: ") }}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+      :root {
+        --pico-font-family: "JetBrains Mono", monospace;
+        /* --pico-font-size: 110%; */
+      }
+
+      body {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      .zola-anchor {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a class="contrast" href="/">main</a></li>
+        <li><a class="secondary" target="_blank" href="https://github.com/vladkens">github</a></li>
+        <li><a class="secondary" target="_blank" href="https://x.com/uid127">x</a></li>
+      </ul>
+      <ul>
+        <li><a class="secondary" href="/tags">tags</a></li>
+        <li><a class="secondary" href="/atom.xml">atom</a></li>
+      </ul>
+    </nav>
+    <main>{% block main_content %} Nothing here?! {% endblock main_content %}</main>
+    <footer></footer>
+  </body>
+</html>

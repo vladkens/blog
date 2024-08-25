@@ -2,23 +2,8 @@ base_url = "/"
 title = "notes"
 compile_sass = false
 build_search_index = false
-
-theme = "apollo"
+generate_feeds = true
 taxonomies = [{ name = "tags" }]
 
 [markdown]
 highlight_code = true
-
-[extra]
-menu = [
-  # { name = "/posts", url = "/", weight = 1 },
-  # { name = "/projects", url = "/projects", weight = 2 },
-#   # { name = "/about", url = "/about", weight = 3 },
-  { name = "/tags", url = "/tags", weight = 4 },
-]
-socials = [
-  { name = "twitter", url = "https://twitter.com/vladcancode", icon = "twitter" },
-  { name = "github", url = "https://github.com/vladkens", icon = "github" },
-]
-toc = true
-fancy_code = true

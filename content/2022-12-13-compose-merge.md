@@ -22,7 +22,7 @@ services:
     volumes:
       - ".:/app"
     command: python run_master.py
-  
+
   worker-foo:
     build:
       context: .
@@ -33,7 +33,7 @@ services:
     environment:
       - MASTER_HOST=master:8080
     command: python run_foo_worker.py
-  
+
   worker-bar:
     build:
       context: .
@@ -70,11 +70,11 @@ services:
     ports:
       - "8080:8080"
     command: python run_master.py
-  
+
   worker-foo:
     <<: *worker
     command: python run_foo_worker.py
-  
+
   worker-bar:
     <<: *worker
     command: python run_bar_worker.py
@@ -106,8 +106,7 @@ The `worker` service will completely overwrite environment of base and will cont
 However, if you want to make only one value common, you can put that value into a variable, and use that variable as an array element.
 
 ```yaml
-x-super-secret: &super-secret
-  SUPER_SECRET=42
+x-super-secret: &super-secret SUPER_SECRET=42
 
 x-base: &base
   environment:

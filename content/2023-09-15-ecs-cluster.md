@@ -3,12 +3,13 @@ title: AWS ECS Cluster on EC2 with Terraform (2023)
 slug: aws-ecs-cluster
 date: 2023-09-15
 taxonomies:
-  tags: ["aws", "devops", "terraform"]
+  tags: ["aws", "terraform", "tutorial"]
 ---
 
 This short guide will describe how to create an AWS ECS Cluster on EC2 in 2023. Basically there are already articles and code samples on the Internet, but some products in AWS are becoming obsolete (like Launch Configuration) and Terraform is undergoing API changes. So the purpose of this article is to show how to run ECS Cluster on EC2 with Terraform today.
 
 This article will look at how to create a Terraform configuration to provide such resources:
+
 - VPC with public subnet
 - Internet Gateway to connect to the global Internet
 - Security groups for EC2 Node & ECS Service
@@ -219,8 +220,9 @@ resource "aws_launch_template" "ecs_ec2" {
 ```
 
 A couple of comments on the code above:
-1) `ecs_node_ami` is the recommended image for ECS (but it possible to use another image by passing different `ami`)
-2) In `user_data` you is required to pass ECS cluster name, so AWS can register EC2 instance as node of ECS cluster
+
+1. `ecs_node_ami` is the recommended image for ECS (but it possible to use another image by passing different `ami`)
+2. In `user_data` you is required to pass ECS cluster name, so AWS can register EC2 instance as node of ECS cluster
 
 ## Autoscaling Group
 
