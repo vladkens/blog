@@ -1,6 +1,10 @@
 {% import "abc.html" as abc %}
 
-{% set title = [page.title | default(value=""), config.title] | join(sep=" :: ") %}
+{% set title = [] -%}
+{% if page.title %}{% set title = title | concat(with=page.title) %}{% endif -%}
+{% if section.title %}{% set title = title | concat(with=section.title) %}{% endif -%}
+{% if config.title %}{% set title = title | concat(with=config.title) %}{% endif -%}
+{% set title = title | join(sep=" :: ") -%}
 
 <!doctype html>
 <html lang="en">
