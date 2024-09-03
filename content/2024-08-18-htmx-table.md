@@ -1,7 +1,7 @@
 ---
 title: Table sorting and pagination with HTMX
 slug: htmx-table-sorting
-date: 2024-09-18
+date: 2024-08-18
 taxonomies:
   tags: ["tutorial", "rust", "htmx", "webdev"]
 extra:

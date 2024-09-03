@@ -1,7 +1,7 @@
 ---
 title: How to get macOS power metrics with Rust?
 slug: powermetrics-macos
-date: 2024-09-13
+date: 2024-08-13
 taxonomies:
   tags: ["rust", "macos", "cli"]
 ---
