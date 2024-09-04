@@ -4,6 +4,8 @@ slug: powermetrics-macos
 date: 2024-08-13
 taxonomies:
   tags: ["rust", "macos", "cli"]
+extra:
+  medium: https://medium.com/p/d42b0ad53967
 ---
 
 In this post, I’m going to talk about how [macmon](https://github.com/vladkens/macmon) works, specifically where it gets system metrics.
