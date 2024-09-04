@@ -3,7 +3,7 @@ title: Better date parsing for REST API with TypeScript
 slug: rest-api-date-parsing
 date: 2022-12-15
 taxonomies:
-  tags: ["typescript", "react", "rest-api"]
+  tags: ["typescript", "react", "api"]
 ---
 
 A little trick in TypeScript to make it easier to work with date strings in the API. Let’s say we have a model like this on the client:
