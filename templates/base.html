@@ -13,12 +13,12 @@
 {% if page.description %}{% set page_descr = page.description %}{% endif -%}
 
 {% if page %}
-{% set page_descr = page.content | striptags | truncate(length=160) -%}
+{% set page_descr = page.content | linebreaksbr | striptags | truncate(length=160) -%}
 {% endif -%}
 
 {% set page_image = "" -%}
 
-{% set page_image = "https://dynamic-og-image-generator.vercel.app/api/generate?theme=default&title={page_title}&author={author}&websiteUrl={site}&avatar=https://avatars.githubusercontent.com/u/825754" | replace(from="{page_title}", to=page_title|urlencode) | replace(from="{author}", to="config.extra.github") | replace(from="{site}", to=config.base_url|safe) -%}
+{% set page_image = "https://dynamic-og-image-generator.vercel.app/api/generate?theme=default&title={page_title}&author={author}&websiteUrl={site}&avatar=https://avatars.githubusercontent.com/u/825754" | replace(from="{page_title}", to=page_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) -%}
 
 {% set kw = [] -%}
 {% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
@@ -55,7 +55,8 @@
     <meta name="twitter:data1" content="{{ page.reading_time }} min read" />
     {% endif -%}
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦐</text></svg>">
+    <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦐</text></svg>"> -->
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/825754" />
     <link href="{{get_url(path='main.css',cachebust=true)}}" rel="stylesheet" />
   </head>
   <body>
