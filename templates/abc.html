@@ -1,7 +1,7 @@
 {% macro list_posts(pages) %}
-<ul>
+<ul style="list-style-type: none;">
 {% for page in pages %}
-  <li>
+  <li style="list-style: none">
     <time>{{ page.date | date(format="%Y-%m-%d") }}</time> -
     <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
   </li>
