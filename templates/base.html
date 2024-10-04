@@ -18,6 +18,8 @@
 
 {% set page_image = "" -%}
 
+{% set page_image = "https://dynamic-og-image-generator.vercel.app/api/generate?theme=default&title={page_title}&author={author}&websiteUrl={site}&avatar=https://avatars.githubusercontent.com/u/825754" | replace(from="{page_title}", to=page_title|urlencode) | replace(from="{author}", to="config.extra.github") | replace(from="{site}", to=config.base_url|safe) -%}
+
 {% set kw = [] -%}
 {% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
 {% if page.extra.keywords %}{% set kw = kw | concat(with=page.extra.keywords) %}{% endif -%}
@@ -34,23 +36,23 @@
     <meta name="keywords" content="{{ kw | join(sep=', ') }}" />
     <link rel="alternate" type="application/atom+xml" title="vnotes feed" href="/atom.xml" />
 
-    <meta property="og:url" content="{{ page_url }}" />
+    <meta property="og:url" content="{{ page_url | safe }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:description" content="{{ page_descr }}" />
-    <!-- <meta property="og:image" content="{{ page_image }}"> -->
+    <meta property="og:image" content="{{ page_image | safe }}" />
 
     <meta property="twitter:domain" content="vnotes.pages.dev">
-    <meta property="twitter:url" content="{{ page_url }}">
+    <meta property="twitter:url" content="{{ page_url | safe }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page_title }}">
     <meta name="twitter:description" content="{{ page_descr }}">
-    <!-- <meta name="twitter:image" content="{{ page_image }}"> -->
+    <meta name="twitter:image" content="{{ page_image | safe }}">
 
-    {% if page %}
-      <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
-      <meta name="twitter:label1" content="Reading time" />
-      <meta name="twitter:data1" content="{{ page.reading_time }} min read" />
+    {%- if page %}
+    <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
+    <meta name="twitter:label1" content="Reading time" />
+    <meta name="twitter:data1" content="{{ page.reading_time }} min read" />
     {% endif -%}
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦐</text></svg>">
