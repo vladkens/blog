@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block main_content %}
-<article>
+<article class="blog-post">
   <header>
     <h1>{{ page.title }}</h1>
     <div>
@@ -25,19 +25,24 @@
     </div>
   </header>
 
-  {% if page.toc %}
-  <details>
-    <summary>Table of Contents</summary>
-    <ul>
-    {% for h1 in page.toc %}
-    <li>
-      <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-    </li>
-    {% endfor %}
-    </ul>
-  </details>
-  {% endif %}
-
   {{ page.content | safe }}
 </article>
+
+<script src="https://giscus.app/client.js"
+        data-repo="vladkens/blog"
+        data-repo-id="R_kgDOMlJ4xA"
+        data-category="General"
+        data-category-id="DIC_kwDOMlJ4xM4CjC_Y"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        data-loading="lazy"
+        async>
+</script>
+
 {% endblock main_content %}

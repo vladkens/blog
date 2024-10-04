@@ -2,5 +2,5 @@
 
 {% block main_content %}
 <h1>Posts tagged: {{ term.name }}</h1>
-{{ abc::list_posts(pages=term.pages) }}
+{{ macros::list_posts(pages=term.pages) }}
 {% endblock main_content %}

@@ -1,4 +1,4 @@
-{% import "abc.html" as abc %}
+{% import "_macros.html" as macros %}
 
 {% set title = [] -%}
 {% if page.title %}{% set title = title | concat(with=page.title) %}{% endif -%}
@@ -12,41 +12,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦐</text></svg>">
-
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-
-      :root {
-        --pico-font-family: "JetBrains Mono", monospace;
-        /* --pico-font-size: 110%; */
-      }
-
-      body {
-        max-width: 980px;
-        margin: 0 auto;
-      }
-
-      .zola-anchor {
-        text-decoration: none;
-      }
-    </style>
+    <link href="{{get_url(path='main.css',cachebust=true)}}" rel="stylesheet" />
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a class="contrast" href="/">main</a></li>
-        <li><a class="secondary" target="_blank" href="https://github.com/vladkens">github</a></li>
-        <li><a class="secondary" target="_blank" href="https://x.com/uid127">x</a></li>
-      </ul>
-      <ul>
-        <li><a class="secondary" href="/tags">tags</a></li>
-        <li><a class="secondary" href="/atom.xml">atom</a></li>
-      </ul>
-    </nav>
+    <header>
+      <div>
+        <a href="/">posts</a>
+        <a href="/tags">tags</a>
+        <a href="/atom.xml">rss</a>
+      </div>
+
+      <div>
+        <a target="_blank" href="https://github.com/vladkens">github</a>
+        <a target="_blank" href="https://x.com/uid127">x</a>
+      </div>
+    </header>
+
     <main>{% block main_content %} Nothing here?! {% endblock main_content %}</main>
-    <footer></footer>
+
+    <footer>© {{ now() | date(format="%Y") }} All rights reserved. Code samples are public domain unless otherwise noted.</footer>
+
+    <script>
+      document.querySelectorAll(`a[href="${document.location.pathname}"]`).forEach(x => x.classList.add('current'));
+    </script>
   </body>
 </html>

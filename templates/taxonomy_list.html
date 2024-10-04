@@ -2,7 +2,7 @@
 
 {% block main_content %}
 <h1>Tags</h1>
-<div>
+<div class="tags-cloud">
   {% for term in terms | sort(attribute="pages") | reverse %}
     <a href="{{ term.permalink | safe }}">{{ term.name }}&nbsp;({{ term.pages | length }})</a>
   {% endfor %}

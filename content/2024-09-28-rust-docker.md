@@ -118,9 +118,15 @@ COPY --from=builder /app/${TARGETPLATFORM} /app/prog
 CMD "/app/prog"
 ```
 
-In general that all. Such build approach will work faster. For me project:
+In general that all. Such build approach will work faster. For my project:
 
 1. initial build 50 min -> 13 min (3.8x)
 2. code updated 7 min -> 3 min (2.3x)
 
 Additional performance can be achieved by moving first step into separate base image, then our main Docker image will not need to build `cargo-zibguild` and `cargo-chef` (-2 min from initial build).
+
+---
+
+Sources:
+
+1. <https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide>
