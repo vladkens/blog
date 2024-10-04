@@ -18,7 +18,7 @@ There are several programs can do this:
 - `nm` — see the list of used symbols
 - `strings` — just prints all strings from a binary file, but it may be useful to understand what is going on in the program.
 
-```text
+```
 > otool -L /usr/bin/powermetrics
  /usr/lib/libIOReport.dylib (compatibility version 1.0.0, current version 1.0.0)
  /usr/lib/libpmsample.dylib (compatibility version 1.0.0, current version 2.0.0)

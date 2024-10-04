@@ -20,7 +20,7 @@ type User = {
 
 And we transfer this data in textual protocol in JSON format, e.g. via REST API or Websockets. And we get data in a format similar to this:
 
-```text
+```
 GET /api/users/current
 {
   "id": "1234567890",
