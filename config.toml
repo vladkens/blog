@@ -1,5 +1,5 @@
 base_url = "/"
-title = "notes"
+title = "vnotes"
 compile_sass = false
 build_search_index = false
 generate_feeds = true
