@@ -75,7 +75,10 @@
     <footer>© {{ now() | date(format="%Y") }} All rights reserved. Code samples are public domain unless otherwise noted.</footer>
 
     <script>
-      document.querySelectorAll(`a[href="${document.location.pathname}"]`).forEach(x => x.classList.add('current'));
+      (() => {
+        const loc = document.location.pathname.replace(/\/$/, '');
+        document.querySelectorAll(`a[href="${loc}"],a[href="${loc}/"]`).forEach(x => x.classList.add('current'))
+      })()
     </script>
   </body>
 </html>
