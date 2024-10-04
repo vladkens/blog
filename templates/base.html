@@ -1,22 +1,51 @@
 {% import "_macros.html" as macros %}
 
-{% set title = [] -%}
-{% if page.title %}{% set title = title | concat(with=page.title) %}{% endif -%}
-{% if section.title %}{% set title = title | concat(with=section.title) %}{% endif -%}
-{% if config.title %}{% set title = title | concat(with=config.title) %}{% endif -%}
-{% set title = title | join(sep=" :: ") -%}
+{% set page_url = "" -%}
+{% if current_url %}{% set page_url = current_url %}{% endif -%}
+
+{% set page_title = [config.title] -%}
+{% if section.title %}{% set page_title = page_title | concat(with=section.title) %}{% endif -%}
+{% if page.title %}{% set page_title = page_title | concat(with=page.title) %}{% endif -%}
+{% set page_title = page_title | reverse | join(sep=" :: ") -%}
+
+{% set page_descr = config.description -%}
+{% if section.description %}{% set page_descr = section.description %}{% endif -%}
+{% if page.description %}{% set page_descr = page.description %}{% endif -%}
+
+{% set page_image = "" -%}
+
+{% set kw = [] -%}
+{% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
+{% if page.extra.keywords %}{% set kw = kw | concat(with=page.extra.keywords) %}{% endif -%}
+
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title }}</title>
+
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_descr }}" />
+    <meta name="keywords" content="{{ kw | join(sep=', ') }}" />
+    <link rel="alternate" type="application/atom+xml" title="vnotes feed" href="/atom.xml" />
+
+    <meta property="og:url" content="{{ page_url }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_descr }}" />
+    <meta property="og:image" content="{{ page_image }}">
+
+    <meta property="twitter:domain" content="vnotes.pages.dev">
+    <meta property="twitter:url" content="{{ page_url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:description" content="{{ page_descr }}">
+    <meta name="twitter:image" content="{{ page_image }}">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦐</text></svg>">
     <link href="{{get_url(path='main.css',cachebust=true)}}" rel="stylesheet" />
-
-    <link rel="alternate" type="application/atom+xml" title="vnotes feed" href="/atom.xml" />
   </head>
   <body>
     <header>
