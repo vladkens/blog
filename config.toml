@@ -1,9 +1,17 @@
-base_url = "/"
+base_url = "https://vnotes.pages.dev"
 title = "vnotes"
+description = "the tech blog"
 compile_sass = false
 build_search_index = false
+generate_sitemap = true
 generate_feeds = true
+feed_filenames = ["atom.xml"]
 taxonomies = [{ name = "tags" }]
 
 [markdown]
 highlight_code = true
+extra_syntaxes_and_themes = []
+
+[extra]
+github = "vladkens"
+twitter = "uid127"
