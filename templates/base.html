@@ -12,6 +12,10 @@
 {% if section.description %}{% set page_descr = section.description %}{% endif -%}
 {% if page.description %}{% set page_descr = page.description %}{% endif -%}
 
+{% if page %}
+{% set page_descr = page.content | striptags | truncate(length=160) -%}
+{% endif -%}
+
 {% set page_image = "" -%}
 
 {% set kw = [] -%}
@@ -34,14 +38,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:description" content="{{ page_descr }}" />
-    <meta property="og:image" content="{{ page_image }}">
+    <!-- <meta property="og:image" content="{{ page_image }}"> -->
 
     <meta property="twitter:domain" content="vnotes.pages.dev">
     <meta property="twitter:url" content="{{ page_url }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page_title }}">
     <meta name="twitter:description" content="{{ page_descr }}">
-    <meta name="twitter:image" content="{{ page_image }}">
+    <!-- <meta name="twitter:image" content="{{ page_image }}"> -->
 
     {% if page %}
       <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
