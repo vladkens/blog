@@ -4,6 +4,8 @@ slug: aws-python-lambda
 date: 2023-10-12
 taxonomies:
   tags: ["aws", "tutorial", "terraform", "python"]
+extra:
+  medium: https://medium.com/p/87793b2a7866
 ---
 
 In this article I will show the way how to deploy AWS Lambda using Terraform, with support for code updates in a single workflow.

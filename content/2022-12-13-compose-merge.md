@@ -4,6 +4,8 @@ slug: docker-compose-merge
 date: 2022-12-13
 taxonomies:
   tags: ["docker"]
+extra:
+  medium: https://medium.com/p/1b73ee11c4a
 ---
 
 Useful trick when you have many of the same services in the `docker-compose.yml` file.

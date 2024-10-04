@@ -4,6 +4,8 @@ slug: small-nodejs-docker-image
 date: 2022-01-16
 taxonomies:
   tags: ["docker", "nodejs"]
+extra:
+  medium: https://medium.com/p/dc5c8999cd96
 ---
 
 Hi. Today I want to talk about how to reduce the size of the Docker Image with NodeJS inside.

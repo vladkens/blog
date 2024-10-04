@@ -4,6 +4,8 @@ slug: docker-container-env
 date: 2022-12-06
 taxonomies:
   tags: ["docker", "tricks"]
+extra:
+  medium: https://medium.com/p/514e1979ae35
 ---
 
 ## TL;DR

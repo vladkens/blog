@@ -4,6 +4,8 @@ slug: asdf-package-manager
 date: 2022-12-10
 taxonomies:
   tags: ["tools"]
+extra:
+  medium: https://medium.com/p/1e713eac7345
 ---
 
 When you develop or maintain many projects or use a microservice architecture, over time you have a zoo of different programming languages and their versions on your computer. Each service has its own dependencies. After a while it becomes hellishly difficult to work comfortably.

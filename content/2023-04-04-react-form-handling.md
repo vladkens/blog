@@ -4,6 +4,8 @@ slug: react-form-handling
 date: 2023-04-04
 taxonomies:
   tags: ["typescript", "react"]
+extra:
+  medium: https://medium.com/p/55add66c9a21
 ---
 
 React-use-form is a powerful library that simplifies form handling in React applications. Its intuitive API and robust feature set make it an excellent choice for developers.
@@ -85,8 +87,8 @@ import { Primitive } from "react-hook-form";
 type NestedImpl<K extends string | number, V, T> = V extends T
   ? K
   : V extends Primitive | Array<infer V>
-    ? never
-    : `${K}.${NestedByType<V, T>}`;
+  ? never
+  : `${K}.${NestedByType<V, T>}`;
 
 export type NestedByType<O, T> = {
   [K in keyof O]-?: K extends string ? NestedImpl<K, O[K], T> : never;

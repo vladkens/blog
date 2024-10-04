@@ -4,6 +4,8 @@ slug: typescript-guards
 date: 2022-12-03
 taxonomies:
   tags: ["typescript", "tricks"]
+extra:
+  medium: https://medium.com/p/9c786e4187bd
 ---
 
 TypeScript is a great language for writing applications with type safety checks. Extending or refactoring code in TypeScript is much easier than in plain JavaScript.

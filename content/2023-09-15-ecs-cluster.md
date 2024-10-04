@@ -4,6 +4,8 @@ slug: aws-ecs-cluster
 date: 2023-09-15
 taxonomies:
   tags: ["aws", "terraform", "tutorial"]
+extra:
+  medium: https://medium.com/p/fdb9f6b7db07
 ---
 
 This short guide will describe how to create an AWS ECS Cluster on EC2 in 2023. Basically there are already articles and code samples on the Internet, but some products in AWS are becoming obsolete (like Launch Configuration) and Terraform is undergoing API changes. So the purpose of this article is to show how to run ECS Cluster on EC2 with Terraform today.
