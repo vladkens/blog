@@ -147,6 +147,10 @@ article > header {
   margin-bottom: 1rem;
 }
 
+article img {
+  max-width: 100%;
+}
+
 .tags-cloud {
   display: flex;
   flex-wrap: wrap;
