@@ -3,10 +3,13 @@ title: Fast multi-arch Docker build for Rust projects
 slug: fast-multi-arch-docker-for-rust
 date: 2024-10-04
 taxonomies:
-  tags: ["rust", "docker"]
+  tags: ["rust", "docker", "ci", "webdev"]
+extra:
+  medium: https://medium.com/p/a7db42f3adde
+  devto: https://dev.to/vladkens/fast-multi-arch-docker-build-for-rust-projects-an1
 ---
 
-## Rust vs other languages
+![post cover image](/rust-docker-build-cover.png)
 
 Rust allows programs to run very fast and memory efficient, but it has a cost – compile time. In web development, it is standard practice to deliver programs as Docker images and then run them in Kubernetes / [Amazon ECS](/aws-ecs-cluster) / Docker Compose / etc. After the popularity of ARM processors in recent years, programmers have been faced with the additional step of preparing multi-arch Docker images (meaning that the same image should be able to run natively on both x86-64/amd64 and aarch64/arm64 processors).
 

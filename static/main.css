@@ -177,6 +177,11 @@ article img {
   gap: 0 1rem;
 }
 
+hr {
+  border-top: none;
+  border-bottom: var(--text-color) 1px solid;
+}
+
 .blog-post {
   border-bottom: var(--text-color) 1px solid;
 }

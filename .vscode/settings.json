@@ -1,17 +1,17 @@
 {
   "editor.rulers": [100],
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 100,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.requireConfig": false,
   "[markdown]": {
-    "editor.wordWrap": "wordWrapColumn"
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100
   },
   "[html]": {
     "editor.formatOnSave": false
   },
   "files.exclude": {
-    ".frontmatter": true
+    ".frontmatter": true,
+    "public": true
   }
 }
