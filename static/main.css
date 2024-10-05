@@ -51,7 +51,8 @@ pre {
 pre code {
   width: 100%;
   display: block;
-  overflow-x: scroll;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 pre .copy-code {
