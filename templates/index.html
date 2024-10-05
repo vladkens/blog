@@ -1,5 +1,29 @@
 {% extends "base.html" %}
 
 {%- block main_content -%}
+
+<h2>Projects</h2>
+{% set projects = load_data(path="/projects.json") %}
+<ul class="projects-list">
+{% for project in projects | sort(attribute="stars") | reverse %}
+  <li>
+    <div>
+      <a target="_blank" href="{{ "https://github.com/" ~ project.name }}">{{ project.name | split(pat="/") | last }}</a>
+      – {{ project.descr }}
+      <div class="project-langs">
+        {% for lang in project.langs %}
+        <div>{{ lang }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    <div style="flex-shrink: 0;">
+      {{ project.stars }} ⭐️
+    </div>
+  </li>
+{% endfor %}
+</ul>
+
+<h2>Posts</h2>
 {{ macros::list_posts(pages=section.pages) }}
+
 {% endblock main_content %}

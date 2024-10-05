@@ -7,6 +7,8 @@
     --text-color: #333333;
     --link-color: #0077cc;
     --link-hover-color: #005fa3;
+    --title-color: #000000;
+    --border-color: #dddddd;
   }
 }
 
@@ -17,6 +19,7 @@
     --link-color: #ffb600;
     --link-hover-color: #ff8c00;
     --title-color: #ffffff;
+    --border-color: #333333;
   }
 }
 
@@ -145,6 +148,14 @@ body > header a.current {
   border-bottom: 2px solid var(--link-color);
 }
 
+main > h2 {
+  margin: 1rem 0 0.75rem;
+}
+
+main > h2:first-child {
+  margin-top: 0;
+}
+
 /*  */
 
 .posts-list {
@@ -184,4 +195,53 @@ hr {
 
 .blog-post {
   border-bottom: var(--text-color) 1px solid;
+}
+
+/*  */
+
+.projects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 0.75rem;
+}
+
+.projects-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.projects-list li:before {
+  content: "•";
+  margin-left: -0.75rem;
+  position: absolute;
+  width: 0.75rem;
+  height: 0.75rem;
+  transform: translateY(-50%);
+  margin-top: 0.375rem;
+}
+
+.projects-list a {
+  /* color: var(--title-color); */
+  text-decoration: none;
+}
+
+.projects-list li > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  line-height: 1rem;
+}
+
+.project-langs {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.project-langs > div {
+  border: 1px solid var(--border-color);
+  font-size: 0.7rem;
+  border-radius: 0.25rem;
+  padding: 0rem 0.25rem;
+  background-color: var(--bg-color);
 }

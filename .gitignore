@@ -1,3 +1,4 @@
 .frontmatter/
 public/
 themes/
+.env
