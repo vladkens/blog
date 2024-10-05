@@ -100,16 +100,16 @@ RUN cargo chef prepare --recipe-path recipe.json
 FROM chef AS builder
 COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --recipe-path recipe.json --release --zigbuild \
-  --target x86_64-unknown-linux-musl --target aarch64-unknown-linux-musl
+    --target x86_64-unknown-linux-musl --target aarch64-unknown-linux-musl
 
 # (4) actuall project build for all targets
 # binary renamed to easier copy in runtime stage
 COPY . .
-RUN cargo zigbuild -r
+RUN cargo zigbuild -r \
     --target x86_64-unknown-linux-musl --target aarch64-unknown-linux-musl && \
-  mkdir /app/linux && \
-  cp target/aarch64-unknown-linux-musl/release/prog /app/linux/arm64 && \
-  cp target/x86_64-unknown-linux-musl/release/prog /app/linux/amd64
+    mkdir /app/linux && \
+    cp target/aarch64-unknown-linux-musl/release/prog /app/linux/arm64 && \
+    cp target/x86_64-unknown-linux-musl/release/prog /app/linux/amd64
 
 # (5) this staged will be emulated as was before
 # TARGETPLATFORM usage to copy right binary from builder stage
@@ -127,6 +127,8 @@ In general that all. Such build approach will work faster. For my project:
 2. code updated 7 min -> 3 min (2.3x)
 
 Additional performance can be achieved by moving first step into separate base image, then our main Docker image will not need to build `cargo-zibguild` and `cargo-chef` (-2 min from initial build).
+
+> Note: If you already know your server architecture (if you build your docker for a specific server), you can remove everything link to the other architecture. This will lead you to have performance improvement in both initial build and updates. 
 
 ---
 
