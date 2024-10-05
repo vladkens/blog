@@ -17,19 +17,19 @@
 {% endif -%}
 
 {% set page_image = "" -%}
-
 {% set page_image = "https://dynamic-og-image-generator.vercel.app/api/generate?theme=default&title={page_title}&author={author}&websiteUrl={site}&avatar=https://avatars.githubusercontent.com/u/825754" | replace(from="{page_title}", to=page_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) -%}
 
 {% set kw = [] -%}
 {% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
 {% if page.extra.keywords %}{% set kw = kw | concat(with=page.extra.keywords) %}{% endif -%}
+{% if page.taxonomies.tags %}{% set kw = page.taxonomies.tags %}{% endif -%}
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes">
 
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ page_descr }}" />
@@ -77,11 +77,6 @@
 
     <footer>© {{ now() | date(format="%Y") }} All rights reserved. Code samples are public domain unless otherwise noted.</footer>
 
-    <script>
-      (() => {
-        const loc = document.location.pathname.replace(/\/$/, '');
-        document.querySelectorAll(`a[href="${loc}"],a[href="${loc}/"]`).forEach(x => x.classList.add('current'))
-      })()
-    </script>
+    <script src="{{get_url(path='main.js',cachebust=true)}}"></script>
   </body>
 </html>
