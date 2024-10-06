@@ -218,10 +218,23 @@ hr {
 a.post-edit {
   color: var(--text-color);
   text-decoration: none;
+  opacity: 0.75;
 }
 
 a.post-edit:hover {
   text-decoration: underline;
+}
+
+.post blockquote {
+  border-left: 2px solid var(--link-color);
+  padding-left: 1rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.post #references + ol {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
 }
 
 /*  */
