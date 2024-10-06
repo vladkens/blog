@@ -194,8 +194,34 @@ hr {
   border-bottom: var(--text-color) 1px solid;
 }
 
-.blog-post {
+.post {
   border-bottom: var(--text-color) 1px solid;
+}
+
+.post > header > h1 {
+  margin-bottom: 0.75rem;
+}
+
+.post-meta {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}
+
+.post-meta > div {
+  vertical-align: middle;
+}
+
+.post-meta i {
+  margin: 0 0.15rem;
+}
+
+a.post-edit {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+a.post-edit:hover {
+  text-decoration: underline;
 }
 
 /*  */
