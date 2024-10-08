@@ -3,10 +3,11 @@
 {% set page_url = config.base_url -%}
 {% if current_url %}{% set page_url = current_url %}{% endif -%}
 
-{% set page_title = [config.title] -%}
-{% if section.title %}{% set page_title = page_title | concat(with=section.title) %}{% endif -%}
-{% if page.title %}{% set page_title = page_title | concat(with=page.title) %}{% endif -%}
-{% set page_title = page_title | reverse | join(sep=" :: ") -%}
+{% set og_title = config.title -%}
+{% if section.title %}{% set og_title = section.title %}{% endif -%}
+{% if page.title %}{% set og_title = page.title %}{% endif -%}
+
+{% set page_title = og_title ~ " :: " ~ config.title -%}
 
 {% set page_descr = config.description -%}
 {% if section.description %}{% set page_descr = section.description %}{% endif -%}
@@ -17,7 +18,7 @@
 {% endif -%}
 
 {% set page_image = "" -%}
-{% set page_image = "https://dynamic-og-image-generator.vercel.app/api/generate?theme=default&title={page_title}&author={author}&websiteUrl={site}&avatar=https://avatars.githubusercontent.com/u/825754" | replace(from="{page_title}", to=page_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) -%}
+{% set page_image = "https://dynamic-og-image-generator.vercel.app/api/generate?theme=default&title={page_title}&author={author}&websiteUrl={site}&avatar=https://avatars.githubusercontent.com/u/825754" | replace(from="{page_title}", to=og_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) -%}
 
 {% set kw = [] -%}
 {% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
@@ -38,14 +39,14 @@
 
     <meta property="og:url" content="{{ page_url | safe }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:title" content="{{ og_title }}" />
     <meta property="og:description" content="{{ page_descr }}" />
     <meta property="og:image" content="{{ page_image | safe }}" />
 
     <meta property="twitter:domain" content="vnotes.pages.dev">
     <meta property="twitter:url" content="{{ page_url | safe }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:title" content="{{ og_title }}">
     <meta name="twitter:description" content="{{ page_descr }}">
     <meta name="twitter:image" content="{{ page_image | safe }}">
 
