@@ -132,6 +132,4 @@ Additional performance can be achieved by moving first step into separate base i
 
 ---
 
-## References
-
 1. <https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide>
