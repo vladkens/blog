@@ -480,7 +480,7 @@ async fn index_page(req: Request) -> impl IntoResponse {
 
 So in this code we check if `hx-target` header is present. If not – we return full page. If it's present and equal to `contacts_table` – we return only table. This is how partial updates works in HTMX. We can split page to smaller parts and update it independently.
 
-Full code from this article can be found [here](https://github.com/vladkens/blog_code/tree/main/rust-htmx-table-sorting).
+_PS. Source files of this article can be found [here](https://github.com/vladkens/blog/tree/main/code/rust-htmx-table-sorting)._
 
 ## Conclusion
 

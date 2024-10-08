@@ -42,8 +42,8 @@ a:hover {
 
 pre {
   padding: 0.5rem;
-  font-size: 0.85rem;
-  line-height: 1.15rem;
+  font-size: 0.8rem;
+  line-height: 1.1rem;
   font-family: "JetBrains Mono", monospace;
   position: relative;
 }
@@ -91,6 +91,7 @@ h1 {
 
 article h1 {
   font-size: 1.75rem;
+  line-height: 2rem;
 }
 
 .zola-anchor {

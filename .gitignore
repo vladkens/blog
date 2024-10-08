@@ -1,4 +1,7 @@
-.frontmatter/
 public/
-themes/
+.frontmatter/
+.terraform/
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/.terraform.lock.hcl
 .env

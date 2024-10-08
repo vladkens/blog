@@ -1,16 +1,18 @@
 # blog
 
+Check out my blog at:
+
+- https://vnotes.pages.dev
+- https://medium.com/@vladkens
+- https://dev.to/vladkens
+
 ## Stack
 
 - https://github.com/getzola/zola/
 - https://keats.github.io/tera/docs/
 - https://giscus.app/
 
-Tera helpers:
-
-```
-__tera_context
-```
+Useful: `{{ __tera_context }}`
 
 ## Cross-post tools
 
