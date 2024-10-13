@@ -3,13 +3,13 @@
     "name": "vladkens/twscrape",
     "descr": "X/Twitter scrapper with authorization support",
     "langs": ["Python"],
-    "stars": 971
+    "stars": 987
   },
   {
     "name": "vladkens/macmon",
     "descr": "CLI performance monitoring for Apple Silicon",
     "langs": ["Rust"],
-    "stars": 162
+    "stars": 165
   },
   {
     "name": "vladkens/ghstats",
@@ -21,7 +21,7 @@
     "name": "vladkens/apigen-ts",
     "descr": "Typed HTTP client generator from OpenAPI schema",
     "langs": ["TypeScript"],
-    "stars": 27
+    "stars": 28
   },
   {
     "name": "vladkens/ecloop",
