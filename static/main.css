@@ -267,6 +267,14 @@ a.post-edit:hover {
   line-height: 1.25rem;
 }
 
+.post hr:last-of-type + ol a {
+  color: var(--text-color);
+}
+
+.post hr:last-of-type + ol a:hover {
+  color: var(--link-hover-color);
+}
+
 /*  */
 
 .projects-list {
