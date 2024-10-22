@@ -4,7 +4,12 @@ slug: deploy-fastapi-with-sqlite-on-flyio
 date: 2024-10-21
 taxonomies:
   tags: ["docker", "python", "sqlite", "devops"]
+extra:
+  medium: https://medium.com/p/5ed1185fece1
+  devto: https://dev.to/vladkens/deploy-fastapi-application-with-sqlite-on-flyio-3da1
 ---
+
+![post cover image](/sqlite-flyio.png)
 
 Cloud solutions are good for medium and large projects, but too heavy for small personal projects. If you want to launch something small (a few api endpoins and a small repository), there are three options:
 
