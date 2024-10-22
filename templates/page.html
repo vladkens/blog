@@ -31,6 +31,20 @@
   {{ page.content | safe }}
 </article>
 
+<script src="https://kit.fontawesome.com/15cfaf31d4.js" crossorigin="anonymous"></script>
+
+{% set share_url = current_url | replace(from="http://127.0.0.1:1111/", to="https://vnotes.pages.dev/") %}
+{% set share_text = page.title | urlencode %}
+{% set share_tags = page.taxonomies.tags | join(sep=",") | urlencode %}
+
+<div class="social-share">
+  <a target="_blank" class="fa-brands fa-x-twitter" href="https://twitter.com/intent/tweet?url={{ share_url | safe }}&text={{ share_text | safe }}&hashtags={{ share_tags | safe }}"></a>
+  <a target="_blank" class="fa-brands fa-linkedin-in" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url | safe }}"></a>
+  <a target="_blank" class="fa-brands fa-reddit" href="https://www.reddit.com/submit?url={{ share_url }}&title={{ share_text | safe }}&type=LINK"></a>
+  <a target="_blank" class="fa-brands fa-hacker-news" href="https://news.ycombinator.com/submitlink?u={{ share_url | safe }}&t={{ share_text | safe }}"></a>
+  <a target="_blank" class="fa-brands fa-threads" href="https://www.threads.net/intent/post?&url={{ share_url| urlencode }}&text={{ share_text | safe }}"></a>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/style.min.css" rel="stylesheet" />
 <script>mediumZoom('article img', { background: '#00000030' })</script>

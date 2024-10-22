@@ -201,10 +201,6 @@ main > h2:first-child {
   padding: 0.1rem 0;
 }
 
-article {
-  margin-bottom: 2rem;
-}
-
 article > header {
   margin-bottom: 1rem;
 }
@@ -272,6 +268,25 @@ a.post-edit:hover {
 }
 
 .post hr:last-of-type + ol a:hover {
+  color: var(--link-hover-color);
+}
+
+.social-share {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.social-share a {
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 0.25rem;
+}
+
+.social-share a:hover {
   color: var(--link-hover-color);
 }
 
