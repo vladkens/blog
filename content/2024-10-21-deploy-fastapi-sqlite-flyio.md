@@ -15,7 +15,7 @@ Cloud solutions are good for medium and large projects, but too heavy for small 
 
 - Use the same approaches as for "big" projects (AWS ECS/EKS, RDS), but they are redundant, and infrastructure code can be larger than code of the actual project. Also it's expensive (~$100).
 - Use serverless solutions (Lambda, Vercel). Most cloud providers have such solutions, but these services have difficulties with simple databases – they provide cheap vendor solutions (AWS) or require a managed database, which again is expensive (mostly nothing for serverless, ~$20 for DB)
-- Use VPS with Docker. It is cheap (~$5 for small machine) and almost no need to manage infrastructure, but deployments sucks (needs private or self-hosted regestry, SSH access from CI).
+- Use VPS with Docker. It is cheap (~$5 for small machine) and almost no need to manage infrastructure, but deployments sucks (needs private or self-hosted registry, SSH access from CI).
 
 I usually write my small applications using SQLite, it's a handy little single file database that works in any programming language and can be copied to local machine to analyze data for example. So I was looking for some middleware solution that combines the serveless approach, ease of deployment and ability to use SQLite and found Fly.io.
 
