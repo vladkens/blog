@@ -18,7 +18,7 @@
 {% endif -%}
 
 {% set page_image = "" -%}
-{% set page_image = "https://ogp.fly.dev/v0/svg?title={title}&author={author}&photo=https://avatars.githubusercontent.com/u/825754&url={site}&theme=default" | replace(from="{title}", to=og_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) %}
+{% set page_image = "https://ogp.fly.dev/v0/png?title={title}&author={author}&photo=https://avatars.githubusercontent.com/u/825754&url={site}&theme=dracula" | replace(from="{title}", to=og_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) %}
 
 {% set kw = [] -%}
 {% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
