@@ -31,14 +31,21 @@ body {
   color: var(--text-color);
   font-family: "Open Sans", Verdana, sans-serif;
   font-size: 16px;
+  padding: 0 4px;
 }
 
 a {
   color: var(--link-color);
+  text-decoration: none;
 }
 
 a:hover {
   color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+time {
+  white-space: nowrap;
 }
 
 pre {
@@ -177,6 +184,7 @@ body > header a:hover,
 body > header a.current {
   color: var(--title-color);
   border-bottom: 2px solid var(--link-color);
+  text-decoration: none;
 }
 
 main > h2 {
@@ -205,8 +213,16 @@ article > header {
   margin-bottom: 1rem;
 }
 
-article img {
-  max-width: 100%;
+article img,
+article svg {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+}
+
+article > img {
+  margin-bottom: 12px;
 }
 
 .tags-cloud {
@@ -296,15 +312,17 @@ a.post-edit:hover {
   list-style: none;
   padding: 0;
   margin: 0;
-  padding-left: 0.75rem;
 }
 
 .projects-list li {
   display: flex;
   justify-content: space-between;
+  margin: 0.25rem 0;
+  line-height: 1.25rem;
+  /* padding-left: 0.75rem; */
 }
 
-.projects-list li:before {
+/* .projects-list li:before {
   content: "•";
   margin-left: -0.75rem;
   position: absolute;
@@ -312,23 +330,17 @@ a.post-edit:hover {
   height: 0.75rem;
   transform: translateY(-50%);
   margin-top: 0.375rem;
-}
+} */
 
 .projects-list a {
   /* color: var(--title-color); */
-  text-decoration: none;
-}
-
-.projects-list li > div:first-child {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  line-height: 1rem;
+  /* text-decoration: none; */
 }
 
 .project-langs {
   display: inline-flex;
   gap: 0.5rem;
+  line-height: 1rem;
 }
 
 .project-langs > div {

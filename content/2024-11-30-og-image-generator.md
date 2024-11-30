@@ -80,11 +80,7 @@ async fn svg_handler(req: Request) -> Res<impl IntoResponse> {
 
 This code will generate the following SVG:
 
-<center>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="600" height="315"><style>text { font-family: 'Open Sans', Arial, sans-serif; }</style><rect x="0" y="0" width="1200" height="630" fill="black" stroke="white" stroke-width="16"></rect><text x="120" y="200" font-weight="700" font-size="72" fill="white">This is default article title</text><text x="200" y="500" font-weight="700" font-size="48" fill="white">Author</text><text x="200" y="536" font-weight="400" font-size="32" fill="white">https://example.com</text><defs><clipPath id="circle-photo"><circle cx="128" cy="502" r="50"></circle></clipPath></defs><g clip-path="url(#circle-photo)"><image href="https://gravatar.com/avatar/" x="78" y="452" width="100" height="100"></image><circle cx="128" cy="502" r="50" stroke="white" stroke-width="4" fill="none"></circle></g></svg>
-</center>
-
-Endpoint can accept `title`, `author`, `url`, and `photo` in the search params, and those values will be passed into SVG template. That's pretty much it, I thought, deployed the service on [fly.io](/deploy-fastapi-with-sqlite-on-flyio/), updated the links in my blog, and went to check how preview looks, and... the thumbnail wasn't showed.
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><style>text { font-family: 'Open Sans', Arial, sans-serif; }</style><rect x="0" y="0" width="1200" height="630" fill="black" stroke="white" stroke-width="16"></rect><text x="120" y="200" font-weight="700" font-size="72" fill="white">This is default article title</text><text x="200" y="500" font-weight="700" font-size="48" fill="white">Author</text><text x="200" y="536" font-weight="400" font-size="32" fill="white">https://example.com</text><defs><clipPath id="circle-photo"><circle cx="128" cy="502" r="50"></circle></clipPath></defs><g clip-path="url(#circle-photo)"><image href="https://gravatar.com/avatar/" x="78" y="452" width="100" height="100"></image><circle cx="128" cy="502" r="50" stroke="white" stroke-width="4" fill="none"></circle></g></svg>
 
 The endpoint can accept `title`, `author`, `url` and `photo` in the search params, and these values will be passed to SVG template. That's pretty much it, I thought, deployed the service to [fly.io](/deploy-fastapi-with-sqlite-on-flyio/), updated the blog links, went to check how new preview looked, and the thumbnail didn't display.
 
@@ -138,7 +134,7 @@ async fn png_handler(req: Request) -> Res<impl IntoResponse> {
 
 I run it, and generally, everything works, but the avatar doesn't show up.
 
-<center><img src="/ogi-image-generator-1.png" width="600" height="315" /></center>
+<img src="/ogi-image-generator-1.png" />
 
 ## Loading remote images
 
@@ -192,7 +188,7 @@ async fn prepare_svg(uri: &axum::http::Uri) -> Res<String> {
 
 I check generation again – everything is fine, the avatar is present in the final render:
 
-<center><img src="/ogi-image-generator-2.png" width="600" height="315" /></center>
+<img src="/ogi-image-generator-2.png" />
 
 ## Docker image
 
