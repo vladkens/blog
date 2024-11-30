@@ -3,31 +3,37 @@
     "name": "vladkens/twscrape",
     "descr": "X/Twitter scrapper with authorization support",
     "langs": ["Python"],
-    "stars": 1017
+    "stars": 1138
   },
   {
     "name": "vladkens/macmon",
     "descr": "CLI performance monitoring for Apple Silicon",
     "langs": ["Rust"],
-    "stars": 217
+    "stars": 319
   },
   {
     "name": "vladkens/ghstats",
     "descr": "Self-hosted dashboard for tracking GitHub repos traffic",
     "langs": ["Rust"],
-    "stars": 121
+    "stars": 125
   },
   {
     "name": "vladkens/apigen-ts",
     "descr": "Typed HTTP client generator from OpenAPI schema",
     "langs": ["TypeScript"],
-    "stars": 28
+    "stars": 30
   },
   {
     "name": "vladkens/ecloop",
     "descr": "secp256k1 \"brute-forcer\"",
     "langs": ["C"],
-    "stars": 13
+    "stars": 17
+  },
+  {
+    "name": "vladkens/ogp",
+    "descr": "Open Graph Image Generator for Static Sites",
+    "langs": ["Rust"],
+    "stars": 4
   },
   {
     "name": "vladkens/timewiz",
