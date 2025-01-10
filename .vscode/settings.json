@@ -11,7 +11,9 @@
     "editor.formatOnSave": false
   },
   "files.exclude": {
-    ".frontmatter": true,
     "public": true
+  },
+  "markdown.copyFiles.destination": {
+    "/content/**/*": "/static/${documentBaseName/(\\d*)-(\\d*)-(\\d*).*/$1$2$3/}.${fileExtName}"
   }
 }
