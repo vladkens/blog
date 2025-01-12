@@ -1,6 +1,6 @@
-base_url = "https://vnotes.pages.dev"
-title = "vnotes"
-description = "the tech blog"
+base_url = "https://vladkens.cc"
+title = "vladkens.cc"
+description = "my tech blog"
 compile_sass = false
 build_search_index = false
 generate_sitemap = true

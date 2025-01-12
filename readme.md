@@ -2,7 +2,7 @@
 
 Check out my blog at:
 
-- https://vnotes.pages.dev
+- https://vladkens.cc
 - https://medium.com/@vladkens
 - https://dev.to/vladkens
 

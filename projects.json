@@ -3,13 +3,13 @@
     "name": "vladkens/twscrape",
     "descr": "X/Twitter scrapper with authorization support",
     "langs": ["Python"],
-    "stars": 1249
+    "stars": 1257
   },
   {
     "name": "vladkens/macmon",
     "descr": "CLI performance monitoring for Apple Silicon",
     "langs": ["Rust"],
-    "stars": 440
+    "stars": 445
   },
   {
     "name": "vladkens/ghstats",
