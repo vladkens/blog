@@ -192,7 +192,7 @@ I check generation again – everything is fine, the avatar is present in the fi
 
 ## Docker image
 
-So, the service is ready. Now, just needed to pack code into a [Docker image](/fast-multi-arch-docker-for-rust). It's pretty much the same as usual, except that fonts files should be added to image too. I usually use Alpine images, and fonts can be added via `apk`:
+So, the service is ready. Now, just needed to pack code into a [Docker image](/fast-multi-arch-docker-for-rust/). It's pretty much the same as usual, except that fonts files should be added to image too. I usually use Alpine images, and fonts can be added via `apk`:
 
 ```Dockerfile
 FROM alpine:latest
