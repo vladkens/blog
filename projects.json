@@ -3,42 +3,42 @@
     "name": "vladkens/twscrape",
     "descr": "X/Twitter scrapper with authorization support",
     "langs": ["Python"],
-    "stars": 1257
+    "stars": 1417
   },
   {
     "name": "vladkens/macmon",
     "descr": "CLI performance monitoring for Apple Silicon",
     "langs": ["Rust"],
-    "stars": 445
+    "stars": 602
   },
   {
     "name": "vladkens/ghstats",
     "descr": "Self-hosted dashboard for tracking GitHub repos traffic",
     "langs": ["Rust"],
-    "stars": 133
+    "stars": 140
   },
   {
     "name": "vladkens/apigen-ts",
     "descr": "Typed HTTP client generator from OpenAPI schema",
     "langs": ["TypeScript"],
-    "stars": 30
+    "stars": 35
   },
   {
     "name": "vladkens/ecloop",
     "descr": "secp256k1 \"brute-forcer\"",
     "langs": ["C"],
-    "stars": 21
+    "stars": 24
   },
   {
     "name": "vladkens/ogp",
     "descr": "Open Graph Image Generator for Static Sites",
     "langs": ["Rust"],
-    "stars": 5
+    "stars": 6
   },
   {
     "name": "vladkens/timewiz",
     "descr": "Timezone viewer & meetings planner",
     "langs": ["TypeScript"],
-    "stars": 3
+    "stars": 4
   }
 ]
