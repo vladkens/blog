@@ -1,43 +1,49 @@
 [
   {
     "name": "vladkens/twscrape",
-    "descr": "X/Twitter scrapper with authorization support",
+    "descr": "Python library for scraping X",
     "langs": ["Python"],
-    "stars": 1425
+    "stars": 1505
   },
   {
     "name": "vladkens/macmon",
-    "descr": "CLI performance monitoring for Apple Silicon",
+    "descr": "MacOS CLI tool for performance monitoring",
     "langs": ["Rust"],
-    "stars": 606
+    "stars": 661
   },
   {
     "name": "vladkens/ghstats",
-    "descr": "Self-hosted dashboard for tracking GitHub repos traffic",
+    "descr": "Self-hosted GitHub stats for your repos",
     "langs": ["Rust"],
-    "stars": 141
+    "stars": 148
   },
   {
     "name": "vladkens/apigen-ts",
-    "descr": "Typed HTTP client generator from OpenAPI schema",
+    "descr": "Generate TypeScript API clients from OpenAPI",
     "langs": ["TypeScript"],
-    "stars": 35
+    "stars": 38
   },
   {
     "name": "vladkens/ecloop",
-    "descr": "secp256k1 \"brute-forcer\"",
+    "descr": "secp256k1 elliptic curve brute-forcing",
     "langs": ["C"],
-    "stars": 24
+    "stars": 25
+  },
+  {
+    "name": "vladkens/badges",
+    "descr": "Nice badges for your projects",
+    "langs": ["Rust"],
+    "stars": 9
   },
   {
     "name": "vladkens/ogp",
-    "descr": "Open Graph Image Generator for Static Sites",
+    "descr": "Open Graph image generator as a service",
     "langs": ["Rust"],
     "stars": 6
   },
   {
     "name": "vladkens/timewiz",
-    "descr": "Timezone viewer & meetings planner",
+    "descr": "Time zone viewer & meeting planner",
     "langs": ["TypeScript"],
     "stars": 4
   }

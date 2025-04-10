@@ -3,7 +3,7 @@
 {%- block main_content -%}
 
 <h2>Projects</h2>
-{% set projects = load_data(path="/projects.json") %}
+{% set projects = load_data(path="projects.json") %}
 <ul class="projects-list">
 {% for project in projects | sort(attribute="stars") | reverse %}
   <li>
