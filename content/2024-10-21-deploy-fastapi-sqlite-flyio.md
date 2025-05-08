@@ -212,7 +212,7 @@ fly ssh sftp get /data/app.db ./app-backup.db
 
 ## Conclusion
 
-Fly.io is a simple and convenient service for deploying applications. Deploy works from Docker Containers, additional services include PSQL, Redis, S3 like storage (unlike Vercel). It's cheap, the cheapest service costs 3 dollars (1 shared CPU / 256 MB) – maybe even less, if you have little traffic – container shuts down after a few minutes without activity and automatically turns on when traffic appears.
+Fly.io is a simple and convenient service for deploying applications. Deploy works from Docker Containers, additional services include PSQL, Redis, S3 like storage (unlike Vercel). It's cheap, the cheapest service costs 3 dollars (1 shared CPU / 256 MB) – maybe even less, if you have little traffic – container shuts down after a few minutes without activity and automatically turns on when traffic appears.
 
 On downside, there is no built-in solution for scheduled tasks – instead, the official solution is to set up a separate server with `crontab` and run tasks from it – it's kind of creepy.
 

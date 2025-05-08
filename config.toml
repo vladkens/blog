@@ -7,6 +7,12 @@ generate_sitemap = true
 generate_feeds = true
 feed_filenames = ["atom.xml"]
 taxonomies = [{ name = "tags" }]
+default_language = "en"
+
+[languages.ru]
+title = "vladkens.cc"
+generate_feeds = false
+taxonomies = [{ name = "tags" }]
 
 [markdown]
 highlight_code = true
