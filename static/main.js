@@ -51,6 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const initInlineCodeCopy = () => {
+    document.querySelectorAll(".wallets-list code").forEach((x) => {
+      x.style.cursor = "pointer";
+      x.title = "Click to copy";
+      x.onclick = () => {
+        const address = x.dataset.address || x.innerText;
+        navigator.clipboard.writeText(address);
+      };
+    });
+  };
+
   markCurrentLinks();
   addCopyCodeButton();
+  initInlineCodeCopy();
 });

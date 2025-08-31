@@ -3,43 +3,43 @@
     "name": "vladkens/twscrape",
     "descr": "Python library for scraping X",
     "langs": ["Python"],
-    "stars": 1505
+    "stars": 1887
   },
   {
     "name": "vladkens/macmon",
     "descr": "MacOS CLI tool for performance monitoring",
     "langs": ["Rust"],
-    "stars": 661
+    "stars": 957
   },
   {
     "name": "vladkens/ghstats",
     "descr": "Self-hosted GitHub stats for your repos",
     "langs": ["Rust"],
-    "stars": 148
+    "stars": 164
   },
   {
     "name": "vladkens/apigen-ts",
     "descr": "Generate TypeScript API clients from OpenAPI",
     "langs": ["TypeScript"],
-    "stars": 38
+    "stars": 46
   },
   {
     "name": "vladkens/ecloop",
     "descr": "secp256k1 elliptic curve brute-forcing",
     "langs": ["C"],
-    "stars": 25
+    "stars": 44
   },
   {
     "name": "vladkens/badges",
     "descr": "Nice badges for your projects",
     "langs": ["Rust"],
-    "stars": 9
+    "stars": 36
   },
   {
     "name": "vladkens/ogp",
     "descr": "Open Graph image generator as a service",
     "langs": ["Rust"],
-    "stars": 6
+    "stars": 8
   },
   {
     "name": "vladkens/timewiz",
