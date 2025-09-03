@@ -1,7 +1,7 @@
 ---
 title: Donate
 path: donate
-template: page.html
+template: page-single.html
 ---
 
 If you enjoy my work or projects, please consider supporting their development. Every bit helps and is greatly appreciated!
