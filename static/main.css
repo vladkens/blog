@@ -215,7 +215,7 @@ article > header {
 article img,
 article svg {
   width: 100%;
-  max-width: 600px;
+  max-width: 720px;
   display: block;
   margin: 0 auto;
 }

@@ -15,7 +15,26 @@ CLOUDFLARE_TOKEN = os.environ["CLOUDFLARE_TOKEN"]
 UMAMI_TOKEN = os.environ["UMAMI_TOKEN"]
 UNAMI_SITE = "2314c16c-b72f-4f6e-8f5e-ee3abe39383e"
 
-SINCE, UNTIL = "2024-01-01", "2025-01-01"
+# SINCE, UNTIL = "2024-01-01", "2025-01-01"   
+SINCE, UNTIL = "2025-01-01", "2026-01-01"
+
+def load_lines(filepath: str) -> list[str]:
+    with open(filepath, "r") as fp:
+        lines = [x.strip() for x in fp.readlines()]
+        lines = [x for x in lines if x and not x.startswith("#")]
+        return lines
+
+def parse_proxy(proxy: str | None) -> str | None:
+    if not proxy:
+        return None
+
+    if not proxy.startswith("http") and proxy.count(":") == 3:
+        parts = proxy.split(":")
+        proxy = f"http://{parts[2]}:{parts[3]}@{parts[0]}:{parts[1]}"
+        return proxy
+
+    return proxy
+
 
 projects = """
 vladkens/twscrape
@@ -38,13 +57,26 @@ GITHUB_API_URL = "https://api.github.com"
 def fromiso(date_str: str):
     return datetime.fromisoformat(date_str).replace(tzinfo=None)
 
+PROXIES = load_lines("../web3-cybil-tools/_proxies.txt")
+PROXIES = [parse_proxy(x) for x in PROXIES]
+
+def get_page(url, params):
+    proxies = [None, *PROXIES]
+    for proxy in proxies:
+        try:
+            # print(f">> {url} via {proxy}")
+            rep = httpx.get(url, params=params, proxy=proxy, timeout=10.0)
+            rep.raise_for_status()
+            return rep
+        except Exception as e:
+            print(f"Error fetching {url} via {proxy}: {e}")
+            time.sleep(1)
 
 def fetch_all_pages(url, params):
     items = []
+
     while url:
-        # print(f">> {url}")
-        rep = httpx.get(url, params=params)
-        rep.raise_for_status()
+        rep = get_page(url, params)
         items.extend(rep.json())
         url = rep.links.get("next", {}).get("url")
         time.sleep(1)

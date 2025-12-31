@@ -8,6 +8,7 @@ generate_feeds = true
 feed_filenames = ["atom.xml"]
 taxonomies = [{ name = "tags" }]
 default_language = "en"
+author = "vladkens"
 
 [languages.ru]
 title = "vladkens.cc"
