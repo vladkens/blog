@@ -4,26 +4,24 @@ on:
   push:
     branches:
       - main
-  # schedule:
-  #   - cron: "0 0 * * 0" # every Sunday at midnight
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: taiki-e/install-action@v2
         with:
-          tool: zola@0.20.0
+          tool: zola@0.22.1
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.13"
 
       - name: Install dependencies
         run: |
@@ -35,10 +33,9 @@ jobs:
 
       - run: zola build
 
-      - uses: cloudflare/pages-action@v1
+      - uses: cloudflare/wrangler-action@v4
         if: github.ref == 'refs/heads/main'
         with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          projectName: vnotes
-          directory: public
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=vnotes
