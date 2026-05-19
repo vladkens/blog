@@ -1,3 +1,26 @@
+{% macro lang_switch(lang, tr_pages, lang_switch) %}
+  {%- set_global has_other = false -%}
+  {%- for lc in lang_switch -%}
+    {%- if lc != lang -%}
+      {%- for tr in tr_pages -%}
+        {%- if tr.lang == lc -%}{%- set_global has_other = true -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if has_other -%}
+    {%- for lc in lang_switch -%}
+      {%- if not loop.first %} {% endif -%}
+      {%- if lc == lang -%}{{ lc }}
+      {%- else -%}
+        {%- for tr in tr_pages -%}
+          {%- if tr.lang == lc -%}<a href="{{ tr.permalink }}">{{ lc }}</a>{%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {{- " " }}<i>•</i>
+  {%- endif -%}
+{% endmacro %}
+
 {% macro list_posts(pages) %}
 <ul class="posts-list">
 {% for page in pages %}

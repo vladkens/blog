@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block main_content %}
-<h1>Tags</h1>
+<h1>{{ trans(key="tags_title") }}</h1>
 <div class="tags-cloud">
   {% for term in terms | sort(attribute="pages") | reverse %}
     <a href="{{ term.permalink | safe }}">{{ term.name }}&nbsp;({{ term.pages | length }})</a>

@@ -25,8 +25,26 @@
 {% if page.extra.keywords %}{% set kw = kw | concat(with=page.extra.keywords) %}{% endif -%}
 {% if page.taxonomies.tags %}{% set kw = page.taxonomies.tags %}{% endif -%}
 
+{% set tr_pages = [] %}
+{% if page is defined %}{% set tr_pages = page.translations %}
+{% elif section is defined %}{% set tr_pages = section.translations %}
+{% endif %}
+
+{# Default language URL for fallback: find EN translation, or use current page if already EN #}
+{% set_global default_url = "" %}
+{% for tr in tr_pages %}
+  {% if tr.lang == config.default_language %}{% set_global default_url = tr.permalink %}{% endif %}
+{% endfor %}
+{% if default_url == "" %}
+  {% if page is defined %}{% set_global default_url = page.permalink %}
+  {% elif section is defined %}{% set_global default_url = section.permalink %}
+  {% endif %}
+{% endif %}
+
+{% if lang == config.default_language %}{% set lp = "" %}{% else %}{% set lp = "/" ~ lang %}{% endif %}
+
 <!doctype html>
-<html lang="en">
+<html lang="{{ lang }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -52,7 +70,7 @@
 
     {%- if page %}
     <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
-    <meta name="twitter:label1" content="Reading time" />
+    <meta name="twitter:label1" content="{{ trans(key='reading_time') }}" />
     <meta name="twitter:data1" content="{{ page.reading_time }} min read" />
     {% endif -%}
 
@@ -62,10 +80,10 @@
   <body>
     <header>
       <div>
-        <a href="/">main</a>
-        <a href="/tags">tags</a>
-        <a href="/donate">donate</a>
-        <a href="/atom.xml" target="_blank">rss <i class="fas fa-external-link-alt" style="font-size: 14px"></i></a>
+        <a href="{{ lp ~ '/' }}">{{ trans(key="nav_home") }}</a>
+        <a href="{{ lp ~ '/tags' }}">{{ trans(key="nav_tags") }}</a>
+        <a href="{{ lp ~ '/donate' }}">{{ trans(key="nav_donate") }}</a>
+        <a href="/atom.xml" target="_blank">{{ trans(key="nav_rss") }} <i class="fas fa-external-link-alt" style="font-size: 14px"></i></a>
       </div>
 
       <div>
@@ -76,7 +94,7 @@
 
     <main>{% block main_content %} Nothing here?! {% endblock main_content %}</main>
 
-    <footer>© {{ now() | date(format="%Y") }} All rights reserved. Code samples are public domain unless otherwise noted.</footer>
+    <footer>© {{ now() | date(format="%Y") }} {{ trans(key="footer") }}</footer>
 
     <script src="{{ get_url(path='main.js', cachebust=true) }}"></script>
     <script defer src="https://kit.fontawesome.com/15cfaf31d4.js" crossorigin="anonymous"></script>

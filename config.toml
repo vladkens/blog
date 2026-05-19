@@ -10,11 +10,6 @@ taxonomies = [{ name = "tags" }]
 default_language = "en"
 author = "vladkens"
 
-[languages.ru]
-title = "vladkens.cc"
-generate_feeds = false
-taxonomies = [{ name = "tags" }]
-
 [markdown]
 external_links_target_blank = true
 
@@ -25,3 +20,31 @@ dark_theme = "github-dark"
 [extra]
 github = "vladkens"
 twitter = "uid127"
+lang_switch = ["en", "ru"] # display order in lang switcher
+
+[translations]
+nav_home = "home"
+nav_tags = "tags"
+nav_donate = "donate"
+nav_rss = "rss"
+projects = "Projects"
+posts = "Posts"
+posted_at = "Posted"
+words = "words"
+min_read = "min read"
+also_read = "Also read on"
+tags_label = "Tags"
+tags_title = "Tags"
+tagged_with = "Posts tagged"
+edit_page = "Edit this page"
+reading_time = "Reading time"
+not_found = "Nothing here :("
+footer = "All rights reserved. Code samples are public domain unless otherwise noted."
+
+[languages.ru]
+title = "vladkens.cc"
+generate_feeds = false
+taxonomies = [{ name = "tags" }]
+
+[languages.ru.translations]
+nav_home = "main" # todo: https://github.com/getzola/zola/issues/3161

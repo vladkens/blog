@@ -6,10 +6,10 @@
     <h1>{{ page.title }}</h1>
     <div class="post-meta">
       <div>
-        Posted at <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
-        <i>•</i> {{ page.word_count }} words ~ {{ page.reading_time }} min read
+        {{ trans(key="posted_at") }} <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
+        <i>•</i> {{ page.word_count }} {{ trans(key="words") }} ~ {{ page.reading_time }} {{ trans(key="min_read") }}
         {% if page.extra | length > 0 %}
-        <i>•</i> Also read on: {%- for key, value in page.extra -%}
+        <i>•</i> {{ trans(key="also_read") }}: {%- for key, value in page.extra -%}
             {% if not loop.first %}, {% endif %}
             <a target="_blank" href="{{ value | safe }}">{{ key }}</a>
           {%- endfor -%}
@@ -18,12 +18,13 @@
 
       <div>
         {% if page.taxonomies.tags | length > 0 %}
-        Tags: {%- for tag in page.taxonomies.tags -%}
+        {{ trans(key="tags_label") }}: {%- for tag in page.taxonomies.tags -%}
             {% if not loop.first %}, {% endif %}
             <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="post-tag">{{ tag }}</a>
           {%- endfor %} <i>•</i>
         {% endif %}
-        <a class="post-edit" target="_blank" href="https://github.com/vladkens/blog/edit/main/content/{{ page.relative_path | safe }}">Edit this page</a>
+        {{ macros::lang_switch(lang=lang, tr_pages=tr_pages, lang_switch=config.extra.lang_switch) }}
+        <a class="post-edit" target="_blank" href="https://github.com/vladkens/blog/edit/main/content/{{ page.relative_path | safe }}">{{ trans(key="edit_page") }}</a>
       </div>
     </div>
   </header>
@@ -58,7 +59,7 @@
   data-emit-metadata="0"
   data-input-position="bottom"
   data-theme="preferred_color_scheme"
-  data-lang="en"
+  data-lang="{{ lang }}"
   crossorigin="anonymous"
   data-loading="lazy"
   async
