@@ -118,8 +118,8 @@ dir="$(get '.workspace.current_dir')"
 dir="${dir/#"$HOME"/\~}"
 
 context_remaining="$(get '(.context_window.remaining_percentage // 100)')% left"
-five_hour="$(get '100 - .rate_limits.five_hour.used_percentage')%"
-weekly="$(get '100 - .rate_limits.seven_day.used_percentage')%"
+five_hour="$(get '(100 - .rate_limits.five_hour.used_percentage) | round')%"
+weekly="$(get '(100 - .rate_limits.seven_day.used_percentage) | round')%"
 window="$(fmt_tokens "$(get '.context_window.context_window_size')")"
 used="$(fmt_tokens "$(get '.context_window.context_window_size * .context_window.used_percentage / 100')")"
 
