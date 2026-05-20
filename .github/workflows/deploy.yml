@@ -28,9 +28,8 @@ jobs:
       - run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - run: zola build
 
-      - uses: cloudflare/wrangler-action@v4
-        if: github.ref == 'refs/heads/main'
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy public --project-name=vnotes
+      - if: github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpm dlx wrangler@4 pages deploy public --project-name=vnotes

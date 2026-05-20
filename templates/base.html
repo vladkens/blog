@@ -78,6 +78,7 @@
     </header>
 
     <main>{% block main_content %}Nothing here?!{% endblock main_content %}</main>
+    {# debug: {{ __tera_context }} #}
 
     {%- set sha = get_env(name="COMMIT_SHA", default="dev") -%}
     {%- if sha == "dev" -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/tree/main" -%}{%- else -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/commit/" ~ sha -%}{%- endif -%}
