@@ -10,7 +10,8 @@
   "files.exclude": {
     "public": true,
     "node_modules": true,
-    "pnpm-lock.yaml": true
+    "pnpm-lock.yaml": true,
+    ".pnpm-store": true
   },
   "markdown.copyFiles.destination": {
     "/content/**/*": "/static/${documentBaseName/(\\d*)-(\\d*)-(\\d*).*/$1$2$3/}.${fileExtName}"

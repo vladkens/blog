@@ -12,9 +12,11 @@ taxonomies:
 
 После того как месяц-полтора назад ввели лимиты, стало неудобно постоянно проверять их руками через `/status`. С контекстом та же история: чтобы понять, сколько ещё осталось до автокомпакта, нужно отдельно дёргать `/context`. Само по себе это несложно, но делать это постоянно быстро надоедает. При этом хотелось заранее видеть, когда лимит или контекст уже близко, чтобы успеть что-то сохранить руками. После автокомпакта модель у меня часто тупеет и забывает важные факты. Поэтому я полез смотреть, как это вообще можно отслеживать, и выяснил, что у обоих клиентов есть statusline. По умолчанию он и там и там довольно минималистичный и показывает в основном только текущую модель.
 
-В Codex statusline настраивается адекватно. Достаточно написать `/statusline` и в интерактивном UI выбрать, что показывать. Дальше настройки сохраняются в `~/.codex/config.toml`.
+В Codex statusline настраивается адекватно. Достаточно написать `/statusline` и в интерактивном UI выбрать, что показывать. Дальше эти настройки сохраняются в `~/.codex/config.toml`.
 
 Я для себя выбрал такой формат:
+
+![Codex statusline](/20260521-0.png)
 
 ```text
 gpt-5.4 medium · ~/Code/blog · Context 73% left · 5h 93% · weekly 92% · 258K window · 1.2M used
@@ -53,31 +55,21 @@ theme = "catppuccin-macchiato"
 
 Здесь `command` — это просто скрипт, который Claude Code будет запускать при обновлении statusline. На GitHub можно найти много разных реализаций. Например, такие безумные решения: [sirmalloc/ccstatusline](https://github.com/sirmalloc/ccstatusline), [Owloops/claude-powerline](https://github.com/Owloops/claude-powerline), [Haleclipse/CCometixLine](https://github.com/Haleclipse/CCometixLine), [hagan/claudia-statusline](https://github.com/hagan/claudia-statusline), [felipeelias/claude-statusline](https://github.com/felipeelias/claude-statusline). Безумными я их называю потому, что в эпоху, когда очередной npm-пакет ломают чуть ли не каждый день, ставить дополнительный софт через npm ради настолько простой задачи кажется [странной идеей](https://en.wikipedia.org/wiki/Npm_left-pad_incident).
 
-Но идею у них позаимствовать можно. Команда запускается при каждом обновлении статуса, в `stdin` приходит JSON, который можно распарсить и отобразить как угодно. Документация по доступным полям: https://code.claude.com/docs/en/statusline#available-data
+Но идею у них позаимствовать можно. Команда запускается при каждом обновлении статуса, в `stdin` приходит JSON, который можно распарсить и отобразить как угодно. Документация по доступным полям: [Claude Code statusline docs](https://code.claude.com/docs/en/statusline#available-data)
 
 В общем, в statusline приходит примерно такой набор данных:
 
 ```jsonc
 {
+  // shortened example; see docs for the full schema
   "session_id": "<session-id>",
   "transcript_path": "/Users/<user>/.claude/projects/<project>/<session-id>.jsonl",
   "cwd": "/Users/user/Code/blog",
   "session_name": "<session-name>",
   "model": { "id": "claude-sonnet-4-6", "display_name": "Sonnet 4.6" },
-  "workspace": {
-    "current_dir": "/Users/user/Code/blog",
-    "project_dir": "/Users/user/Code/blog",
-    "added_dirs": ["/Users/user/code/blog"],
-  },
+  "workspace": { "current_dir": "/Users/user/Code/blog" },
   "version": "2.1.126",
   "output_style": { "name": "default" },
-  "cost": {
-    "total_cost_usd": 0.0356155,
-    "total_duration_ms": 1017863,
-    "total_api_duration_ms": 22769,
-    "total_lines_added": 1,
-    "total_lines_removed": 0,
-  },
   "context_window": {
     "total_input_tokens": 433,
     "total_output_tokens": 492,
@@ -125,7 +117,7 @@ model="$(get '.model.display_name')"
 dir="$(get '.workspace.current_dir')"
 dir="${dir/#"$HOME"/\~}"
 
-context_remaining="$(get '.context_window.remaining_percentage')% left"
+context_remaining="$(get '(.context_window.remaining_percentage // 100)')% left"
 five_hour="$(get '100 - .rate_limits.five_hour.used_percentage')%"
 weekly="$(get '100 - .rate_limits.seven_day.used_percentage')%"
 window="$(fmt_tokens "$(get '.context_window.context_window_size')")"
@@ -138,6 +130,8 @@ printf '%s · %s · Context %s · 5h %s · weekly %s · %s window · %s used\n' 
 
 В итоге оба клиента начинают выглядеть одинаково:
 
-![alt text](/20260521.png)
+![Matching statuslines](/20260521-1.png)
+
+Единственный косяк, который я заметил в Claude Code: при открытии терминала statusline не показывается сразу в новых сессиях. Появляется только после первого взаимодействия с чатом (можно вызвать вручную через Cmd+Shift).
 
 На этом всё. На настройку statusline и написание заметки ушло около трёх часов.
