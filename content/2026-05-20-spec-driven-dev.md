@@ -1,5 +1,5 @@
 ---
-title: Spec-Driven Dev in Practice
+title: Spec-Driven Development in Practice
 slug: spec-driven-dev
 date: 2026-05-20
 taxonomies:

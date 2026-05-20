@@ -30,6 +30,13 @@
           <a
             class="post-edit"
             target="_blank"
+            href="https://raw.githubusercontent.com/vladkens/blog/main/content/{{ page.relative_path | safe }}"
+            >{{ trans(key="view_markdown") }}</a
+          >
+          <i>•</i>
+          <a
+            class="post-edit"
+            target="_blank"
             href="https://github.com/vladkens/blog/edit/main/content/{{ page.relative_path | safe }}"
             >{{ trans(key="edit_page") }}</a
           >

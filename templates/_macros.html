@@ -8,9 +8,9 @@
     {%- endif -%}
   {%- endfor -%}
   {%- if has_other -%}
+    {{ trans(key="language_switch") }}:{{ " " }}
     {%- for lc in lang_switch -%}
-      {%- if not loop.first %}
-      {% endif -%}
+      {%- if not loop.first %}&nbsp;/&nbsp;{% endif -%}
       {%- if lc == lang -%}
         {{ lc }}
       {%- else -%}

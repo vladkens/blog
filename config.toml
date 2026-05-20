@@ -37,6 +37,8 @@ tags_label = "Tags"
 tags_title = "Tags"
 tagged_with = "Posts tagged"
 edit_page = "Edit this page"
+view_markdown = "View as Markdown"
+language_switch = "Lang"
 reading_time = "Reading time"
 not_found = "Nothing here :("
 empty_state = "Nothing here?!"
@@ -49,3 +51,5 @@ taxonomies = [{ name = "tags" }]
 
 [languages.ru.translations]
 nav_home = "main" # todo: https://github.com/getzola/zola/issues/3161
+view_markdown = "View as Markdown"
+language_switch = "Lang"
