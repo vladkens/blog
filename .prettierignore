@@ -1,0 +1,6 @@
+code/
+*.py
+static/*.png
+static/*.webp
+static/*.ico
+pnpm-lock.yaml

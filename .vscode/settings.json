@@ -7,11 +7,10 @@
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 100
   },
-  "[html]": {
-    "editor.formatOnSave": false
-  },
   "files.exclude": {
-    "public": true
+    "public": true,
+    "node_modules": true,
+    "pnpm-lock.yaml": true
   },
   "markdown.copyFiles.destination": {
     "/content/**/*": "/static/${documentBaseName/(\\d*)-(\\d*)-(\\d*).*/$1$2$3/}.${fileExtName}"

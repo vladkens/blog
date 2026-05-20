@@ -87,8 +87,8 @@ import { Primitive } from "react-hook-form";
 type NestedImpl<K extends string | number, V, T> = V extends T
   ? K
   : V extends Primitive | Array<infer V>
-  ? never
-  : `${K}.${NestedByType<V, T>}`;
+    ? never
+    : `${K}.${NestedByType<V, T>}`;
 
 export type NestedByType<O, T> = {
   [K in keyof O]-?: K extends string ? NestedImpl<K, O[K], T> : never;
@@ -128,11 +128,14 @@ import { Control, Controller, FieldValues } from "react-hook-form";
 
 const makeCtrl = <T extends Pick<T, "value" | "onChange"> & { error?: string }>(
   Component: FC<T>,
-  options: { errorKey?: string } = {}
+  options: { errorKey?: string } = {},
 ) => {
   // react-hook-form has FieldPathByValue but it slow, so we use NestedByType
   const Wrapped = <D extends FieldValues, P extends NestedByType<D, T["value"]>>(
-    props: Omit<T, "value" | "onChange" | "error"> & { control: Control<D>; name: P }
+    props: Omit<T, "value" | "onChange" | "error"> & {
+      control: Control<D>;
+      name: P;
+    },
   ) => {
     const { control, name, ...rest } = props;
     const errorKey = options.errorKey ? `${name}.${options.errorKey}` : name.toString();

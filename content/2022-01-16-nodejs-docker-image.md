@@ -28,7 +28,7 @@ Well, let’s fix that problem.
 
 The most basic and simple solution would be to change the basic Docker Image to the alpine version. To do this, change in the first line of the Dockerfile `FROM node:16` to `FROM node:16-alpine`. This was already in my Dockerfile, so this optimization won’t help me. The original Docker file looks like:
 
-```yaml
+```dockerfile
 FROM node:16-alpine
 
 WORKDIR /app
@@ -51,7 +51,7 @@ I divided the build process of container into three steps. The first step builds
 
 This approach requires a little more time to build the container, but it also reduces its size considerably. For example, the TypeScript dependency alone takes up over 80 mb of space. The final Dockerfile looks like:
 
-```yaml
+```dockerfile
 FROM node:16-alpine as dist
 WORKDIR /app
 COPY . .

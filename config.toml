@@ -1,6 +1,6 @@
 base_url = "https://vladkens.cc"
 title = "vladkens.cc"
-description = "my tech blog"
+description = "Practical software engineering notes"
 compile_sass = false
 build_search_index = false
 generate_sitemap = true
@@ -39,6 +39,7 @@ tagged_with = "Posts tagged"
 edit_page = "Edit this page"
 reading_time = "Reading time"
 not_found = "Nothing here :("
+empty_state = "Nothing here?!"
 footer = "All rights reserved. Code samples are public domain unless otherwise noted."
 
 [languages.ru]

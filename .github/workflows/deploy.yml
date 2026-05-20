@@ -15,22 +15,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
       - uses: taiki-e/install-action@v2
         with:
           tool: zola@0.22.1
 
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run projects update script
-        run: python _projects_update.py
-
+      - run: corepack enable && pnpm install --frozen-lockfile
+      - run: pnpm run format:check
+      - run: pnpm run update-projects
+      - run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - run: zola build
 
       - uses: cloudflare/wrangler-action@v4

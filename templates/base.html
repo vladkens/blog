@@ -1,54 +1,37 @@
-{% import "_macros.html" as macros %}
+{%- import "_macros.html" as macros -%}
 
-{% set page_url = config.base_url -%}
-{% if current_url %}{% set page_url = current_url %}{% endif -%}
+{%- set page_url = config.base_url -%}
+{%- if current_url -%}{%- set page_url = current_url -%}{%- endif -%}
 
-{% set og_title = config.title -%}
-{% if section.title %}{% set og_title = section.title %}{% endif -%}
-{% if page.title %}{% set og_title = page.title %}{% endif -%}
+{%- set og_title = config.title -%}
+{%- if section.title -%}{%- set og_title = section.title -%}{%- endif -%}
+{%- if page.title -%}{%- set og_title = page.title -%}{%- endif -%}
 
-{% set page_title = og_title ~ " :: " ~ config.title -%}
+{%- set page_title = og_title ~ " :: " ~ config.title -%}
 
-{% set page_descr = config.description -%}
-{% if section.description %}{% set page_descr = section.description %}{% endif -%}
-{% if page.description %}{% set page_descr = page.description %}{% endif -%}
+{%- set page_descr = config.description -%}
+{%- if section.description -%}{%- set page_descr = section.description -%}{%- endif -%}
+{%- if page.description -%}{%- set page_descr = page.description -%}{%- endif -%}
 
-{% if page %}
-{% set page_descr = page.content | linebreaksbr | striptags | truncate(length=160) -%}
-{% endif -%}
+{%- if page -%}
+  {%- set page_descr = page.content | linebreaksbr | striptags | truncate(length=160) -%}
+{%- endif -%}
+{%- set page_image = "https://ogp.fly.dev/v0/png?title={title}&author={author}&photo=https://avatars.githubusercontent.com/u/825754&url={site}&theme=dracula" | replace(from="{title}", to=og_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) -%}
 
-{% set page_image = "" -%}
-{% set page_image = "https://ogp.fly.dev/v0/png?title={title}&author={author}&photo=https://avatars.githubusercontent.com/u/825754&url={site}&theme=dracula" | replace(from="{title}", to=og_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) %}
+{%- set kw = [] -%}
+{%- if config.extra.keywords -%}{%- set kw = kw | concat(with=config.extra.keywords) -%}{%- endif -%}
+{%- if page.extra.keywords -%}{%- set kw = kw | concat(with=page.extra.keywords) -%}{%- endif -%}
+{%- if page.taxonomies.tags -%}{%- set kw = page.taxonomies.tags -%}{%- endif -%}
 
-{% set kw = [] -%}
-{% if config.extra.keywords %}{% set kw = kw | concat(with=config.extra.keywords) %}{% endif -%}
-{% if page.extra.keywords %}{% set kw = kw | concat(with=page.extra.keywords) %}{% endif -%}
-{% if page.taxonomies.tags %}{% set kw = page.taxonomies.tags %}{% endif -%}
-
-{% set tr_pages = [] %}
-{% if page is defined %}{% set tr_pages = page.translations %}
-{% elif section is defined %}{% set tr_pages = section.translations %}
-{% endif %}
-
-{# Default language URL for fallback: find EN translation, or use current page if already EN #}
-{% set_global default_url = "" %}
-{% for tr in tr_pages %}
-  {% if tr.lang == config.default_language %}{% set_global default_url = tr.permalink %}{% endif %}
-{% endfor %}
-{% if default_url == "" %}
-  {% if page is defined %}{% set_global default_url = page.permalink %}
-  {% elif section is defined %}{% set_global default_url = section.permalink %}
-  {% endif %}
-{% endif %}
-
-{% if lang == config.default_language %}{% set lp = "" %}{% else %}{% set lp = "/" ~ lang %}{% endif %}
+{%- set tr_pages = [] -%}
+{%- if page is defined -%}{%- set tr_pages = page.translations -%}{%- elif section is defined -%}{%- set tr_pages = section.translations -%}{%- endif -%}
 
 <!doctype html>
 <html lang="{{ lang }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes" />
 
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ page_descr }}" />
@@ -61,17 +44,17 @@
     <meta property="og:description" content="{{ page_descr }}" />
     <meta property="og:image" content="{{ page_image | safe }}" />
 
-    <meta property="twitter:domain" content="vladkens.cc">
-    <meta property="twitter:url" content="{{ page_url | safe }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ og_title }}">
-    <meta name="twitter:description" content="{{ page_descr }}">
-    <meta name="twitter:image" content="{{ page_image | safe }}">
+    <meta property="twitter:domain" content="vladkens.cc" />
+    <meta property="twitter:url" content="{{ page_url | safe }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ og_title }}" />
+    <meta name="twitter:description" content="{{ page_descr }}" />
+    <meta name="twitter:image" content="{{ page_image | safe }}" />
 
     {%- if page %}
-    <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
-    <meta name="twitter:label1" content="{{ trans(key='reading_time') }}" />
-    <meta name="twitter:data1" content="{{ page.reading_time }} min read" />
+      <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
+      <meta name="twitter:label1" content="{{ trans(key='reading_time') }}" />
+      <meta name="twitter:data1" content="{{ page.reading_time }} min read" />
     {% endif -%}
 
     <link rel="icon" href="https://avatars.githubusercontent.com/u/825754" />
@@ -80,10 +63,12 @@
   <body>
     <header>
       <div>
-        <a href="{{ lp ~ '/' }}">{{ trans(key="nav_home") }}</a>
-        <a href="{{ lp ~ '/tags' }}">{{ trans(key="nav_tags") }}</a>
-        <a href="{{ lp ~ '/donate' }}">{{ trans(key="nav_donate") }}</a>
-        <a href="/atom.xml" target="_blank">{{ trans(key="nav_rss") }} <i class="fas fa-external-link-alt" style="font-size: 14px"></i></a>
+        <a href="/">{{ trans(key="nav_home") }}</a>
+        <a href="/tags">{{ trans(key="nav_tags") }}</a>
+        <a href="/donate">{{ trans(key="nav_donate") }}</a>
+        <a href="/atom.xml" target="_blank"
+          >{{ trans(key="nav_rss") }} <i class="fas fa-external-link-alt ext-link-icon"></i
+        ></a>
       </div>
 
       <div>
@@ -92,12 +77,21 @@
       </div>
     </header>
 
-    <main>{% block main_content %} Nothing here?! {% endblock main_content %}</main>
+    <main>{% block main_content %}Nothing here?!{% endblock main_content %}</main>
 
-    <footer>© {{ now() | date(format="%Y") }} {{ trans(key="footer") }}</footer>
+    {%- set sha = get_env(name="COMMIT_SHA", default="dev") -%}
+{%- if sha == "dev" -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/tree/main" -%}{%- else -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/commit/" ~ sha -%}{%- endif -%}
+<footer>
+  <div>© {{ now() | date(format="%Y") }} {{ trans(key="footer") }}</div>
+  <div>Built on {{ now() | date(format="%Y-%m-%d") }}, commit <a href="{{ sha_url }}">{{ sha }}</a></div>
+</footer>
 
     <script src="{{ get_url(path='main.js', cachebust=true) }}"></script>
     <script defer src="https://kit.fontawesome.com/15cfaf31d4.js" crossorigin="anonymous"></script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="2314c16c-b72f-4f6e-8f5e-ee3abe39383e"></script>
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="2314c16c-b72f-4f6e-8f5e-ee3abe39383e"
+    ></script>
   </body>
 </html>

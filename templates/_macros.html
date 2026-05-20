@@ -9,8 +9,10 @@
   {%- endfor -%}
   {%- if has_other -%}
     {%- for lc in lang_switch -%}
-      {%- if not loop.first %} {% endif -%}
-      {%- if lc == lang -%}{{ lc }}
+      {%- if not loop.first %}
+      {% endif -%}
+      {%- if lc == lang -%}
+        {{ lc }}
       {%- else -%}
         {%- for tr in tr_pages -%}
           {%- if tr.lang == lc -%}<a href="{{ tr.permalink }}">{{ lc }}</a>{%- endif -%}
@@ -22,12 +24,12 @@
 {% endmacro %}
 
 {% macro list_posts(pages) %}
-<ul class="posts-list">
-{% for page in pages %}
-  <li>
-    <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
-    <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
-  </li>
-{% endfor %}
-</ul>
+  <ul class="posts-list">
+    {% for page in pages %}
+      <li>
+        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+        <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
+      </li>
+    {% endfor %}
+  </ul>
 {% endmacro %}

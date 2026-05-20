@@ -1,0 +1,14 @@
+{
+  "name": "blog",
+  "private": true,
+  "scripts": {
+    "stats": "node --env-file-if-exists=.env scripts/stats-at-glance.mjs",
+    "update-projects": "node scripts/update-projects.mjs",
+    "format": "prettier --write --log-level warn .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "prettier-plugin-jinja-template": "2.2.0"
+  }
+}
