@@ -9,10 +9,10 @@ importers:
   .:
     devDependencies:
       prettier:
-        specifier: ^3.6.2
+        specifier: 3.8.3
         version: 3.8.3
       prettier-plugin-jinja-template:
-        specifier: ^2.2.0
+        specifier: 2.2.0
         version: 2.2.0(prettier@3.8.3)
 
 packages:

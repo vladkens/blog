@@ -80,11 +80,13 @@
     <main>{% block main_content %}Nothing here?!{% endblock main_content %}</main>
 
     {%- set sha = get_env(name="COMMIT_SHA", default="dev") -%}
-{%- if sha == "dev" -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/tree/main" -%}{%- else -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/commit/" ~ sha -%}{%- endif -%}
-<footer>
-  <div>© {{ now() | date(format="%Y") }} {{ trans(key="footer") }}</div>
-  <div>Built on {{ now() | date(format="%Y-%m-%d") }}, commit <a href="{{ sha_url }}">{{ sha }}</a></div>
-</footer>
+    {%- if sha == "dev" -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/tree/main" -%}{%- else -%}{%- set sha_url = "https://github.com/" ~ config.extra.github ~ "/blog/commit/" ~ sha -%}{%- endif -%}
+    <footer>
+      <div>© {{ now() | date(format="%Y") }} {{ trans(key="footer") }}</div>
+      <div>
+        Built on {{ now() | date(format="%Y-%m-%d") }}, commit <a href="{{ sha_url }}">{{ sha }}</a>
+      </div>
+    </footer>
 
     <script src="{{ get_url(path='main.js', cachebust=true) }}"></script>
     <script defer src="https://kit.fontawesome.com/15cfaf31d4.js" crossorigin="anonymous"></script>
