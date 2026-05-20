@@ -14,8 +14,6 @@ Tried two tools for Spec-Driven Development on my pet project — [delta-farmer]
 
 **cc-thingz** ([github](https://github.com/umputun/cc-thingz)) — a set of skills for Claude Code, installed via plugins / marketplace api. Basically a ready-made workflow inside Claude, not a separate wrapper around different agents.
 
-## Quick comparison
-
 ### Setup, workflow and artifacts
 
 `spec-kit` is designed as a more universal thing for different agents, but you pay for that with a separate CLI wrapper, its own templates and its own file structure. The flow is a sequence of separate commands: `/speckit-specify` -> `/speckit-plan` -> `/speckit-tasks` -> `/speckit-implement`, plus `/speckit-clarify` for spec refinement. One task creates multiple files.
@@ -83,8 +81,6 @@ The task itself is simple, so both were able to implement it from the plan witho
 The `cc-thingz` result was clean and easy to read. `spec-kit` used some unclear packages, so the result didn't even run. I didn't check if what it did actually works — I didn't trust the result and didn't bother running it.
 
 ## Task 2. Real coding task
-
-### Task description
 
 Task description (580 words, 5 kb): what to do, where to get the data, and how to verify the result. I intentionally didn't name specific files — left everything up to the developer, like in real life.
 
