@@ -3,18 +3,25 @@
 
 :root {
   color-scheme: light dark;
-  --font-size-body: 1.0625rem;
-  --font-size-small: 0.875rem;
-  --font-size-code: 0.9375rem;
-  --line-height-body: 1.5rem;
+  --font-size-body: 18px;
+  --font-size-small: calc(var(--font-size-body) * 0.85);
+  --font-size-code: calc(var(--font-size-body) * 0.9);
+  --font-size-h1: calc(var(--font-size-body) * 1.75);
+  --font-size-h2: calc(var(--font-size-body) * 1.4);
+  --font-size-h3: calc(var(--font-size-body) * 1.2);
+  --font-size-h4: var(--font-size-body);
+  --font-size-h5: var(--font-size-body);
+  --font-size-h6: var(--font-size-body);
+  --rhythm: 26px;
+  --line-height-body: var(--rhythm);
   --line-height-small: var(--line-height-body);
-  --line-height-code: 1.5rem;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-12: 3rem;
+  --line-height-code: var(--rhythm);
+  --space-1: calc(var(--rhythm) / 6);
+  --space-2: calc(var(--rhythm) / 3);
+  --space-3: calc(var(--rhythm) / 2);
+  --space-4: calc(var(--rhythm) * 2 / 3);
+  --space-6: var(--rhythm);
+  --space-12: calc(var(--rhythm) * 2);
   --bg-color: light-dark(#f5f5f5, #0a0a0a);
   --text-color: light-dark(#333333, #dddddd);
   --link-color: light-dark(#0077cc, #ffb600);
@@ -34,6 +41,7 @@ html[data-theme="dark"] {
 
 html {
   scrollbar-gutter: stable;
+  font-size: 16px;
 }
 
 html,
@@ -41,7 +49,6 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: "Open Sans", Verdana, sans-serif;
-  font-size: 16px;
   padding: 0 4px;
 }
 
@@ -160,12 +167,13 @@ h6,
 }
 
 h1 {
+  font-size: var(--font-size-h1);
   margin-bottom: var(--space-6);
   line-height: var(--space-12);
 }
 
 article h1 {
-  font-size: 1.75rem;
+  font-size: var(--font-size-h1);
   line-height: var(--space-12);
 }
 
@@ -269,6 +277,7 @@ body > header a.current {
 }
 
 main > h2 {
+  font-size: var(--font-size-h2);
   line-height: var(--space-12);
   margin: var(--line-height-body) 0 0;
 }
@@ -301,10 +310,26 @@ article h6 {
   margin: var(--line-height-body) 0 0;
 }
 
+article h2 {
+  font-size: var(--font-size-h2);
+}
+
+article h3 {
+  font-size: var(--font-size-h3);
+}
+
 article h4,
 article h5,
 article h6 {
-  font-size: var(--font-size-body);
+  font-size: var(--font-size-h4);
+}
+
+article h5 {
+  font-size: var(--font-size-h5);
+}
+
+article h6 {
+  font-size: var(--font-size-h6);
 }
 
 article h2 > .zola-anchor,

@@ -1,6 +1,7 @@
 (() => {
   const debugParam = "debug";
   const debugKey = "debug-menu-enabled";
+  const gridKey = "debug-menu-grid-enabled";
   const themeKey = "debug-menu-theme";
   const root = document.documentElement;
   const url = new URL(window.location.href);
@@ -45,9 +46,23 @@
     removeStored(themeKey);
   };
 
+  const resetTheme = () => {
+    root.removeAttribute("data-theme");
+  };
+
+  const isGridEnabled = () => getStored(gridKey) !== "0";
+
+  const setGridEnabled = (enabled) => {
+    setStored(gridKey, enabled ? "1" : "0");
+  };
+
+  const applyGrid = (enabled) => {
+    document.body?.classList.toggle("rhythm-grid-hidden", !enabled);
+  };
+
   const exitDebugMode = () => {
     removeStored(debugKey);
-    setTheme("system");
+    resetTheme();
     root.classList.remove("rhythm-grid-enabled");
     document.body?.classList.remove("rhythm-grid-enabled", "rhythm-grid-hidden");
     document.querySelector(".debug-menu")?.remove();
@@ -162,6 +177,7 @@
 
     root.classList.add("rhythm-grid-enabled");
     document.body.classList.add("rhythm-grid-enabled");
+    applyGrid(isGridEnabled());
 
     const panel = document.createElement("div");
     panel.className = "debug-menu";
@@ -187,8 +203,8 @@
     });
 
     const renderGrid = () => {
-      const hidden = document.body.classList.contains("rhythm-grid-hidden");
-      gridButton.setAttribute("aria-pressed", String(!hidden));
+      const enabled = isGridEnabled();
+      gridButton.setAttribute("aria-pressed", String(enabled));
     };
 
     const renderTheme = () => {
@@ -207,7 +223,9 @@
     };
 
     gridButton.addEventListener("click", () => {
-      document.body.classList.toggle("rhythm-grid-hidden");
+      const nextEnabled = !isGridEnabled();
+      setGridEnabled(nextEnabled);
+      applyGrid(nextEnabled);
       renderGrid();
       gridButton.blur();
     });
