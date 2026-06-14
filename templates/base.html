@@ -59,6 +59,7 @@
 
     <link rel="icon" href="https://avatars.githubusercontent.com/u/825754" />
     <link href="{{ get_url(path='main.css', cachebust=true) }}" rel="stylesheet" />
+    <script defer src="{{ get_url(path='debug-menu.js', cachebust=true) }}"></script>
   </head>
   <body>
     <header>
@@ -66,14 +67,12 @@
         <a href="/">{{ trans(key="nav_home") }}</a>
         <a href="/tags">{{ trans(key="nav_tags") }}</a>
         <a href="/donate">{{ trans(key="nav_donate") }}</a>
-        <a href="/atom.xml" target="_blank"
-          >{{ trans(key="nav_rss") }} <i class="fas fa-external-link-alt ext-link-icon"></i
-        ></a>
+        <a href="/atom.xml" target="_blank">{{ trans(key="nav_rss") }}</a>
       </div>
 
       <div>
         <a target="_blank" href="https://github.com/{{ config.extra.github }}">github</a>
-        <a target="_blank" href="https://x.com/{{ config.extra.twitter }}">x</a>
+        <a target="_blank" href="https://x.com/{{ config.extra.twitter }}">x.com</a>
       </div>
     </header>
 

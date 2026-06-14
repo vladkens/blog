@@ -62,7 +62,86 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const alignMediaBlocksToRhythm = () => {
+    const getStep = () => {
+      const lineHeight = parseFloat(getComputedStyle(document.body).lineHeight);
+      return Number.isFinite(lineHeight) ? lineHeight : 24;
+    };
+
+    const isMediaParagraph = (el) => {
+      if (el.tagName !== "P") return false;
+
+      const children = Array.from(el.children);
+      return children.length === 1 && ["IMG", "SVG"].includes(children[0].tagName);
+    };
+
+    const wrapDirectMedia = (media) => {
+      if (media.parentElement?.classList.contains("rhythm-media")) {
+        return media.parentElement;
+      }
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "rhythm-media";
+      media.before(wrapper);
+      wrapper.appendChild(media);
+      return wrapper;
+    };
+
+    const getMediaBlock = (media) => {
+      if (media.parentElement && isMediaParagraph(media.parentElement)) {
+        media.parentElement.classList.add("rhythm-media");
+        return media.parentElement;
+      }
+
+      return wrapDirectMedia(media);
+    };
+
+    const mediaItems = Array.from(
+      document.querySelectorAll(
+        "article.post > img, article.post > svg, article.post > p > img, article.post > p > svg",
+      ),
+    ).map((media) => {
+      getMediaBlock(media);
+      return media;
+    });
+
+    if (mediaItems.length === 0) return;
+
+    const update = () => {
+      const step = getStep();
+
+      mediaItems.forEach((media) => {
+        media.style.width = "";
+        media.style.height = "";
+
+        const height = media.getBoundingClientRect().height;
+        const width = media.getBoundingClientRect().width;
+
+        if (height === 0 || width === 0) return;
+
+        const remainder = height % step;
+        if (remainder < 0.5 || step - remainder < 0.5) return;
+
+        const targetHeight = Math.max(step, Math.floor(height / step) * step);
+        const targetWidth = (targetHeight * width) / height;
+
+        media.style.width = `${targetWidth}px`;
+        media.style.height = "auto";
+      });
+    };
+
+    mediaItems.forEach((media) => {
+      if (media.tagName === "IMG" && !media.complete) {
+        media.addEventListener("load", update, { once: true });
+      }
+    });
+
+    window.addEventListener("resize", update);
+    update();
+  };
+
   markCurrentLinks();
   addCopyCodeButton();
   initInlineCodeCopy();
+  alignMediaBlocksToRhythm();
 });

@@ -7,7 +7,7 @@
       <div class="post-meta">
         <div>
           {{ trans(key="posted_at") }} <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
-          <i>•</i> {{ page.word_count }} {{ trans(key="words") }} ~ {{ page.reading_time }}
+          <i>•</i> {{ page.word_count }} {{ trans(key="words") }} <i>•</i> {{ page.reading_time }}
           {{ trans(key="min_read") }}
           {% if page.extra | length > 0 %}
             <i>•</i> {{ trans(key="also_read") }}:
