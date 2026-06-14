@@ -108,10 +108,10 @@
         gap: var(--space-1, 0.25rem);
         height: calc(var(--line-height-body, 24px) + var(--space-1, 0.25rem));
         padding: var(--space-1, 0.25rem);
+        border: 1px solid var(--border-color, color-mix(in srgb, canvastext 18%, canvas));
         border-radius: var(--space-1, 0.25rem);
-        background-color: var(--bg-color, canvas);
+        background-color: var(--code-bg-color, color-mix(in srgb, canvastext 6%, canvas));
         color: var(--text-color, canvastext);
-        box-shadow: 0 var(--space-1, 0.25rem) var(--space-2, 0.5rem) rgb(0 0 0 / 0.22);
         font: inherit;
         font-size: var(--font-size-small, 0.875rem);
         line-height: var(--line-height-body, 24px);

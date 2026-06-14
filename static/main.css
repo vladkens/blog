@@ -87,7 +87,8 @@ time {
 }
 
 pre {
-  padding: var(--space-3) var(--space-2);
+  --copy-code-gutter: calc(var(--line-height-body) + var(--space-2));
+  padding: var(--space-3) var(--copy-code-gutter) var(--space-3) var(--space-2);
   font-size: var(--font-size-code);
   line-height: var(--line-height-code);
   font-family: "JetBrains Mono", monospace;
@@ -535,13 +536,19 @@ a.post-edit:hover {
 
 .project-langs {
   display: inline-flex;
-  gap: 0.5rem;
-  line-height: 1rem;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--line-height-body);
+  line-height: var(--line-height-body);
+  vertical-align: top;
 }
 
 .project-langs > div {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid var(--border-color);
   font-size: 0.75rem;
+  line-height: calc(var(--line-height-body) / 1.5);
   border-radius: 0.25rem;
   padding: 0rem 0.25rem;
   background-color: var(--bg-color);
