@@ -1,8 +1,8 @@
-# vladkens.cc
+# vladkens.me
 
 Personal tech blog. I write about things I actually build and use — Rust, TypeScript, DevOps, macOS tooling, and occasionally something deeper when a topic deserves it.
 
-Live at **[vladkens.cc](https://vladkens.cc)** · also cross-posted to [Medium](https://medium.com/@vladkens) and [dev.to](https://dev.to/vladkens)
+Live at **[vladkens.me](https://vladkens.me)** · also cross-posted to [Medium](https://medium.com/@vladkens) and [dev.to](https://dev.to/vladkens)
 
 ## Stack
 

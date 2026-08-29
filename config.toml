@@ -1,5 +1,5 @@
-base_url = "https://vladkens.cc"
-title = "vladkens.cc"
+base_url = "https://vladkens.me"
+title = "vladkens.me"
 description = "Practical software engineering notes"
 compile_sass = false
 build_search_index = false
@@ -45,7 +45,7 @@ empty_state = "Nothing here?!"
 footer = "All rights reserved. Code samples are public domain unless otherwise noted."
 
 [languages.ru]
-title = "vladkens.cc"
+title = "vladkens.me"
 generate_feeds = false
 taxonomies = [{ name = "tags" }]
 

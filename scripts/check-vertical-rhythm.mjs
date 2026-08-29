@@ -168,7 +168,7 @@ const startStaticServer = async (publicDir) => {
       const contentType = CONTENT_TYPES[ext] || "application/octet-stream";
 
       if (ext === ".html") {
-        body = Buffer.from(body.toString("utf8").replaceAll("https://vladkens.cc/", `${baseUrl}/`));
+        body = Buffer.from(body.toString("utf8").replaceAll("https://vladkens.me/", `${baseUrl}/`));
       }
 
       res.writeHead(filePath.endsWith("404.html") ? 404 : 200, {
