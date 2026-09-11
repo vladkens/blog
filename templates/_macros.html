@@ -1,4 +1,4 @@
-{% macro lang_switch(lang, tr_pages, lang_switch) %}
+{% component lang_switch(lang, tr_pages, lang_switch) %}
   {%- set_global has_other = false -%}
   {%- for lc in lang_switch -%}
     {%- if lc != lang -%}
@@ -21,9 +21,9 @@
     {%- endfor -%}
     {{- " " }}<i>•</i>
   {%- endif -%}
-{% endmacro %}
+{% endcomponent lang_switch %}
 
-{% macro list_posts(pages) %}
+{% component list_posts(pages) %}
   <ul class="posts-list">
     {% for page in pages %}
       <li>
@@ -32,4 +32,4 @@
       </li>
     {% endfor %}
   </ul>
-{% endmacro %}
+{% endcomponent list_posts %}

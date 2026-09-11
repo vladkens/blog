@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block main_content %}
+  {% set tags = page?.taxonomies?.tags or [] %}
   <article class="post">
     <header>
       <h1>{{ page.title }}</h1>
@@ -19,14 +20,14 @@
         </div>
 
         <div>
-          {% if page.taxonomies.tags | length > 0 %}
+          {% if tags | length > 0 %}
             {{ trans(key="tags_label") }}:
-            {%- for tag in page.taxonomies.tags -%}
+            {%- for tag in tags -%}
               {% if not loop.first %},{% endif %}
               <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="post-tag">{{ tag }}</a>
             {%- endfor %} <i>•</i>
           {% endif %}
-          {{ macros::lang_switch(lang=lang, tr_pages=tr_pages, lang_switch=config.extra.lang_switch) }}
+          {{ <lang_switch lang={lang} tr_pages={tr_pages} lang_switch={config.extra.lang_switch} /> }}
           <a
             class="post-edit"
             target="_blank"
@@ -49,7 +50,7 @@
 
   {% set share_url = current_url | replace(from="http://127.0.0.1:1111/", to="https://vladkens.me/") %}
   {% set share_text = page.title | urlencode %}
-  {% set share_tags = page.taxonomies.tags | join(sep=",") | urlencode %}
+  {% set share_tags = tags | join(sep=",") | urlencode %}
 
   <div class="social-share">
     <a

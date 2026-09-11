@@ -6,11 +6,13 @@
     "test:rhythm": "zola build --drafts && node scripts/check-vertical-rhythm.mjs --serve-public",
     "update-projects": "node scripts/update-projects.mjs",
     "format": "prettier --write --log-level warn .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "deploy": "wrangler pages deploy public --project-name=blog"
   },
   "devDependencies": {
     "playwright": "1.60.0",
     "prettier": "3.8.3",
-    "prettier-plugin-jinja-template": "2.2.0"
+    "prettier-plugin-jinja-template": "2.2.0",
+    "wrangler": "4.131.0"
   }
 }

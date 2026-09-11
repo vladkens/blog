@@ -1,7 +1,3 @@
-trustPolicy: no-downgrade
-trustPolicyIgnoreAfter: 40320
-blockExoticSubdeps: true
-
 allowBuilds:
   esbuild: true
   sharp: true

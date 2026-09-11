@@ -1,27 +1,25 @@
-{%- import "_macros.html" as macros -%}
-
 {%- set page_url = config.base_url -%}
-{%- if current_url -%}{%- set page_url = current_url -%}{%- endif -%}
+{%- if current_url is defined -%}{%- set page_url = current_url -%}{%- endif -%}
 
 {%- set og_title = config.title -%}
-{%- if section.title -%}{%- set og_title = section.title -%}{%- endif -%}
-{%- if page.title -%}{%- set og_title = page.title -%}{%- endif -%}
+{%- if section is defined and section.title -%}{%- set og_title = section.title -%}{%- endif -%}
+{%- if page is defined and page.title -%}{%- set og_title = page.title -%}{%- endif -%}
 
 {%- set page_title = og_title ~ " :: " ~ config.title -%}
 
 {%- set page_descr = config.description -%}
-{%- if section.description -%}{%- set page_descr = section.description -%}{%- endif -%}
-{%- if page.description -%}{%- set page_descr = page.description -%}{%- endif -%}
+{%- if section is defined and section.description -%}{%- set page_descr = section.description -%}{%- endif -%}
+{%- if page is defined and page.description -%}{%- set page_descr = page.description -%}{%- endif -%}
 
-{%- if page -%}
-  {%- set page_descr = page.content | linebreaksbr | striptags | truncate(length=160) -%}
+{%- if page is defined -%}
+  {%- set page_descr = page.content | newlines_to_br | striptags | truncate(length=160) -%}
 {%- endif -%}
 {%- set page_image = "https://ogp.fly.dev/v0/png?title={title}&author={author}&photo=https://avatars.githubusercontent.com/u/825754&url={site}&theme=dracula" | replace(from="{title}", to=og_title|urlencode) | replace(from="{author}", to=config.extra.github) | replace(from="{site}", to=config.base_url|safe) -%}
 
 {%- set kw = [] -%}
-{%- if config.extra.keywords -%}{%- set kw = kw | concat(with=config.extra.keywords) -%}{%- endif -%}
-{%- if page.extra.keywords -%}{%- set kw = kw | concat(with=page.extra.keywords) -%}{%- endif -%}
-{%- if page.taxonomies.tags -%}{%- set kw = page.taxonomies.tags -%}{%- endif -%}
+{%- if config.extra.keywords is defined -%}{%- set kw = [...kw, ...config.extra.keywords] -%}{%- endif -%}
+{%- if page?.extra?.keywords -%}{%- set kw = [...kw, ...page.extra.keywords] -%}{%- endif -%}
+{%- if page?.taxonomies?.tags -%}{%- set kw = page.taxonomies.tags -%}{%- endif -%}
 
 {%- set tr_pages = [] -%}
 {%- if page is defined -%}{%- set tr_pages = page.translations -%}{%- elif section is defined -%}{%- set tr_pages = section.translations -%}{%- endif -%}
@@ -51,7 +49,7 @@
     <meta name="twitter:description" content="{{ page_descr }}" />
     <meta name="twitter:image" content="{{ page_image | safe }}" />
 
-    {%- if page %}
+    {%- if page is defined %}
       <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
       <meta name="twitter:label1" content="{{ trans(key='reading_time') }}" />
       <meta name="twitter:data1" content="{{ page.reading_time }} min read" />

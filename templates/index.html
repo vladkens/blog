@@ -23,5 +23,5 @@
   </ul>
 
   <h2>{{ trans(key="posts") }}</h2>
-  {{ macros::list_posts(pages=section.pages) }}
+  {{ <list_posts pages={section.pages} /> }}
 {% endblock main_content %}

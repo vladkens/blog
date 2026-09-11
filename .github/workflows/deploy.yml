@@ -20,11 +20,10 @@ jobs:
           node-version: 24
       - uses: taiki-e/install-action@v2
         with:
-          tool: zola@0.22.1
+          tool: zola@0.23.4
 
       - run: corepack enable && pnpm install --frozen-lockfile
       - run: pnpm run format:check
-      - run: pnpm run update-projects
       - run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - run: zola build
 
@@ -32,4 +31,4 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: pnpm dlx wrangler@4 pages deploy public --project-name=vnotes
+        run: pnpm run deploy
