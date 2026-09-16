@@ -585,3 +585,194 @@ a.post-edit:hover {
 .wallets-list li:last-child code {
   font-size: 13px;
 }
+
+/* Temporary usage dashboard */
+
+.ai-usage h1 {
+  margin-bottom: var(--space-6);
+}
+
+.usage-intro,
+.usage-status {
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+  font-size: var(--font-size-small);
+}
+
+.usage-section {
+  margin-top: var(--space-12);
+}
+
+.usage-section h2 {
+  margin: 0 0 var(--space-6);
+  font-size: var(--font-size-h2);
+  line-height: var(--space-12);
+}
+
+.usage-chart-wrap {
+  position: relative;
+  height: 320px;
+}
+
+.usage-chart-wrap-models {
+  height: 390px;
+}
+
+.usage-period-toggle,
+.usage-year-toggle {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.usage-period-toggle {
+  position: relative;
+  z-index: 1;
+  justify-content: flex-end;
+  margin-top: var(--space-12);
+  margin-bottom: calc(var(--space-12) * -1);
+}
+
+.usage-period-toggle button,
+.usage-year-toggle button {
+  padding: 0 var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--space-1);
+  background: transparent;
+  color: var(--text-color);
+  font: inherit;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  cursor: pointer;
+}
+
+.usage-period-toggle button:hover,
+.usage-year-toggle button:hover {
+  color: var(--link-hover-color);
+}
+
+.usage-period-toggle button.active,
+.usage-year-toggle button.active {
+  border-color: var(--border-color);
+  background: var(--code-bg-color);
+  color: var(--title-color);
+}
+
+.usage-activity-scroll {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.usage-activity-graph {
+  --usage-cell: 12px;
+  --usage-gap: 3px;
+  width: max-content;
+  min-width: 100%;
+}
+
+.usage-activity-months {
+  display: grid;
+  grid-template-columns: repeat(var(--usage-weeks), var(--usage-cell));
+  column-gap: var(--usage-gap);
+  height: var(--line-height-small);
+  margin-left: 34px;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+  font-size: 11px;
+  line-height: var(--line-height-small);
+}
+
+.usage-activity-months span {
+  white-space: nowrap;
+}
+
+.usage-activity-body {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.usage-activity-weekdays {
+  display: grid;
+  grid-template-rows: repeat(7, var(--usage-cell));
+  row-gap: var(--usage-gap);
+  width: 26px;
+  flex: 0 0 26px;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+  font-size: 10px;
+  line-height: var(--usage-cell);
+}
+
+.usage-activity-grid {
+  display: grid;
+  grid-template-rows: repeat(7, var(--usage-cell));
+  grid-auto-flow: column;
+  grid-auto-columns: var(--usage-cell);
+  gap: var(--usage-gap);
+}
+
+.usage-activity-cell {
+  display: inline-block;
+  width: var(--usage-cell);
+  height: var(--usage-cell);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--border-color) 55%, transparent);
+}
+
+.usage-activity-cell[data-level="1"] {
+  background: color-mix(in srgb, var(--link-color) 28%, var(--bg-color));
+}
+
+.usage-activity-cell[data-level="2"] {
+  background: color-mix(in srgb, var(--link-color) 48%, var(--bg-color));
+}
+
+.usage-activity-cell[data-level="3"] {
+  background: color-mix(in srgb, var(--link-color) 70%, var(--bg-color));
+}
+
+.usage-activity-cell[data-level="4"] {
+  background: var(--link-color);
+}
+
+.usage-activity-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--font-size-small);
+}
+
+.usage-activity-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+  font-size: 11px;
+}
+
+.usage-activity-legend .usage-activity-cell {
+  --usage-cell: 11px;
+}
+
+@media (max-width: 700px) {
+  .usage-period-toggle {
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  .usage-section {
+    margin-top: var(--space-6);
+  }
+
+  .usage-chart-wrap {
+    height: 280px;
+  }
+
+  .usage-chart-wrap-models {
+    height: 420px;
+  }
+
+  .usage-activity-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

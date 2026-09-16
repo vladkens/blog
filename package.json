@@ -4,7 +4,6 @@
   "scripts": {
     "stats": "node --env-file-if-exists=.env scripts/stats-at-glance.mjs",
     "test:rhythm": "zola build --drafts && node scripts/check-vertical-rhythm.mjs --serve-public",
-    "update-projects": "node scripts/update-projects.mjs",
     "format": "prettier --write --log-level warn .",
     "format:check": "prettier --check .",
     "deploy": "wrangler pages deploy public --project-name=blog"

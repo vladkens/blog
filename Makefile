@@ -7,7 +7,8 @@ prepare:
 	pnpm run format
 
 update:
-	pnpm run update-projects
+	node scripts/stats-at-glance.mjs
+	node scripts/update-projects.mjs
 
 deploy:
 	pnpm run format:check

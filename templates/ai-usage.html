@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+  <section class="ai-usage" data-usage-url="/usage.json">
+    <h1>{{ page.title }}</h1>
+    <p class="usage-status" role="status">Loading <code>/usage.json</code>…</p>
+
+    <div class="usage-content" hidden>
+      <p class="usage-intro">Data is available from around April 2026. Earlier logs were lost.</p>
+
+      <section class="usage-section">
+        <h2>Activity</h2>
+        <div data-usage-activity></div>
+      </section>
+
+      <div class="usage-period-toggle" data-usage-period aria-label="Chart interval"></div>
+
+      <section class="usage-section">
+        <h2>Tokens</h2>
+        <div class="usage-chart-wrap">
+          <canvas data-usage-tokens></canvas>
+        </div>
+      </section>
+
+      <section class="usage-section">
+        <h2>Tokens by Model</h2>
+        <div class="usage-chart-wrap usage-chart-wrap-models">
+          <canvas data-usage-models></canvas>
+        </div>
+      </section>
+
+      <section class="usage-section">
+        <h2>Model Distribution</h2>
+        <div class="usage-chart-wrap usage-chart-wrap-models">
+          <canvas data-usage-distribution></canvas>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script src="{{ get_url(path='ai-usage.js', cachebust=true) }}"></script>
+{% endblock main_content %}

@@ -3,13 +3,13 @@
     "name": "vladkens/twscrape",
     "descr": "Python library for scraping X",
     "langs": ["Python"],
-    "stars": 2761
+    "stars": 2775
   },
   {
     "name": "vladkens/macmon",
     "descr": "MacOS CLI tool for performance monitoring",
     "langs": ["Rust"],
-    "stars": 1878
+    "stars": 1886
   },
   {
     "name": "vladkens/ghstats",
