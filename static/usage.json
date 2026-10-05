@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-16T14:02:13.658Z",
-  "sources": ["ccusage@20.0.20 daily --json --breakdown", "Claude stats cache v5"],
+  "generatedAt": "2026-10-04T23:48:49.769Z",
+  "sources": ["ccusage@latest daily --json --breakdown", "Claude stats cache v5"],
   "totals": {
-    "activeDays": 151,
+    "activeDays": 170,
     "agents": ["claude", "codex", "opencode"],
-    "inputTokens": 621733578,
-    "outputTokens": 62999207,
-    "cacheCreationTokens": 24657179,
-    "cacheReadTokens": 13763057706,
+    "inputTokens": 762432757,
+    "outputTokens": 80700031,
+    "cacheCreationTokens": 30088497,
+    "cacheReadTokens": 17395621440,
     "unclassifiedTokens": 1316930685,
-    "totalTokens": 15789378355,
-    "estimatedCostUsd": 12315.34388844
+    "totalTokens": 19585773410,
+    "estimatedCostUsd": 22165.516465639997
   },
   "claude": {
     "cacheVersion": 5,
@@ -79,7 +79,7 @@
       "cacheReadTokens": 18538752,
       "totalTokens": 21025464,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 12.3054555,
+      "estimatedCostUsd": 24.610911,
       "models": [
         {
           "name": "gpt-5.4",
@@ -89,7 +89,7 @@
           "cacheReadTokens": 18538752,
           "totalTokens": 21025464,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 12.3054555
+          "estimatedCostUsd": 24.610911
         }
       ],
       "activity": null
@@ -103,7 +103,7 @@
       "cacheReadTokens": 7386496,
       "totalTokens": 8604934,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 6.202069,
+      "estimatedCostUsd": 12.404138,
       "models": [
         {
           "name": "gpt-5.4",
@@ -113,7 +113,7 @@
           "cacheReadTokens": 7386496,
           "totalTokens": 8604934,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 6.202069
+          "estimatedCostUsd": 12.404138
         }
       ],
       "activity": null
@@ -127,7 +127,7 @@
       "cacheReadTokens": 17758592,
       "totalTokens": 19795875,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 10.9998055,
+      "estimatedCostUsd": 21.999611,
       "models": [
         {
           "name": "gpt-5.4",
@@ -137,7 +137,7 @@
           "cacheReadTokens": 17758592,
           "totalTokens": 19795875,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 10.9998055
+          "estimatedCostUsd": 21.999611
         }
       ],
       "activity": null
@@ -151,7 +151,7 @@
       "cacheReadTokens": 1057152,
       "totalTokens": 1251735,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.903008,
+      "estimatedCostUsd": 1.806016,
       "models": [
         {
           "name": "gpt-5.4",
@@ -161,7 +161,7 @@
           "cacheReadTokens": 1057152,
           "totalTokens": 1251735,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.903008
+          "estimatedCostUsd": 1.806016
         }
       ],
       "activity": null
@@ -175,7 +175,7 @@
       "cacheReadTokens": 23111680,
       "totalTokens": 26272358,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 15.9238525,
+      "estimatedCostUsd": 31.847705,
       "models": [
         {
           "name": "gpt-5.4",
@@ -185,7 +185,7 @@
           "cacheReadTokens": 23111680,
           "totalTokens": 26272358,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 15.9238525
+          "estimatedCostUsd": 31.847705
         }
       ],
       "activity": {
@@ -203,7 +203,7 @@
       "cacheReadTokens": 8752768,
       "totalTokens": 10088798,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 6.581467,
+      "estimatedCostUsd": 13.162934,
       "models": [
         {
           "name": "gpt-5.4",
@@ -213,7 +213,7 @@
           "cacheReadTokens": 8752768,
           "totalTokens": 10088798,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 6.581467
+          "estimatedCostUsd": 13.162934
         }
       ],
       "activity": {
@@ -231,7 +231,7 @@
       "cacheReadTokens": 25884800,
       "totalTokens": 27844480,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 13.6021,
+      "estimatedCostUsd": 27.2042,
       "models": [
         {
           "name": "gpt-5.4",
@@ -241,7 +241,7 @@
           "cacheReadTokens": 25884800,
           "totalTokens": 27844480,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 13.6021
+          "estimatedCostUsd": 27.2042
         }
       ],
       "activity": null
@@ -255,7 +255,7 @@
       "cacheReadTokens": 1274368,
       "totalTokens": 1679180,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 1.7265845,
+      "estimatedCostUsd": 3.453169,
       "models": [
         {
           "name": "gpt-5.4",
@@ -265,7 +265,7 @@
           "cacheReadTokens": 1274368,
           "totalTokens": 1679180,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 1.7265845
+          "estimatedCostUsd": 3.453169
         }
       ],
       "activity": null
@@ -279,7 +279,7 @@
       "cacheReadTokens": 4603264,
       "totalTokens": 4965558,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 2.5155635,
+      "estimatedCostUsd": 5.031127,
       "models": [
         {
           "name": "gpt-5.4",
@@ -289,7 +289,7 @@
           "cacheReadTokens": 4603264,
           "totalTokens": 4965558,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 2.5155635
+          "estimatedCostUsd": 5.031127
         }
       ],
       "activity": null
@@ -303,7 +303,7 @@
       "cacheReadTokens": 664576,
       "totalTokens": 741204,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.466839,
+      "estimatedCostUsd": 0.933678,
       "models": [
         {
           "name": "gpt-5.4",
@@ -313,7 +313,7 @@
           "cacheReadTokens": 664576,
           "totalTokens": 741204,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.466839
+          "estimatedCostUsd": 0.933678
         }
       ],
       "activity": {
@@ -331,7 +331,7 @@
       "cacheReadTokens": 540416,
       "totalTokens": 719858,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.7457715,
+      "estimatedCostUsd": 1.491543,
       "models": [
         {
           "name": "gpt-5.4",
@@ -341,7 +341,7 @@
           "cacheReadTokens": 540416,
           "totalTokens": 719858,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.7457715
+          "estimatedCostUsd": 1.491543
         }
       ],
       "activity": null
@@ -355,7 +355,7 @@
       "cacheReadTokens": 11948672,
       "totalTokens": 12518560,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 5.4312005,
+      "estimatedCostUsd": 10.862401,
       "models": [
         {
           "name": "gpt-5.4",
@@ -365,7 +365,7 @@
           "cacheReadTokens": 11948672,
           "totalTokens": 12518560,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 5.4312005
+          "estimatedCostUsd": 10.862401
         }
       ],
       "activity": {
@@ -383,7 +383,7 @@
       "cacheReadTokens": 624640,
       "totalTokens": 870318,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.878305,
+      "estimatedCostUsd": 1.75661,
       "models": [
         {
           "name": "gpt-5.4",
@@ -393,7 +393,7 @@
           "cacheReadTokens": 624640,
           "totalTokens": 870318,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.878305
+          "estimatedCostUsd": 1.75661
         }
       ],
       "activity": {
@@ -411,7 +411,7 @@
       "cacheReadTokens": 1335296,
       "totalTokens": 1516250,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.9109215,
+      "estimatedCostUsd": 1.821843,
       "models": [
         {
           "name": "gpt-5.4",
@@ -421,7 +421,7 @@
           "cacheReadTokens": 1335296,
           "totalTokens": 1516250,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.9109215
+          "estimatedCostUsd": 1.821843
         }
       ],
       "activity": {
@@ -439,7 +439,7 @@
       "cacheReadTokens": 846592,
       "totalTokens": 1010619,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.710053,
+      "estimatedCostUsd": 1.420106,
       "models": [
         {
           "name": "gpt-5.4",
@@ -449,7 +449,7 @@
           "cacheReadTokens": 846592,
           "totalTokens": 1010619,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.710053
+          "estimatedCostUsd": 1.420106
         }
       ],
       "activity": {
@@ -467,7 +467,7 @@
       "cacheReadTokens": 30995456,
       "totalTokens": 33653188,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 16.741444,
+      "estimatedCostUsd": 33.482888,
       "models": [
         {
           "name": "gpt-5.4",
@@ -477,7 +477,7 @@
           "cacheReadTokens": 30995456,
           "totalTokens": 33653188,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 16.741444
+          "estimatedCostUsd": 33.482888
         }
       ],
       "activity": {
@@ -495,7 +495,7 @@
       "cacheReadTokens": 30818048,
       "totalTokens": 31670995,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 9.2814722,
+      "estimatedCostUsd": 17.9382877,
       "models": [
         {
           "name": "gpt-5.4",
@@ -505,7 +505,7 @@
           "cacheReadTokens": 29100672,
           "totalTokens": 29413201,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 8.6568155
+          "estimatedCostUsd": 17.313631
         },
         {
           "name": "gpt-5.4-mini",
@@ -788,7 +788,7 @@
       "cacheReadTokens": 42077568,
       "totalTokens": 44420435,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 16.47775145,
+      "estimatedCostUsd": 31.87216195,
       "models": [
         {
           "name": "gpt-5.4",
@@ -798,7 +798,7 @@
           "cacheReadTokens": 36817152,
           "totalTokens": 38626206,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 15.3944105
+          "estimatedCostUsd": 30.788821
         },
         {
           "name": "gpt-5.4-mini",
@@ -826,7 +826,7 @@
       "cacheReadTokens": 29524992,
       "totalTokens": 32198250,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 16.368093,
+      "estimatedCostUsd": 32.736186,
       "models": [
         {
           "name": "gpt-5.4",
@@ -836,7 +836,7 @@
           "cacheReadTokens": 29524992,
           "totalTokens": 32198250,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 16.368093
+          "estimatedCostUsd": 32.736186
         }
       ],
       "activity": {
@@ -854,7 +854,7 @@
       "cacheReadTokens": 20376960,
       "totalTokens": 22580952,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 12.286707500000002,
+      "estimatedCostUsd": 24.573415000000004,
       "models": [
         {
           "name": "gpt-5.4",
@@ -864,7 +864,7 @@
           "cacheReadTokens": 20376960,
           "totalTokens": 22580952,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 12.286707500000002
+          "estimatedCostUsd": 24.573415000000004
         }
       ],
       "activity": {
@@ -882,7 +882,7 @@
       "cacheReadTokens": 37162496,
       "totalTokens": 39637097,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 17.703464,
+      "estimatedCostUsd": 35.406928,
       "models": [
         {
           "name": "gpt-5.4",
@@ -892,7 +892,7 @@
           "cacheReadTokens": 37162496,
           "totalTokens": 39637097,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 17.703464
+          "estimatedCostUsd": 35.406928
         }
       ],
       "activity": {
@@ -910,7 +910,7 @@
       "cacheReadTokens": 45468800,
       "totalTokens": 48253072,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 20.73753,
+      "estimatedCostUsd": 41.47506,
       "models": [
         {
           "name": "gpt-5.4",
@@ -920,7 +920,7 @@
           "cacheReadTokens": 45468800,
           "totalTokens": 48253072,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 20.73753
+          "estimatedCostUsd": 41.47506
         }
       ],
       "activity": {
@@ -938,7 +938,7 @@
       "cacheReadTokens": 27317888,
       "totalTokens": 29743725,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 15.341102,
+      "estimatedCostUsd": 30.682204,
       "models": [
         {
           "name": "gpt-5.4",
@@ -948,7 +948,7 @@
           "cacheReadTokens": 27317888,
           "totalTokens": 29743725,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 15.341102
+          "estimatedCostUsd": 30.682204
         }
       ],
       "activity": {
@@ -966,7 +966,7 @@
       "cacheReadTokens": 9418880,
       "totalTokens": 11004373,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 7.500852500000001,
+      "estimatedCostUsd": 15.001705000000001,
       "models": [
         {
           "name": "gpt-5.4",
@@ -976,7 +976,7 @@
           "cacheReadTokens": 9418880,
           "totalTokens": 11004373,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 7.500852500000001
+          "estimatedCostUsd": 15.001705000000001
         }
       ],
       "activity": {
@@ -994,7 +994,7 @@
       "cacheReadTokens": 17348352,
       "totalTokens": 18558169,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 8.4261305,
+      "estimatedCostUsd": 16.852261,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1004,7 +1004,7 @@
           "cacheReadTokens": 17348352,
           "totalTokens": 18558169,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 8.4261305
+          "estimatedCostUsd": 16.852261
         }
       ],
       "activity": {
@@ -1022,7 +1022,7 @@
       "cacheReadTokens": 7566080,
       "totalTokens": 8059336,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 3.7373100000000004,
+      "estimatedCostUsd": 7.474620000000001,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1032,7 +1032,7 @@
           "cacheReadTokens": 7566080,
           "totalTokens": 8059336,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 3.7373100000000004
+          "estimatedCostUsd": 7.474620000000001
         }
       ],
       "activity": {
@@ -1084,7 +1084,7 @@
       "cacheReadTokens": 6101248,
       "totalTokens": 6734389,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 3.7938895,
+      "estimatedCostUsd": 7.587779,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1094,7 +1094,7 @@
           "cacheReadTokens": 6101248,
           "totalTokens": 6734389,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 3.7938895
+          "estimatedCostUsd": 7.587779
         }
       ],
       "activity": {
@@ -1112,7 +1112,7 @@
       "cacheReadTokens": 28218624,
       "totalTokens": 31649203,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 17.894041,
+      "estimatedCostUsd": 35.788082,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1122,7 +1122,7 @@
           "cacheReadTokens": 28218624,
           "totalTokens": 31649203,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 17.894041
+          "estimatedCostUsd": 35.788082
         }
       ],
       "activity": {
@@ -1140,7 +1140,7 @@
       "cacheReadTokens": 27440000,
       "totalTokens": 29877472,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 15.1733675,
+      "estimatedCostUsd": 30.346735,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1150,7 +1150,7 @@
           "cacheReadTokens": 27440000,
           "totalTokens": 29877472,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 15.1733675
+          "estimatedCostUsd": 30.346735
         }
       ],
       "activity": {
@@ -1168,7 +1168,7 @@
       "cacheReadTokens": 15359872,
       "totalTokens": 17525265,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 10.5286005,
+      "estimatedCostUsd": 21.057201,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1178,7 +1178,7 @@
           "cacheReadTokens": 15359872,
           "totalTokens": 17525265,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 10.5286005
+          "estimatedCostUsd": 21.057201
         }
       ],
       "activity": {
@@ -1196,7 +1196,7 @@
       "cacheReadTokens": 3424000,
       "totalTokens": 4005993,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 2.6277575,
+      "estimatedCostUsd": 5.255515,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1206,7 +1206,7 @@
           "cacheReadTokens": 3424000,
           "totalTokens": 4005993,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 2.6277575
+          "estimatedCostUsd": 5.255515
         }
       ],
       "activity": {
@@ -1224,7 +1224,7 @@
       "cacheReadTokens": 12685056,
       "totalTokens": 14293188,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 9.261144000000002,
+      "estimatedCostUsd": 18.522288000000003,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1234,7 +1234,7 @@
           "cacheReadTokens": 12685056,
           "totalTokens": 14293188,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 9.261144000000002
+          "estimatedCostUsd": 18.522288000000003
         }
       ],
       "activity": {
@@ -1252,7 +1252,7 @@
       "cacheReadTokens": 21638016,
       "totalTokens": 24315094,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 13.792274,
+      "estimatedCostUsd": 27.584548,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1262,7 +1262,7 @@
           "cacheReadTokens": 21638016,
           "totalTokens": 24315094,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 13.792274
+          "estimatedCostUsd": 27.584548
         }
       ],
       "activity": {
@@ -1280,7 +1280,7 @@
       "cacheReadTokens": 32328192,
       "totalTokens": 34661303,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 15.993663000000002,
+      "estimatedCostUsd": 31.987326000000003,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1290,7 +1290,7 @@
           "cacheReadTokens": 32328192,
           "totalTokens": 34661303,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 15.993663000000002
+          "estimatedCostUsd": 31.987326000000003
         }
       ],
       "activity": {
@@ -1308,7 +1308,7 @@
       "cacheReadTokens": 48344960,
       "totalTokens": 51543769,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 43.273048,
+      "estimatedCostUsd": 107.3230815,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1318,7 +1318,7 @@
           "cacheReadTokens": 45073792,
           "totalTokens": 48021092,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 41.553971000000004
+          "estimatedCostUsd": 103.8849275
         },
         {
           "name": "gpt-5.4",
@@ -1328,7 +1328,7 @@
           "cacheReadTokens": 3271168,
           "totalTokens": 3522677,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 1.7190770000000002
+          "estimatedCostUsd": 3.4381540000000004
         }
       ],
       "activity": {
@@ -1346,7 +1346,7 @@
       "cacheReadTokens": 33625728,
       "totalTokens": 37689269,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 43.8725498,
+      "estimatedCostUsd": 109.57520930000001,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1356,7 +1356,7 @@
           "cacheReadTokens": 33547136,
           "totalTokens": 37537712,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 43.801773000000004
+          "estimatedCostUsd": 109.50443250000001
         },
         {
           "name": "zai-org/GLM-5.1",
@@ -1390,7 +1390,7 @@
       "cacheReadTokens": 146767488,
       "totalTokens": 157886420,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 151.37105400000002,
+      "estimatedCostUsd": 378.427635,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1400,7 +1400,7 @@
           "cacheReadTokens": 146767488,
           "totalTokens": 157886420,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 151.37105400000002
+          "estimatedCostUsd": 378.427635
         }
       ],
       "activity": null
@@ -1414,7 +1414,7 @@
       "cacheReadTokens": 113540864,
       "totalTokens": 119301609,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 98.70133200000001,
+      "estimatedCostUsd": 246.75333000000003,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1424,7 +1424,7 @@
           "cacheReadTokens": 113540864,
           "totalTokens": 119301609,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 98.70133200000001
+          "estimatedCostUsd": 246.75333000000003
         }
       ],
       "activity": null
@@ -1438,7 +1438,7 @@
       "cacheReadTokens": 89591168,
       "totalTokens": 93585799,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 73.49468900000001,
+      "estimatedCostUsd": 183.73672250000004,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1448,7 +1448,7 @@
           "cacheReadTokens": 89591168,
           "totalTokens": 93585799,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 73.49468900000001
+          "estimatedCostUsd": 183.73672250000004
         }
       ],
       "activity": null
@@ -1462,7 +1462,7 @@
       "cacheReadTokens": 195782528,
       "totalTokens": 204170829,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 157.341744,
+      "estimatedCostUsd": 393.35436000000004,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1472,7 +1472,7 @@
           "cacheReadTokens": 195782528,
           "totalTokens": 204170829,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 157.341744
+          "estimatedCostUsd": 393.35436000000004
         }
       ],
       "activity": null
@@ -1486,7 +1486,7 @@
       "cacheReadTokens": 36559744,
       "totalTokens": 38914414,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 34.184197,
+      "estimatedCostUsd": 85.46049249999999,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1496,7 +1496,7 @@
           "cacheReadTokens": 36559744,
           "totalTokens": 38914414,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 34.184197
+          "estimatedCostUsd": 85.46049249999999
         }
       ],
       "activity": null
@@ -1510,7 +1510,7 @@
       "cacheReadTokens": 39220864,
       "totalTokens": 40584394,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 29.011357,
+      "estimatedCostUsd": 72.5283925,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1520,7 +1520,7 @@
           "cacheReadTokens": 39220864,
           "totalTokens": 40584394,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 29.011357
+          "estimatedCostUsd": 72.5283925
         }
       ],
       "activity": null
@@ -1534,7 +1534,7 @@
       "cacheReadTokens": 70414976,
       "totalTokens": 74227139,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 61.060753,
+      "estimatedCostUsd": 152.6518825,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1544,7 +1544,7 @@
           "cacheReadTokens": 70414976,
           "totalTokens": 74227139,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 61.060753
+          "estimatedCostUsd": 152.6518825
         }
       ],
       "activity": null
@@ -1558,7 +1558,7 @@
       "cacheReadTokens": 101075072,
       "totalTokens": 105763748,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 82.65866599999998,
+      "estimatedCostUsd": 206.64666499999996,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1568,7 +1568,7 @@
           "cacheReadTokens": 101075072,
           "totalTokens": 105763748,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 82.65866599999998
+          "estimatedCostUsd": 206.64666499999996
         }
       ],
       "activity": null
@@ -1582,7 +1582,7 @@
       "cacheReadTokens": 53694080,
       "totalTokens": 58030097,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 61.057950000000005,
+      "estimatedCostUsd": 152.644875,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1592,7 +1592,7 @@
           "cacheReadTokens": 53694080,
           "totalTokens": 58030097,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 61.057950000000005
+          "estimatedCostUsd": 152.644875
         }
       ],
       "activity": null
@@ -1606,7 +1606,7 @@
       "cacheReadTokens": 9088,
       "totalTokens": 29613,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.15251900000000002,
+      "estimatedCostUsd": 0.38129750000000007,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1616,7 +1616,7 @@
           "cacheReadTokens": 9088,
           "totalTokens": 29613,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.15251900000000002
+          "estimatedCostUsd": 0.38129750000000007
         }
       ],
       "activity": null
@@ -1630,7 +1630,7 @@
       "cacheReadTokens": 99711360,
       "totalTokens": 104316688,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 82.31917,
+      "estimatedCostUsd": 205.79792500000002,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1640,7 +1640,7 @@
           "cacheReadTokens": 99711360,
           "totalTokens": 104316688,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 82.31917
+          "estimatedCostUsd": 205.79792500000002
         }
       ],
       "activity": {
@@ -1658,7 +1658,7 @@
       "cacheReadTokens": 212448384,
       "totalTokens": 225420817,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 191.995182,
+      "estimatedCostUsd": 479.987955,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1668,7 +1668,7 @@
           "cacheReadTokens": 212448384,
           "totalTokens": 225420817,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 191.995182
+          "estimatedCostUsd": 479.987955
         }
       ],
       "activity": {
@@ -1686,7 +1686,7 @@
       "cacheReadTokens": 146700416,
       "totalTokens": 155005620,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 126.70155299999999,
+      "estimatedCostUsd": 316.7538825,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1696,7 +1696,7 @@
           "cacheReadTokens": 146700416,
           "totalTokens": 155005620,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 126.70155299999999
+          "estimatedCostUsd": 316.7538825
         }
       ],
       "activity": null
@@ -1710,7 +1710,7 @@
       "cacheReadTokens": 67695872,
       "totalTokens": 72226617,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 65.33858599999999,
+      "estimatedCostUsd": 163.34646499999997,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1720,7 +1720,7 @@
           "cacheReadTokens": 67695872,
           "totalTokens": 72226617,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 65.33858599999999
+          "estimatedCostUsd": 163.34646499999997
         }
       ],
       "activity": {
@@ -1738,7 +1738,7 @@
       "cacheReadTokens": 21248640,
       "totalTokens": 22576626,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 20.81235,
+      "estimatedCostUsd": 52.030874999999995,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1748,7 +1748,7 @@
           "cacheReadTokens": 21248640,
           "totalTokens": 22576626,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 20.81235
+          "estimatedCostUsd": 52.030874999999995
         }
       ],
       "activity": {
@@ -1766,7 +1766,7 @@
       "cacheReadTokens": 88107520,
       "totalTokens": 92331930,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 73.57311,
+      "estimatedCostUsd": 183.932775,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1776,7 +1776,7 @@
           "cacheReadTokens": 88107520,
           "totalTokens": 92331930,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 73.57311
+          "estimatedCostUsd": 183.932775
         }
       ],
       "activity": {
@@ -1794,7 +1794,7 @@
       "cacheReadTokens": 197042560,
       "totalTokens": 206623395,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 161.63128,
+      "estimatedCostUsd": 404.07820000000004,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1804,7 +1804,7 @@
           "cacheReadTokens": 197042560,
           "totalTokens": 206623395,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 161.63128
+          "estimatedCostUsd": 404.07820000000004
         }
       ],
       "activity": {
@@ -1822,7 +1822,7 @@
       "cacheReadTokens": 70573312,
       "totalTokens": 74256861,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 60.560351000000004,
+      "estimatedCostUsd": 151.4008775,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1832,7 +1832,7 @@
           "cacheReadTokens": 70573312,
           "totalTokens": 74256861,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 60.560351000000004
+          "estimatedCostUsd": 151.4008775
         }
       ],
       "activity": null
@@ -1846,7 +1846,7 @@
       "cacheReadTokens": 220551424,
       "totalTokens": 232141416,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 170.79877949999997,
+      "estimatedCostUsd": 419.0964149999999,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1856,7 +1856,7 @@
           "cacheReadTokens": 186961664,
           "totalTokens": 196339345,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 154.99771199999998
+          "estimatedCostUsd": 387.49427999999995
         },
         {
           "name": "gpt-5.4",
@@ -1866,7 +1866,7 @@
           "cacheReadTokens": 33589760,
           "totalTokens": 35802071,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 15.8010675
+          "estimatedCostUsd": 31.602135
         }
       ],
       "activity": {
@@ -1884,7 +1884,7 @@
       "cacheReadTokens": 71647488,
       "totalTokens": 75608439,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 32.184787,
+      "estimatedCostUsd": 64.369574,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1894,7 +1894,7 @@
           "cacheReadTokens": 71647488,
           "totalTokens": 75608439,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 32.184787
+          "estimatedCostUsd": 64.369574
         }
       ],
       "activity": null
@@ -1908,7 +1908,7 @@
       "cacheReadTokens": 5086208,
       "totalTokens": 5511240,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 2.746907,
+      "estimatedCostUsd": 5.493814,
       "models": [
         {
           "name": "gpt-5.4",
@@ -1918,7 +1918,7 @@
           "cacheReadTokens": 5086208,
           "totalTokens": 5511240,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 2.746907
+          "estimatedCostUsd": 5.493814
         }
       ],
       "activity": {
@@ -1936,7 +1936,7 @@
       "cacheReadTokens": 212537088,
       "totalTokens": 223070222,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 180.7453215,
+      "estimatedCostUsd": 451.821895,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1946,7 +1946,7 @@
           "cacheReadTokens": 212489728,
           "totalTokens": 223001051,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 180.66250399999998
+          "estimatedCostUsd": 451.65626
         },
         {
           "name": "gpt-5.4",
@@ -1956,7 +1956,7 @@
           "cacheReadTokens": 47360,
           "totalTokens": 69171,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.08281750000000002
+          "estimatedCostUsd": 0.16563500000000003
         }
       ],
       "activity": null
@@ -1970,7 +1970,7 @@
       "cacheReadTokens": 61276544,
       "totalTokens": 64550994,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 53.310947,
+      "estimatedCostUsd": 133.2773675,
       "models": [
         {
           "name": "gpt-5.5",
@@ -1980,7 +1980,7 @@
           "cacheReadTokens": 61276544,
           "totalTokens": 64550994,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 53.310947
+          "estimatedCostUsd": 133.2773675
         }
       ],
       "activity": null
@@ -1994,7 +1994,7 @@
       "cacheReadTokens": 73988224,
       "totalTokens": 80707337,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 79.97792700000001,
+      "estimatedCostUsd": 199.9448175,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2004,7 +2004,7 @@
           "cacheReadTokens": 73988224,
           "totalTokens": 80707337,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 79.97792700000001
+          "estimatedCostUsd": 199.9448175
         }
       ],
       "activity": {
@@ -2022,7 +2022,7 @@
       "cacheReadTokens": 124203392,
       "totalTokens": 130767734,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 106.43765599999999,
+      "estimatedCostUsd": 266.09414,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2032,7 +2032,7 @@
           "cacheReadTokens": 124203392,
           "totalTokens": 130767734,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 106.43765599999999
+          "estimatedCostUsd": 266.09414
         }
       ],
       "activity": {
@@ -2050,7 +2050,7 @@
       "cacheReadTokens": 102496384,
       "totalTokens": 109762142,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 98.756207,
+      "estimatedCostUsd": 246.8905175,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2060,7 +2060,7 @@
           "cacheReadTokens": 102496384,
           "totalTokens": 109762142,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 98.756207
+          "estimatedCostUsd": 246.8905175
         }
       ],
       "activity": {
@@ -2078,7 +2078,7 @@
       "cacheReadTokens": 7630848,
       "totalTokens": 8599271,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 10.588788999999998,
+      "estimatedCostUsd": 26.471972499999996,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2088,7 +2088,7 @@
           "cacheReadTokens": 7630848,
           "totalTokens": 8599271,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 10.588788999999998
+          "estimatedCostUsd": 26.471972499999996
         }
       ],
       "activity": null
@@ -2102,7 +2102,7 @@
       "cacheReadTokens": 80435072,
       "totalTokens": 88435277,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 90.06121100000001,
+      "estimatedCostUsd": 225.15302750000004,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2112,7 +2112,7 @@
           "cacheReadTokens": 80435072,
           "totalTokens": 88435277,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 90.06121100000001
+          "estimatedCostUsd": 225.15302750000004
         }
       ],
       "activity": null
@@ -2126,7 +2126,7 @@
       "cacheReadTokens": 601728,
       "totalTokens": 734451,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 1.174854,
+      "estimatedCostUsd": 2.9371350000000005,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2136,7 +2136,7 @@
           "cacheReadTokens": 601728,
           "totalTokens": 734451,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 1.174854
+          "estimatedCostUsd": 2.9371350000000005
         }
       ],
       "activity": null
@@ -2150,7 +2150,7 @@
       "cacheReadTokens": 2339712,
       "totalTokens": 2731931,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 3.7193260000000006,
+      "estimatedCostUsd": 9.298315000000002,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2160,7 +2160,7 @@
           "cacheReadTokens": 2339712,
           "totalTokens": 2731931,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 3.7193260000000006
+          "estimatedCostUsd": 9.298315000000002
         }
       ],
       "activity": null
@@ -2174,7 +2174,7 @@
       "cacheReadTokens": 128096896,
       "totalTokens": 168179038,
       "unclassifiedTokens": 32419183,
-      "estimatedCostUsd": 114.573068,
+      "estimatedCostUsd": 286.43267000000003,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2184,7 +2184,7 @@
           "cacheReadTokens": 128096896,
           "totalTokens": 135759855,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 114.573068
+          "estimatedCostUsd": 286.43267000000003
         },
         {
           "name": "claude-fable-5",
@@ -2222,17 +2222,17 @@
       "cacheReadTokens": 213247281,
       "totalTokens": 264091715,
       "unclassifiedTokens": 38394917,
-      "estimatedCostUsd": 221.28101200000006,
+      "estimatedCostUsd": 451.75484500000005,
       "models": [
         {
           "name": "gpt-5.5",
-          "inputTokens": 10679065,
-          "outputTokens": 612535,
+          "inputTokens": 10575936,
+          "outputTokens": 611117,
           "cacheCreationTokens": 0,
-          "cacheReadTokens": 165289216,
-          "totalTokens": 176580816,
+          "cacheReadTokens": 164872064,
+          "totalTokens": 176059117,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 154.41598299999998
+          "estimatedCostUsd": 384.123055
         },
         {
           "name": "claude-fable-5",
@@ -2253,6 +2253,16 @@
           "totalTokens": 4529790,
           "unclassifiedTokens": 0,
           "estimatedCostUsd": 0.8956940000000004
+        },
+        {
+          "name": "gpt-5.4",
+          "inputTokens": 103129,
+          "outputTokens": 1418,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 417152,
+          "totalTokens": 521699,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.766761
         }
       ],
       "activity": {
@@ -2270,17 +2280,17 @@
       "cacheReadTokens": 156840224,
       "totalTokens": 175707437,
       "unclassifiedTokens": 8401024,
-      "estimatedCostUsd": 164.3002715,
+      "estimatedCostUsd": 370.48316300000005,
       "models": [
         {
           "name": "gpt-5.5",
-          "inputTokens": 9045572,
-          "outputTokens": 658300,
+          "inputTokens": 8717965,
+          "outputTokens": 654770,
           "cacheCreationTokens": 0,
-          "cacheReadTokens": 149277440,
-          "totalTokens": 158981312,
+          "cacheReadTokens": 148444672,
+          "totalTokens": 157817407,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 139.61558
+          "estimatedCostUsd": 343.63815250000005
         },
         {
           "name": "claude-fable-5",
@@ -2291,6 +2301,16 @@
           "totalTokens": 16726125,
           "unclassifiedTokens": 8401024,
           "estimatedCostUsd": 24.684691500000007
+        },
+        {
+          "name": "gpt-5.4",
+          "inputTokens": 327607,
+          "outputTokens": 3530,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 832768,
+          "totalTokens": 1163905,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 2.1603190000000003
         }
       ],
       "activity": {
@@ -2308,7 +2328,7 @@
       "cacheReadTokens": 14699648,
       "totalTokens": 15497214,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 12.907104,
+      "estimatedCostUsd": 32.267759999999996,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2318,7 +2338,7 @@
           "cacheReadTokens": 14699648,
           "totalTokens": 15497214,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 12.907104
+          "estimatedCostUsd": 32.267759999999996
         }
       ],
       "activity": null
@@ -2332,7 +2352,7 @@
       "cacheReadTokens": 72954624,
       "totalTokens": 81058794,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 86.625237,
+      "estimatedCostUsd": 216.5630925,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2342,7 +2362,7 @@
           "cacheReadTokens": 72954624,
           "totalTokens": 81058794,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 86.625237
+          "estimatedCostUsd": 216.5630925
         }
       ],
       "activity": null
@@ -2356,7 +2376,7 @@
       "cacheReadTokens": 45942128,
       "totalTokens": 80363575,
       "unclassifiedTokens": 30193605,
-      "estimatedCostUsd": 70.3260693,
+      "estimatedCostUsd": 110.43797880000001,
       "models": [
         {
           "name": "claude-fable-5",
@@ -2376,7 +2396,7 @@
           "cacheReadTokens": 21045376,
           "totalTokens": 23823628,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 26.741273
+          "estimatedCostUsd": 66.8531825
         },
         {
           "name": "claude-haiku-4-5-20251001",
@@ -2432,7 +2452,7 @@
       "cacheReadTokens": 129699328,
       "totalTokens": 137902279,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 117.717344,
+      "estimatedCostUsd": 294.29336,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2442,7 +2462,7 @@
           "cacheReadTokens": 129699328,
           "totalTokens": 137902279,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 117.717344
+          "estimatedCostUsd": 294.29336
         }
       ],
       "activity": null
@@ -2456,7 +2476,7 @@
       "cacheReadTokens": 9791360,
       "totalTokens": 10345407,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 8.46189,
+      "estimatedCostUsd": 21.154725,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2466,7 +2486,7 @@
           "cacheReadTokens": 9791360,
           "totalTokens": 10345407,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 8.46189
+          "estimatedCostUsd": 21.154725
         }
       ],
       "activity": null
@@ -2480,7 +2500,7 @@
       "cacheReadTokens": 83947136,
       "totalTokens": 88651794,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 176.18767369999998,
+      "estimatedCostUsd": 178.85765869999997,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2490,7 +2510,7 @@
           "cacheReadTokens": 83115392,
           "totalTokens": 87634605,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 173.7845425
+          "estimatedCostUsd": 176.45452749999998
         },
         {
           "name": "gpt-5.6-sol",
@@ -2514,7 +2534,7 @@
       "cacheReadTokens": 148110044,
       "totalTokens": 157266428,
       "unclassifiedTokens": 1046541,
-      "estimatedCostUsd": 311.58617300000003,
+      "estimatedCostUsd": 317.073734,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2524,7 +2544,7 @@
           "cacheReadTokens": 147654656,
           "totalTokens": 155669259,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 310.144609
+          "estimatedCostUsd": 315.63217
         },
         {
           "name": "claude-opus-4-8",
@@ -2552,7 +2572,7 @@
       "cacheReadTokens": 182901946,
       "totalTokens": 299007542,
       "unclassifiedTokens": 108950562,
-      "estimatedCostUsd": 261.1473651,
+      "estimatedCostUsd": 266.29790610000003,
       "models": [
         {
           "name": "claude-opus-4-8",
@@ -2572,7 +2592,7 @@
           "cacheReadTokens": 95404160,
           "totalTokens": 100916342,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 203.254434
+          "estimatedCostUsd": 208.40497500000004
         },
         {
           "name": "gpt-5.4-mini",
@@ -2600,7 +2620,7 @@
       "cacheReadTokens": 128656896,
       "totalTokens": 133353734,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 14.00142784,
+      "estimatedCostUsd": 14.145959640000001,
       "models": [
         {
           "name": "gpt-5.6-luna",
@@ -2610,7 +2630,7 @@
           "cacheReadTokens": 97319168,
           "totalTokens": 100268673,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 3.08890624
+          "estimatedCostUsd": 3.09028484
         },
         {
           "name": "gpt-5.6-terra",
@@ -2620,7 +2640,7 @@
           "cacheReadTokens": 31337728,
           "totalTokens": 33085061,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 10.9125216
+          "estimatedCostUsd": 11.0556748
         }
       ],
       "activity": null
@@ -2634,7 +2654,7 @@
       "cacheReadTokens": 8776192,
       "totalTokens": 9735872,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 4.1227884,
+      "estimatedCostUsd": 4.715494,
       "models": [
         {
           "name": "gpt-5.6-terra",
@@ -2644,7 +2664,7 @@
           "cacheReadTokens": 8776192,
           "totalTokens": 9735872,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 4.1227884
+          "estimatedCostUsd": 4.715494
         }
       ],
       "activity": null
@@ -2658,7 +2678,7 @@
       "cacheReadTokens": 8011776,
       "totalTokens": 11746428,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 22.9186306,
+      "estimatedCostUsd": 29.853869600000003,
       "models": [
         {
           "name": "gpt-5.5",
@@ -2668,7 +2688,7 @@
           "cacheReadTokens": 4892928,
           "totalTokens": 8017254,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 20.863969
+          "estimatedCostUsd": 27.568510000000003
         },
         {
           "name": "gpt-5.6-terra",
@@ -2678,7 +2698,7 @@
           "cacheReadTokens": 3118848,
           "totalTokens": 3729174,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 2.0546615999999998
+          "estimatedCostUsd": 2.2853595999999996
         }
       ],
       "activity": null
@@ -2716,7 +2736,7 @@
       "cacheReadTokens": 13623808,
       "totalTokens": 14548163,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 11.3980824,
+      "estimatedCostUsd": 12.937712,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -2726,7 +2746,7 @@
           "cacheReadTokens": 7886592,
           "totalTokens": 8469697,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 8.3550408
+          "estimatedCostUsd": 8.757824
         },
         {
           "name": "gpt-5.6-terra",
@@ -2736,7 +2756,7 @@
           "cacheReadTokens": 5737216,
           "totalTokens": 6078466,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 3.0430416
+          "estimatedCostUsd": 4.179888
         }
       ],
       "activity": null
@@ -2750,7 +2770,7 @@
       "cacheReadTokens": 55455488,
       "totalTokens": 59105183,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 69.12775479999999,
+      "estimatedCostUsd": 76.2172552,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -2760,7 +2780,7 @@
           "cacheReadTokens": 42634240,
           "totalTokens": 45467664,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 59.657236
+          "estimatedCostUsd": 65.533952
         },
         {
           "name": "gpt-5.6-terra",
@@ -2770,7 +2790,7 @@
           "cacheReadTokens": 12821248,
           "totalTokens": 13637519,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 9.4705188
+          "estimatedCostUsd": 10.6833032
         }
       ],
       "activity": null
@@ -2784,7 +2804,7 @@
       "cacheReadTokens": 119102003,
       "totalTokens": 125180288,
       "unclassifiedTokens": 962435,
-      "estimatedCostUsd": 135.84184255000002,
+      "estimatedCostUsd": 146.36586655,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -2794,7 +2814,7 @@
           "cacheReadTokens": 107728640,
           "totalTokens": 112361343,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 128.8309704
+          "estimatedCostUsd": 138.927224
         },
         {
           "name": "gpt-5.6-terra",
@@ -2804,7 +2824,7 @@
           "cacheReadTokens": 10627840,
           "totalTokens": 11006853,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 6.2970176
+          "estimatedCostUsd": 6.724788
         },
         {
           "name": "claude-haiku-4-5-20251001",
@@ -2842,7 +2862,7 @@
       "cacheReadTokens": 150510726,
       "totalTokens": 192973875,
       "unclassifiedTokens": 35421742,
-      "estimatedCostUsd": 177.82317940000001,
+      "estimatedCostUsd": 186.3693642,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -2852,7 +2872,7 @@
           "cacheReadTokens": 111782656,
           "totalTokens": 117417528,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 142.576932
+          "estimatedCostUsd": 151.1231168
         },
         {
           "name": "claude-opus-4-8",
@@ -2890,7 +2910,7 @@
       "cacheReadTokens": 83175778,
       "totalTokens": 156476342,
       "unclassifiedTokens": 68531265,
-      "estimatedCostUsd": 64.1633005,
+      "estimatedCostUsd": 69.1789765,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -2910,7 +2930,7 @@
           "cacheReadTokens": 66906112,
           "totalTokens": 70707220,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 55.735804800000004
+          "estimatedCostUsd": 60.7514808
         },
         {
           "name": "claude-opus-4-8",
@@ -2938,7 +2958,7 @@
       "cacheReadTokens": 108577472,
       "totalTokens": 114192876,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 75.8393764,
+      "estimatedCostUsd": 93.52920280000001,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -2948,7 +2968,7 @@
           "cacheReadTokens": 80870400,
           "totalTokens": 85649498,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 65.88389600000001
+          "estimatedCostUsd": 83.57372240000001
         },
         {
           "name": "claude-sonnet-5",
@@ -2976,7 +2996,7 @@
       "cacheReadTokens": 290422306,
       "totalTokens": 603360837,
       "unclassifiedTokens": 306224775,
-      "estimatedCostUsd": 100.43902590000002,
+      "estimatedCostUsd": 101.56019150000002,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -2996,7 +3016,7 @@
           "cacheReadTokens": 39355136,
           "totalTokens": 41454897,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 28.4902344
+          "estimatedCostUsd": 29.6114
         }
       ],
       "activity": {
@@ -3014,7 +3034,7 @@
       "cacheReadTokens": 131088703,
       "totalTokens": 135221984,
       "unclassifiedTokens": 602506,
-      "estimatedCostUsd": 58.81455405,
+      "estimatedCostUsd": 61.054230849999996,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -3034,7 +3054,7 @@
           "cacheReadTokens": 60786432,
           "totalTokens": 63301904,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 39.2336128
+          "estimatedCostUsd": 41.4732896
         },
         {
           "name": "claude-opus-4-8",
@@ -3062,7 +3082,7 @@
       "cacheReadTokens": 357999390,
       "totalTokens": 440475949,
       "unclassifiedTokens": 70633507,
-      "estimatedCostUsd": 220.68661119999996,
+      "estimatedCostUsd": 243.03415439999995,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3072,7 +3092,7 @@
           "cacheReadTokens": 272492544,
           "totalTokens": 283571704,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 199.49277199999997
+          "estimatedCostUsd": 221.84031519999996
         },
         {
           "name": "claude-sonnet-5",
@@ -3100,7 +3120,7 @@
       "cacheReadTokens": 65486848,
       "totalTokens": 69797776,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 49.3519072,
+      "estimatedCostUsd": 59.0754016,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3110,7 +3130,7 @@
           "cacheReadTokens": 65486848,
           "totalTokens": 69797776,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 49.3519072
+          "estimatedCostUsd": 59.0754016
         }
       ],
       "activity": null
@@ -3124,7 +3144,7 @@
       "cacheReadTokens": 123074560,
       "totalTokens": 129047510,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 86.23926879999999,
+      "estimatedCostUsd": 91.24826399999999,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3134,7 +3154,7 @@
           "cacheReadTokens": 123074560,
           "totalTokens": 129047510,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 86.23926879999999
+          "estimatedCostUsd": 91.24826399999999
         }
       ],
       "activity": null
@@ -3148,7 +3168,7 @@
       "cacheReadTokens": 169931264,
       "totalTokens": 179115603,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 210.43494239999998,
+      "estimatedCostUsd": 216.6302384,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3158,7 +3178,7 @@
           "cacheReadTokens": 169931264,
           "totalTokens": 179115603,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 210.43494239999998
+          "estimatedCostUsd": 216.6302384
         }
       ],
       "activity": null
@@ -3172,7 +3192,7 @@
       "cacheReadTokens": 227596568,
       "totalTokens": 387781494,
       "unclassifiedTokens": 150676033,
-      "estimatedCostUsd": 135.0374511,
+      "estimatedCostUsd": 140.84754069999997,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -3192,7 +3212,7 @@
           "cacheReadTokens": 115313408,
           "totalTokens": 122330902,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 99.8153856
+          "estimatedCostUsd": 105.62547519999998
         }
       ],
       "activity": {
@@ -3210,7 +3230,7 @@
       "cacheReadTokens": 269446131,
       "totalTokens": 359309851,
       "unclassifiedTokens": 78092823,
-      "estimatedCostUsd": 146.10688490000007,
+      "estimatedCostUsd": 149.57443850000004,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -3230,7 +3250,7 @@
           "cacheReadTokens": 144662016,
           "totalTokens": 151135891,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 96.11494640000001
+          "estimatedCostUsd": 99.58250000000001
         }
       ],
       "activity": {
@@ -3248,7 +3268,7 @@
       "cacheReadTokens": 195577135,
       "totalTokens": 224698554,
       "unclassifiedTokens": 19939012,
-      "estimatedCostUsd": 217.7280444,
+      "estimatedCostUsd": 223.6317956,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3258,7 +3278,7 @@
           "cacheReadTokens": 179246336,
           "totalTokens": 186955177,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 207.19317759999998
+          "estimatedCostUsd": 213.0969288
         },
         {
           "name": "claude-sonnet-5",
@@ -3286,7 +3306,7 @@
       "cacheReadTokens": 132717886,
       "totalTokens": 148308803,
       "unclassifiedTokens": 9817598,
-      "estimatedCostUsd": 151.71283355,
+      "estimatedCostUsd": 152.71967675,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3296,7 +3316,7 @@
           "cacheReadTokens": 122596096,
           "totalTokens": 127804061,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 147.1431432
+          "estimatedCostUsd": 148.1499864
         },
         {
           "name": "claude-sonnet-5",
@@ -3344,7 +3364,7 @@
       "cacheReadTokens": 237973634,
       "totalTokens": 417614300,
       "unclassifiedTokens": 172846316,
-      "estimatedCostUsd": 84.9529468,
+      "estimatedCostUsd": 87.66700360000002,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -3364,7 +3384,7 @@
           "cacheReadTokens": 74901248,
           "totalTokens": 77981953,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 24.643609599999998
+          "estimatedCostUsd": 25.838809599999998
         },
         {
           "name": "gpt-5.6-sol",
@@ -3374,7 +3394,7 @@
           "cacheReadTokens": 37812480,
           "totalTokens": 39802352,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 25.802432
+          "estimatedCostUsd": 27.321288799999998
         }
       ],
       "activity": {
@@ -3392,7 +3412,7 @@
       "cacheReadTokens": 159474509,
       "totalTokens": 166185521,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 84.5080247,
+      "estimatedCostUsd": 100.6494239,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3402,7 +3422,7 @@
           "cacheReadTokens": 79916032,
           "totalTokens": 84856475,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 60.6744248
+          "estimatedCostUsd": 76.81582399999999
         },
         {
           "name": "claude-sonnet-5",
@@ -3430,7 +3450,7 @@
       "cacheReadTokens": 88018059,
       "totalTokens": 145786909,
       "unclassifiedTokens": 52514801,
-      "estimatedCostUsd": 64.60723780000001,
+      "estimatedCostUsd": 68.20795940000001,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3440,7 +3460,7 @@
           "cacheReadTokens": 87728640,
           "totalTokens": 92775279,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 63.705420000000004
+          "estimatedCostUsd": 67.3061416
         },
         {
           "name": "claude-sonnet-5",
@@ -3468,7 +3488,7 @@
       "cacheReadTokens": 224494400,
       "totalTokens": 232520458,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 123.0142156,
+      "estimatedCostUsd": 131.8122332,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3478,7 +3498,7 @@
           "cacheReadTokens": 157508608,
           "totalTokens": 164493247,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 104.2304472
+          "estimatedCostUsd": 113.0284648
         },
         {
           "name": "claude-sonnet-5",
@@ -3506,7 +3526,7 @@
       "cacheReadTokens": 94208,
       "totalTokens": 123343,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 0.2289592,
+      "estimatedCostUsd": 0.4579184,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3516,7 +3536,7 @@
           "cacheReadTokens": 94208,
           "totalTokens": 123343,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.2289592
+          "estimatedCostUsd": 0.4579184
         }
       ],
       "activity": null
@@ -3530,7 +3550,7 @@
       "cacheReadTokens": 148535168,
       "totalTokens": 154321061,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 93.3785192,
+      "estimatedCostUsd": 97.740556,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3540,7 +3560,7 @@
           "cacheReadTokens": 148535168,
           "totalTokens": 154321061,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 93.3785192
+          "estimatedCostUsd": 97.740556
         }
       ],
       "activity": {
@@ -3558,7 +3578,7 @@
       "cacheReadTokens": 310566656,
       "totalTokens": 323529260,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 200.3006784,
+      "estimatedCostUsd": 229.64739200000002,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3568,7 +3588,7 @@
           "cacheReadTokens": 310566656,
           "totalTokens": 323529260,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 200.3006784
+          "estimatedCostUsd": 229.64739200000002
         }
       ],
       "activity": null
@@ -3582,7 +3602,7 @@
       "cacheReadTokens": 149367296,
       "totalTokens": 156407135,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 99.01021039999999,
+      "estimatedCostUsd": 106.9984248,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3592,7 +3612,7 @@
           "cacheReadTokens": 149367296,
           "totalTokens": 156407135,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 99.01021039999999
+          "estimatedCostUsd": 106.9984248
         }
       ],
       "activity": {
@@ -3610,7 +3630,7 @@
       "cacheReadTokens": 152054784,
       "totalTokens": 158283706,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 97.75080159999999,
+      "estimatedCostUsd": 100.2226992,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3620,7 +3640,7 @@
           "cacheReadTokens": 152054784,
           "totalTokens": 158283706,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 97.75080159999999
+          "estimatedCostUsd": 100.2226992
         }
       ],
       "activity": null
@@ -3634,7 +3654,7 @@
       "cacheReadTokens": 37184128,
       "totalTokens": 39362051,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 34.8486784,
+      "estimatedCostUsd": 51.735931199999996,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3644,7 +3664,7 @@
           "cacheReadTokens": 37184128,
           "totalTokens": 39362051,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 34.8486784
+          "estimatedCostUsd": 51.735931199999996
         }
       ],
       "activity": null
@@ -3658,7 +3678,7 @@
       "cacheReadTokens": 11555968,
       "totalTokens": 12186448,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 17.0757824,
+      "estimatedCostUsd": 17.441350399999997,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3668,7 +3688,7 @@
           "cacheReadTokens": 11555968,
           "totalTokens": 12186448,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 17.0757824
+          "estimatedCostUsd": 17.441350399999997
         }
       ],
       "activity": null
@@ -3682,7 +3702,7 @@
       "cacheReadTokens": 82119424,
       "totalTokens": 84844411,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 93.6032184,
+      "estimatedCostUsd": 99.00174960000001,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3692,7 +3712,7 @@
           "cacheReadTokens": 82119424,
           "totalTokens": 84844411,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 93.6032184
+          "estimatedCostUsd": 99.00174960000001
         }
       ],
       "activity": null
@@ -3706,7 +3726,7 @@
       "cacheReadTokens": 8913408,
       "totalTokens": 9631581,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 7.4656232,
+      "estimatedCostUsd": 11.1215416,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3716,7 +3736,7 @@
           "cacheReadTokens": 8913408,
           "totalTokens": 9631581,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 7.4656232
+          "estimatedCostUsd": 11.1215416
         }
       ],
       "activity": null
@@ -3730,7 +3750,7 @@
       "cacheReadTokens": 39797248,
       "totalTokens": 42113465,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 28.544246400000002,
+      "estimatedCostUsd": 29.408048800000003,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3740,7 +3760,7 @@
           "cacheReadTokens": 39797248,
           "totalTokens": 42113465,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 28.544246400000002
+          "estimatedCostUsd": 29.408048800000003
         }
       ],
       "activity": null
@@ -3754,7 +3774,7 @@
       "cacheReadTokens": 204169984,
       "totalTokens": 212642850,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 159.9120928,
+      "estimatedCostUsd": 187.65641440000002,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3764,7 +3784,7 @@
           "cacheReadTokens": 204169984,
           "totalTokens": 212642850,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 159.9120928
+          "estimatedCostUsd": 187.65641440000002
         }
       ],
       "activity": null
@@ -3778,7 +3798,7 @@
       "cacheReadTokens": 210307712,
       "totalTokens": 217640504,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 234.40068639999998,
+      "estimatedCostUsd": 241.81099279999998,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3788,7 +3808,7 @@
           "cacheReadTokens": 210307712,
           "totalTokens": 217640504,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 234.40068639999998
+          "estimatedCostUsd": 241.81099279999998
         }
       ],
       "activity": null
@@ -3802,7 +3822,7 @@
       "cacheReadTokens": 10884608,
       "totalTokens": 11754537,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 17.9826088,
+      "estimatedCostUsd": 19.601614400000003,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3812,7 +3832,7 @@
           "cacheReadTokens": 10884608,
           "totalTokens": 11754537,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 17.9826088
+          "estimatedCostUsd": 19.601614400000003
         }
       ],
       "activity": {
@@ -3830,7 +3850,7 @@
       "cacheReadTokens": 208055936,
       "totalTokens": 216166315,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 190.05371119999998,
+      "estimatedCostUsd": 197.9209176,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3840,7 +3860,7 @@
           "cacheReadTokens": 208055936,
           "totalTokens": 216166315,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 190.05371119999998
+          "estimatedCostUsd": 197.9209176
         }
       ],
       "activity": null
@@ -3854,7 +3874,7 @@
       "cacheReadTokens": 350536532,
       "totalTokens": 365201805,
       "unclassifiedTokens": 95683,
-      "estimatedCostUsd": 223.5386132,
+      "estimatedCostUsd": 269.2236922,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3864,7 +3884,7 @@
           "cacheReadTokens": 344691200,
           "totalTokens": 358572544,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 215.865728
+          "estimatedCostUsd": 250.14934
         },
         {
           "name": "gpt-5.5",
@@ -3874,7 +3894,7 @@
           "cacheReadTokens": 5758336,
           "totalTokens": 6434148,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 7.600978
+          "estimatedCostUsd": 19.002445
         },
         {
           "name": "claude-sonnet-5",
@@ -3902,7 +3922,7 @@
       "cacheReadTokens": 72952192,
       "totalTokens": 76198377,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 47.6285768,
+      "estimatedCostUsd": 54.8642608,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3912,7 +3932,7 @@
           "cacheReadTokens": 72952192,
           "totalTokens": 76198377,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 47.6285768
+          "estimatedCostUsd": 54.8642608
         }
       ],
       "activity": null
@@ -3926,7 +3946,7 @@
       "cacheReadTokens": 68978560,
       "totalTokens": 71527838,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 44.79172,
+      "estimatedCostUsd": 50.122173599999996,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3936,7 +3956,7 @@
           "cacheReadTokens": 68978560,
           "totalTokens": 71527838,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 44.79172
+          "estimatedCostUsd": 50.122173599999996
         }
       ],
       "activity": null
@@ -3950,7 +3970,7 @@
       "cacheReadTokens": 317272960,
       "totalTokens": 328563154,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 200.892232,
+      "estimatedCostUsd": 219.7442144,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3960,7 +3980,7 @@
           "cacheReadTokens": 317272960,
           "totalTokens": 328563154,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 200.892232
+          "estimatedCostUsd": 219.7442144
         }
       ],
       "activity": null
@@ -3974,7 +3994,7 @@
       "cacheReadTokens": 1827840,
       "totalTokens": 2149307,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 2.459308,
+      "estimatedCostUsd": 4.4895896,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -3984,7 +4004,7 @@
           "cacheReadTokens": 1827840,
           "totalTokens": 2149307,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 2.459308
+          "estimatedCostUsd": 4.4895896
         }
       ],
       "activity": null
@@ -3998,7 +4018,7 @@
       "cacheReadTokens": 73796992,
       "totalTokens": 78348370,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 53.5032368,
+      "estimatedCostUsd": 66.4778656,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4008,7 +4028,7 @@
           "cacheReadTokens": 73796992,
           "totalTokens": 78348370,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 53.5032368
+          "estimatedCostUsd": 66.4778656
         }
       ],
       "activity": null
@@ -4022,7 +4042,7 @@
       "cacheReadTokens": 96754944,
       "totalTokens": 101698930,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 67.2982096,
+      "estimatedCostUsd": 81.12237440000001,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4032,7 +4052,7 @@
           "cacheReadTokens": 96754944,
           "totalTokens": 101698930,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 67.2982096
+          "estimatedCostUsd": 81.12237440000001
         }
       ],
       "activity": null
@@ -4046,7 +4066,7 @@
       "cacheReadTokens": 134162560,
       "totalTokens": 141462867,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 163.41813839999998,
+      "estimatedCostUsd": 167.24869839999997,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4056,7 +4076,7 @@
           "cacheReadTokens": 134162560,
           "totalTokens": 141462867,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 163.41813839999998
+          "estimatedCostUsd": 167.24869839999997
         }
       ],
       "activity": null
@@ -4070,7 +4090,7 @@
       "cacheReadTokens": 142351092,
       "totalTokens": 148428063,
       "unclassifiedTokens": 196893,
-      "estimatedCostUsd": 136.80879919999998,
+      "estimatedCostUsd": 146.9746208,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4080,7 +4100,7 @@
           "cacheReadTokens": 141939456,
           "totalTokens": 147795967,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 136.616876
+          "estimatedCostUsd": 146.7826976
         },
         {
           "name": "claude-sonnet-5",
@@ -4108,7 +4128,7 @@
       "cacheReadTokens": 80060664,
       "totalTokens": 86392481,
       "unclassifiedTokens": 2156501,
-      "estimatedCostUsd": 59.1488828,
+      "estimatedCostUsd": 68.79787520000001,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4118,7 +4138,7 @@
           "cacheReadTokens": 76312192,
           "totalTokens": 80189665,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 51.7315848
+          "estimatedCostUsd": 55.4669952
         },
         {
           "name": "gpt-6-astra",
@@ -4128,7 +4148,7 @@
           "cacheReadTokens": 3311232,
           "totalTokens": 3547372,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 7.0331920000000006
+          "estimatedCostUsd": 12.946774000000001
         },
         {
           "name": "claude-sonnet-5",
@@ -4156,7 +4176,7 @@
       "cacheReadTokens": 231704129,
       "totalTokens": 360447872,
       "unclassifiedTokens": 119072346,
-      "estimatedCostUsd": 310.60794100000004,
+      "estimatedCostUsd": 307.86192556000003,
       "models": [
         {
           "name": "gpt-6-astra",
@@ -4166,7 +4186,7 @@
           "cacheReadTokens": 193041152,
           "totalTokens": 198818280,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 278.194432
+          "estimatedCostUsd": 293.928014
         },
         {
           "name": "claude-sonnet-5",
@@ -4179,14 +4199,14 @@
           "estimatedCostUsd": 7.560418199999999
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 2722638,
           "outputTokens": 14950,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 12040704,
           "totalTokens": 14778292,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 20.082042
+          "estimatedCostUsd": 1.6024445600000001
         },
         {
           "name": "gpt-5.6-sol",
@@ -4214,7 +4234,7 @@
       "cacheReadTokens": 212266177,
       "totalTokens": 219233793,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 169.337092,
+      "estimatedCostUsd": 161.15210052,
       "models": [
         {
           "name": "claude-sonnet-5",
@@ -4234,17 +4254,17 @@
           "cacheReadTokens": 77345792,
           "totalTokens": 80983026,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 124.42933200000002
+          "estimatedCostUsd": 124.707254
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 1432331,
           "outputTokens": 8138,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 3586048,
           "totalTokens": 5026517,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 9.198819
+          "estimatedCostUsd": 0.73590552
         },
         {
           "name": "gpt-5.6-sol",
@@ -4272,7 +4292,7 @@
       "cacheReadTokens": 336191872,
       "totalTokens": 356407707,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 462.70431250000007,
+      "estimatedCostUsd": 405.89929996,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4282,7 +4302,7 @@
           "cacheReadTokens": 187436672,
           "totalTokens": 194696408,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 195.53707200000002
+          "estimatedCostUsd": 203.84508799999998
         },
         {
           "name": "gpt-6-astra",
@@ -4292,17 +4312,17 @@
           "cacheReadTokens": 99257344,
           "totalTokens": 102085461,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 139.76491400000003
+          "estimatedCostUsd": 196.678002
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 10071438,
           "outputTokens": 56544,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 49497856,
           "totalTokens": 59625838,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 127.40232650000002
+          "estimatedCostUsd": 5.37620996
         }
       ],
       "activity": null
@@ -4316,7 +4336,7 @@
       "cacheReadTokens": 372734359,
       "totalTokens": 388712602,
       "unclassifiedTokens": 762982,
-      "estimatedCostUsd": 441.332923,
+      "estimatedCostUsd": 471.57951529999997,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4326,7 +4346,7 @@
           "cacheReadTokens": 270456576,
           "totalTokens": 278664380,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 260.83643440000003
+          "estimatedCostUsd": 268.4228296
         },
         {
           "name": "gpt-6-astra",
@@ -4336,17 +4356,17 @@
           "cacheReadTokens": 90150912,
           "totalTokens": 94010000,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 139.60335199999997
+          "estimatedCostUsd": 200.98829999999998
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 2998962,
           "outputTokens": 19376,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 11660288,
           "totalTokens": 14678626,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 40.128848500000004
+          "estimatedCostUsd": 1.4040976
         },
         {
           "name": "claude-sonnet-5",
@@ -4374,7 +4394,7 @@
       "cacheReadTokens": 242482944,
       "totalTokens": 254782480,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 324.3581868,
+      "estimatedCostUsd": 343.26041492,
       "models": [
         {
           "name": "gpt-6-astra",
@@ -4384,7 +4404,7 @@
           "cacheReadTokens": 148627072,
           "totalTokens": 154440254,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 230.434572
+          "estimatedCostUsd": 268.582718
         },
         {
           "name": "gpt-5.6-sol",
@@ -4394,17 +4414,17 @@
           "cacheReadTokens": 79556736,
           "totalTokens": 82634480,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 68.9540168
+          "estimatedCostUsd": 73.64576
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 3387840,
           "outputTokens": 20770,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 14299136,
           "totalTokens": 17707746,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 24.969598
+          "estimatedCostUsd": 1.03193692
         }
       ],
       "activity": null
@@ -4418,7 +4438,7 @@
       "cacheReadTokens": 228862720,
       "totalTokens": 238003012,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 223.8144253,
+      "estimatedCostUsd": 226.33490079999999,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4428,7 +4448,7 @@
           "cacheReadTokens": 197085056,
           "totalTokens": 203902307,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 190.76228479999997
+          "estimatedCostUsd": 196.1588912
         },
         {
           "name": "gpt-5.6-terra",
@@ -4438,7 +4458,7 @@
           "cacheReadTokens": 16129280,
           "totalTokens": 16665647,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 5.26741
+          "estimatedCostUsd": 5.3858388
         },
         {
           "name": "gpt-6-astra",
@@ -4448,17 +4468,17 @@
           "cacheReadTokens": 11691392,
           "totalTokens": 12181238,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 18.349892
+          "estimatedCostUsd": 24.263814
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 1253005,
           "outputTokens": 6738,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 3956992,
           "totalTokens": 5216735,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 9.286394500000002
+          "estimatedCostUsd": 0.3779128
         },
         {
           "name": "claude-sonnet-5",
@@ -4486,7 +4506,7 @@
       "cacheReadTokens": 300927744,
       "totalTokens": 322543399,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 302.7195893,
+      "estimatedCostUsd": 248.90440772,
       "models": [
         {
           "name": "gpt-5.6-terra",
@@ -4496,7 +4516,7 @@
           "cacheReadTokens": 161980288,
           "totalTokens": 169164531,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 82.12454360000001
+          "estimatedCostUsd": 83.918222
         },
         {
           "name": "gpt-5.6-sol",
@@ -4506,17 +4526,17 @@
           "cacheReadTokens": 71951616,
           "totalTokens": 75538106,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 78.17031279999999
+          "estimatedCostUsd": 82.24124479999999
         },
         {
-          "name": "gpt-5.5",
-          "inputTokens": 8926132,
-          "outputTokens": 46703,
+          "name": "gpt-5.6-luna",
+          "inputTokens": 9130795,
+          "outputTokens": 47933,
           "cacheCreationTokens": 0,
-          "cacheReadTokens": 37976064,
-          "totalTokens": 46948899,
+          "cacheReadTokens": 38747904,
+          "totalTokens": 47926632,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 88.3990115
+          "estimatedCostUsd": 3.7442929199999995
         },
         {
           "name": "gpt-6-astra",
@@ -4526,17 +4546,7 @@
           "cacheReadTokens": 28247936,
           "totalTokens": 29914130,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 53.96787600000001
-        },
-        {
-          "name": "gpt-5.6-luna",
-          "inputTokens": 204663,
-          "outputTokens": 1230,
-          "cacheCreationTokens": 0,
-          "cacheReadTokens": 771840,
-          "totalTokens": 977733,
-          "unclassifiedTokens": 0,
-          "estimatedCostUsd": 0.0578454
+          "estimatedCostUsd": 79.000648
         }
       ],
       "activity": null
@@ -4550,7 +4560,7 @@
       "cacheReadTokens": 130627200,
       "totalTokens": 141551756,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 168.5356124,
+      "estimatedCostUsd": 145.144045,
       "models": [
         {
           "name": "gpt-5.6-terra",
@@ -4560,7 +4570,7 @@
           "cacheReadTokens": 51634560,
           "totalTokens": 54021451,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 29.087620800000003
+          "estimatedCostUsd": 29.183794
         },
         {
           "name": "gpt-6-astra",
@@ -4570,17 +4580,17 @@
           "cacheReadTokens": 43423360,
           "totalTokens": 45271034,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 67.76074
+          "estimatedCostUsd": 105.09046
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 6255085,
           "outputTokens": 33264,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 30119680,
           "totalTokens": 36408029,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 65.287582
+          "estimatedCostUsd": 2.394543
         },
         {
           "name": "gpt-5.6-sol",
@@ -4590,7 +4600,7 @@
           "cacheReadTokens": 5449600,
           "totalTokens": 5851242,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 6.3996696
+          "estimatedCostUsd": 8.475248
         }
       ],
       "activity": null
@@ -4604,7 +4614,7 @@
       "cacheReadTokens": 304403584,
       "totalTokens": 321460212,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 358.5885901,
+      "estimatedCostUsd": 241.12930975999998,
       "models": [
         {
           "name": "gpt-5.6-terra",
@@ -4614,7 +4624,7 @@
           "cacheReadTokens": 171910912,
           "totalTokens": 177152394,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 102.20812559999999
+          "estimatedCostUsd": 102.8314128
         },
         {
           "name": "gpt-5.6-sol",
@@ -4624,17 +4634,17 @@
           "cacheReadTokens": 101318656,
           "totalTokens": 104762278,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 110.74188800000002
+          "estimatedCostUsd": 121.2935968
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 8149350,
           "outputTokens": 32030,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 28075520,
           "totalTokens": 36256900,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 139.3911605
+          "estimatedCostUsd": 4.509468159999999
         },
         {
           "name": "gpt-6-astra",
@@ -4644,7 +4654,7 @@
           "cacheReadTokens": 3098496,
           "totalTokens": 3288640,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 6.247416
+          "estimatedCostUsd": 12.494832
         }
       ],
       "activity": null
@@ -4658,7 +4668,7 @@
       "cacheReadTokens": 538492288,
       "totalTokens": 565435927,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 632.7285286,
+      "estimatedCostUsd": 600.8641,
       "models": [
         {
           "name": "gpt-5.6-sol",
@@ -4668,7 +4678,7 @@
           "cacheReadTokens": 405113984,
           "totalTokens": 418910565,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 378.79516320000005
+          "estimatedCostUsd": 383.65687920000005
         },
         {
           "name": "gpt-6-astra",
@@ -4678,7 +4688,7 @@
           "cacheReadTokens": 77464448,
           "totalTokens": 81807973,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 143.07217799999998
+          "estimatedCostUsd": 190.41752199999996
         },
         {
           "name": "gpt-5.6-terra",
@@ -4688,17 +4698,17 @@
           "cacheReadTokens": 34530176,
           "totalTokens": 36792132,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 19.6329804
+          "estimatedCostUsd": 23.6802068
         },
         {
-          "name": "gpt-5.5",
+          "name": "gpt-5.6-luna",
           "inputTokens": 6507025,
           "outputTokens": 34552,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 21383680,
           "totalTokens": 27925257,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 91.228207
+          "estimatedCostUsd": 3.1094919999999995
         }
       ],
       "activity": null
@@ -4706,23 +4716,949 @@
     {
       "date": "2026-09-16",
       "agents": ["codex"],
-      "inputTokens": 218719,
-      "outputTokens": 2457,
+      "inputTokens": 229527,
+      "outputTokens": 3012,
       "cacheCreationTokens": 0,
-      "cacheReadTokens": 281088,
-      "totalTokens": 502264,
+      "cacheReadTokens": 393344,
+      "totalTokens": 625883,
       "unclassifiedTokens": 0,
-      "estimatedCostUsd": 1.0364512,
+      "estimatedCostUsd": 1.1356856,
       "models": [
         {
           "name": "gpt-5.6-sol",
-          "inputTokens": 218719,
-          "outputTokens": 2457,
+          "inputTokens": 229527,
+          "outputTokens": 3012,
           "cacheCreationTokens": 0,
-          "cacheReadTokens": 281088,
-          "totalTokens": 502264,
+          "cacheReadTokens": 393344,
+          "totalTokens": 625883,
           "unclassifiedTokens": 0,
-          "estimatedCostUsd": 1.0364512
+          "estimatedCostUsd": 1.1356856
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-17",
+      "agents": ["codex"],
+      "inputTokens": 5589558,
+      "outputTokens": 676442,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 128539520,
+      "totalTokens": 134805520,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 93.09415584,
+      "models": [
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 3993561,
+          "outputTokens": 599180,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 115695104,
+          "totalTokens": 120287845,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 80.7810976
+        },
+        {
+          "name": "gpt-5.6-terra",
+          "inputTokens": 614965,
+          "outputTokens": 51945,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6893312,
+          "totalTokens": 7560222,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 6.4638648
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 821334,
+          "outputTokens": 5133,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2941184,
+          "totalTokens": 3767651,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.23309343999999996
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 159698,
+          "outputTokens": 20184,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 3009920,
+          "totalTokens": 3189802,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 5.616099999999999
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-18",
+      "agents": ["codex"],
+      "inputTokens": 19083589,
+      "outputTokens": 1937518,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 430806272,
+      "totalTokens": 451827379,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 411.15703304,
+      "models": [
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 12077848,
+          "outputTokens": 1782987,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 389737344,
+          "totalTokens": 403598179,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 376.6887872
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 5695092,
+          "outputTokens": 54898,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 28829184,
+          "totalTokens": 34579174,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 2.6909106400000002
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 1048558,
+          "outputTokens": 93825,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 10777216,
+          "totalTokens": 11919599,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 30.687932000000004
+        },
+        {
+          "name": "gpt-5.6-terra",
+          "inputTokens": 262091,
+          "outputTokens": 5808,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 1462528,
+          "totalTokens": 1730427,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.0894031999999998
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-19",
+      "agents": ["codex"],
+      "inputTokens": 8879328,
+      "outputTokens": 1151926,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 237201792,
+      "totalTokens": 247233046,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 267.431874,
+      "models": [
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 6335288,
+          "outputTokens": 1139937,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 229119744,
+          "totalTokens": 236594969,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 263.339044
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 2412263,
+          "outputTokens": 10708,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8074240,
+          "totalTokens": 10497211,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.313574
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 131777,
+          "outputTokens": 1281,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7808,
+          "totalTokens": 140866,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 2.779256
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-20",
+      "agents": ["codex"],
+      "inputTokens": 15136300,
+      "outputTokens": 2363653,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 389294336,
+      "totalTokens": 406794289,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 420.53328964,
+      "models": [
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 11752769,
+          "outputTokens": 2290850,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 365741312,
+          "totalTokens": 379784931,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 414.2036216
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 2951537,
+          "outputTokens": 20979,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 13846016,
+          "totalTokens": 16818532,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.4958032399999999
+        },
+        {
+          "name": "gpt-5.6-terra",
+          "inputTokens": 431994,
+          "outputTokens": 51824,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 9707008,
+          "totalTokens": 10190826,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 4.833864800000001
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-21",
+      "agents": ["codex"],
+      "inputTokens": 67257,
+      "outputTokens": 4083,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 517248,
+      "totalTokens": 588588,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 1.0323032,
+      "models": [
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 59409,
+          "outputTokens": 3724,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 504448,
+          "totalTokens": 567581,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.0277904
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 7848,
+          "outputTokens": 359,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 12800,
+          "totalTokens": 21007,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.0045128
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-22",
+      "agents": ["claude", "codex"],
+      "inputTokens": 13687979,
+      "outputTokens": 1688922,
+      "cacheCreationTokens": 101977,
+      "cacheReadTokens": 391532325,
+      "totalTokens": 407011203,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 301.7417833799999,
+      "models": [
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 8754047,
+          "outputTokens": 1307518,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 302920448,
+          "totalTokens": 312982013,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 262.68839679999996
+        },
+        {
+          "name": "gpt-6-sol",
+          "inputTokens": 2847241,
+          "outputTokens": 295762,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 75207808,
+          "totalTokens": 78350811,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 23.6936636
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 1604089,
+          "outputTokens": 21498,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8703488,
+          "totalTokens": 10329075,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.7239338
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 290926,
+          "outputTokens": 31786,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2974720,
+          "totalTokens": 3297432,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 14.131108000000001
+        },
+        {
+          "name": "gpt-6-luna",
+          "inputTokens": 191666,
+          "outputTokens": 29803,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 1621248,
+          "totalTokens": 1842717,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.05028058
+        },
+        {
+          "name": "claude-sonnet-5",
+          "inputTokens": 10,
+          "outputTokens": 2555,
+          "cacheCreationTokens": 101977,
+          "cacheReadTokens": 104613,
+          "totalTokens": 209155,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.45440060000000004
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-23",
+      "agents": ["codex"],
+      "inputTokens": 10539662,
+      "outputTokens": 1187162,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 250812288,
+      "totalTokens": 262539112,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 294.62771412,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 4469647,
+          "outputTokens": 572479,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 116443264,
+          "totalTokens": 121485390,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 222.95996200000002
+        },
+        {
+          "name": "gpt-6-sol",
+          "inputTokens": 2279724,
+          "outputTokens": 301610,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 61747840,
+          "totalTokens": 64329174,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 19.925116000000003
+        },
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 1631502,
+          "outputTokens": 221776,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 45664896,
+          "totalTokens": 47518174,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 50.454406399999996
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 1932914,
+          "outputTokens": 26740,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 24795392,
+          "totalTokens": 26755046,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.21175476
+        },
+        {
+          "name": "gpt-6-luna",
+          "inputTokens": 225875,
+          "outputTokens": 64557,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2160896,
+          "totalTokens": 2451328,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.07647496000000001
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-24",
+      "agents": ["codex"],
+      "inputTokens": 169476,
+      "outputTokens": 8164,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 941184,
+      "totalTokens": 1118824,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 6.0882879999999995,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 169476,
+          "outputTokens": 8164,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 941184,
+          "totalTokens": 1118824,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 6.0882879999999995
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-25",
+      "agents": ["codex"],
+      "inputTokens": 404015,
+      "outputTokens": 40119,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 7173504,
+      "totalTokens": 7617638,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 16.62047792,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 334156,
+          "outputTokens": 38512,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7064960,
+          "totalTokens": 7437628,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 16.598446
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 69859,
+          "outputTokens": 1607,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 108544,
+          "totalTokens": 180010,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.02203192
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-26",
+      "agents": ["claude", "codex"],
+      "inputTokens": 4021946,
+      "outputTokens": 601745,
+      "cacheCreationTokens": 273950,
+      "cacheReadTokens": 105657572,
+      "totalTokens": 110555213,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 229.54709560000003,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 3081078,
+          "outputTokens": 500968,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 77317504,
+          "totalTokens": 80899550,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 223.76844200000002
+        },
+        {
+          "name": "claude-sonnet-5",
+          "inputTokens": 242,
+          "outputTokens": 77173,
+          "cacheCreationTokens": 273950,
+          "cacheReadTokens": 16320612,
+          "totalTokens": 16671977,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 5.132136399999999
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 940626,
+          "outputTokens": 23604,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 12019456,
+          "totalTokens": 12983686,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.6465172
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-27",
+      "agents": ["codex"],
+      "inputTokens": 133958,
+      "outputTokens": 20214,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2207872,
+      "totalTokens": 2362044,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 5.439692000000001,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 133958,
+          "outputTokens": 20214,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2207872,
+          "totalTokens": 2362044,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 5.439692000000001
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-28",
+      "agents": ["codex"],
+      "inputTokens": 5124078,
+      "outputTokens": 524433,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 103222144,
+      "totalTokens": 108870655,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 220.09040104,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 4451014,
+          "outputTokens": 506822,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 94993280,
+          "totalTokens": 99951116,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 219.691912
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 673064,
+          "outputTokens": 17611,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8228864,
+          "totalTokens": 8919539,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.39848904000000007
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-29",
+      "agents": ["codex"],
+      "inputTokens": 12957887,
+      "outputTokens": 1488352,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 292931456,
+      "totalTokens": 307377695,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 500.53843152,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 8682125,
+          "outputTokens": 1199542,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 218068480,
+          "totalTokens": 227950147,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 483.93612199999995
+        },
+        {
+          "name": "gpt-6-sol",
+          "inputTokens": 1363420,
+          "outputTokens": 201648,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 43120640,
+          "totalTokens": 44685708,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 13.367447999999998
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 2424889,
+          "outputTokens": 49214,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 24199936,
+          "totalTokens": 26674039,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.12623552
+        },
+        {
+          "name": "gpt-6.1-sol",
+          "inputTokens": 487453,
+          "outputTokens": 37948,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 7542400,
+          "totalTokens": 8067801,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 2.108626
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-09-30",
+      "agents": ["claude", "codex"],
+      "inputTokens": 16574726,
+      "outputTokens": 1619580,
+      "cacheCreationTokens": 53756,
+      "cacheReadTokens": 392327164,
+      "totalTokens": 410575226,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 256.2670232,
+      "models": [
+        {
+          "name": "gpt-6.1-sol",
+          "inputTokens": 8258407,
+          "outputTokens": 989395,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 228655360,
+          "totalTokens": 237903162,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 49.276300000000006
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 3248301,
+          "outputTokens": 310526,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 76394752,
+          "totalTokens": 79953579,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 186.071868
+        },
+        {
+          "name": "gpt-6-sol",
+          "inputTokens": 1583434,
+          "outputTokens": 274640,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 66993536,
+          "totalTokens": 68851610,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 19.3119752
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 3484568,
+          "outputTokens": 38805,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 19959296,
+          "totalTokens": 23482669,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.26484
+        },
+        {
+          "name": "claude-sonnet-5",
+          "inputTokens": 16,
+          "outputTokens": 6214,
+          "cacheCreationTokens": 53756,
+          "cacheReadTokens": 324220,
+          "totalTokens": 384206,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.34204
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-10-01",
+      "agents": ["codex"],
+      "inputTokens": 8919346,
+      "outputTokens": 990488,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 216466688,
+      "totalTokens": 226376522,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 561.8109829599999,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 6995466,
+          "outputTokens": 924271,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 202558720,
+          "totalTokens": 210478457,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 559.149916
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 1508932,
+          "outputTokens": 17746,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8699136,
+          "totalTokens": 10225814,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.82557776
+        },
+        {
+          "name": "gpt-6.1-sol",
+          "inputTokens": 414948,
+          "outputTokens": 48471,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 5208832,
+          "totalTokens": 5672251,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.8354891999999998
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-10-02",
+      "agents": ["claude", "codex"],
+      "inputTokens": 8407019,
+      "outputTokens": 1052955,
+      "cacheCreationTokens": 459190,
+      "cacheReadTokens": 187247742,
+      "totalTokens": 197166906,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 512.78838308,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 7015982,
+          "outputTokens": 861343,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 155236736,
+          "totalTokens": 163114061,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 500.71742000000006
+        },
+        {
+          "name": "claude-opus-5-5",
+          "inputTokens": 240,
+          "outputTokens": 119227,
+          "cacheCreationTokens": 355569,
+          "cacheReadTokens": 22243354,
+          "totalTokens": 22718390,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 9.5068858
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 1207335,
+          "outputTokens": 15164,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4857856,
+          "totalTokens": 6080355,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.66010328
+        },
+        {
+          "name": "gpt-6.1-sol",
+          "inputTokens": 183444,
+          "outputTokens": 46085,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4316032,
+          "totalTokens": 4545561,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 1.2593412
+        },
+        {
+          "name": "claude-sonnet-5",
+          "inputTokens": 18,
+          "outputTokens": 11136,
+          "cacheCreationTokens": 103621,
+          "cacheReadTokens": 593764,
+          "totalTokens": 708539,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.6446327999999999
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-10-03",
+      "agents": ["claude", "codex"],
+      "inputTokens": 5951536,
+      "outputTokens": 1191407,
+      "cacheCreationTokens": 1640171,
+      "cacheReadTokens": 290587625,
+      "totalTokens": 299370739,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 267.47789819999997,
+      "models": [
+        {
+          "name": "claude-opus-5-5",
+          "inputTokens": 682,
+          "outputTokens": 449541,
+          "cacheCreationTokens": 1640171,
+          "cacheReadTokens": 131878889,
+          "totalTokens": 133969283,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 47.35772879999998
+        },
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 1788765,
+          "outputTokens": 267834,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 61078144,
+          "totalTokens": 63134743,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 73.8859952
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 1961250,
+          "outputTokens": 175377,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 45021312,
+          "totalTokens": 47157939,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 141.103332
+        },
+        {
+          "name": "gpt-6-luna",
+          "inputTokens": 813749,
+          "outputTokens": 153697,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 28750336,
+          "totalTokens": 29717782,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.44572676
+        },
+        {
+          "name": "gpt-6.1-sol",
+          "inputTokens": 556843,
+          "outputTokens": 128216,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 17142016,
+          "totalTokens": 17827075,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 4.1100476
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 830247,
+          "outputTokens": 16742,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6716928,
+          "totalTokens": 7563917,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.57506784
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-10-04",
+      "agents": ["claude", "codex"],
+      "inputTokens": 3034326,
+      "outputTokens": 841110,
+      "cacheCreationTokens": 1744693,
+      "cacheReadTokens": 127840855,
+      "totalTokens": 133460984,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 210.36947252,
+      "models": [
+        {
+          "name": "claude-opus-5-5",
+          "inputTokens": 1002,
+          "outputTokens": 498634,
+          "cacheCreationTokens": 1744693,
+          "cacheReadTokens": 62427863,
+          "totalTokens": 64672192,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 31.94423059999999
+        },
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 1955935,
+          "outputTokens": 269040,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 48933504,
+          "totalTokens": 51158479,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 163.88970799999998
+        },
+        {
+          "name": "gpt-5.6-sol",
+          "inputTokens": 321629,
+          "outputTokens": 58043,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 11371520,
+          "totalTokens": 11751192,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 13.991968
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 755760,
+          "outputTokens": 15393,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 5107968,
+          "totalTokens": 5879121,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.5435659199999999
+        }
+      ],
+      "activity": null
+    },
+    {
+      "date": "2026-10-05",
+      "agents": ["claude", "codex"],
+      "inputTokens": 2006385,
+      "outputTokens": 311996,
+      "cacheCreationTokens": 1157581,
+      "cacheReadTokens": 77143891,
+      "totalTokens": 80619853,
+      "unclassifiedTokens": 0,
+      "estimatedCostUsd": 157.6579068,
+      "models": [
+        {
+          "name": "gpt-6-astra",
+          "inputTokens": 1441134,
+          "outputTokens": 227390,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 46115200,
+          "totalTokens": 47783724,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 143.79208
+        },
+        {
+          "name": "claude-opus-5-5",
+          "inputTokens": 252,
+          "outputTokens": 75273,
+          "cacheCreationTokens": 1157581,
+          "cacheReadTokens": 26466771,
+          "totalTokens": 27699877,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 13.4349512
+        },
+        {
+          "name": "gpt-5.6-luna",
+          "inputTokens": 564999,
+          "outputTokens": 9333,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4561920,
+          "totalTokens": 5136252,
+          "unclassifiedTokens": 0,
+          "estimatedCostUsd": 0.43087559999999997
         }
       ],
       "activity": null

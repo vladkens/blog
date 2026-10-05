@@ -4,7 +4,7 @@ import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const ccusageVersion = "20.0.20";
+const ccusageVersion = "latest";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputPath = path.join(root, "static", "usage.json");
 const claudeConfigDir = process.env.CLAUDE_CONFIG_DIR ?? path.join(homedir(), ".claude");

@@ -1,0 +1,166 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+
+github_handle="vladkens"
+port=2222
+listen_address="0.0.0.0"
+state_dir="${HOME}/.ssh/local-sshd"
+launchd_label="local.sshd"
+launchd_plist="${HOME}/Library/LaunchAgents/${launchd_label}.plist"
+launchd_domain="gui/${EUID}"
+service_user="$(id -un)"
+
+if [[ "$EUID" -eq 0 ]]; then
+  echo "Run this installer as your regular macOS user." >&2
+  exit 1
+fi
+
+if [[ -e "$launchd_plist" || -e "$state_dir" ]] ||
+  launchctl print "${launchd_domain}/${launchd_label}" >/dev/null 2>&1; then
+  echo "Existing installation: ${state_dir}"
+  echo "1) Install (default)"
+  echo "2) Uninstall"
+  echo "Uninstall permanently deletes ${state_dir} and ${launchd_plist}."
+  echo "Other SSH keys and Homebrew packages are not touched."
+
+  printf 'Choose [1/2]: '
+  if ! { read -r choice </dev/tty; } 2>/dev/null; then
+    echo "Run from a terminal to choose what to do with the existing installation." >&2
+    exit 1
+  fi
+
+  case "${choice:-1}" in
+    1) ;;
+    2)
+      if launchctl print "${launchd_domain}/${launchd_label}" >/dev/null 2>&1; then
+        launchctl bootout "${launchd_domain}/${launchd_label}"
+      fi
+
+      rm -f "$launchd_plist"
+      rm -rf "$state_dir"
+      echo "Deleted the service, configuration, server key and logs; no backup was made."
+      exit 0
+      ;;
+    *)
+      echo "Unknown choice; nothing changed." >&2
+      exit 1
+      ;;
+  esac
+fi
+
+if ! launchctl print "$launchd_domain" >/dev/null 2>&1; then
+  echo "Log in to the macOS desktop as ${service_user} before installing this LaunchAgent." >&2
+  exit 1
+fi
+
+if [[ ! -x /usr/sbin/sshd ]]; then
+  echo "System OpenSSH was not found. This installer requires macOS." >&2
+  exit 1
+fi
+
+mkdir -p "$state_dir"
+chmod 700 "${HOME}/.ssh" "$state_dir"
+
+if [[ ! -f "${state_dir}/ssh_host_ed25519_key" ]]; then
+  ssh-keygen -q -t ed25519 -f "${state_dir}/ssh_host_ed25519_key" -N ''
+fi
+
+chmod 600 "${state_dir}/ssh_host_ed25519_key"
+ssh-keygen -y -P '' -f "${state_dir}/ssh_host_ed25519_key" > "${state_dir}/ssh_host_ed25519_key.pub"
+chmod 644 "${state_dir}/ssh_host_ed25519_key.pub"
+
+install_tmp="$(mktemp -d "${state_dir}/install.XXXXXX")"
+trap 'rm -f "${install_tmp}/authorized_keys" "${install_tmp}/sshd_config" "${install_tmp}/local.sshd.plist"; rmdir "$install_tmp"' EXIT
+
+curl -fsSL --connect-timeout 10 --max-time 30 \
+  "https://github.com/${github_handle}.keys" -o "${install_tmp}/authorized_keys"
+if [[ ! -s "${install_tmp}/authorized_keys" ]]; then
+  echo "GitHub user has no public SSH keys: ${github_handle}" >&2
+  exit 1
+fi
+
+if ! ssh-keygen -l -f "${install_tmp}/authorized_keys" >/dev/null; then
+  echo "GitHub returned invalid SSH keys for: ${github_handle}" >&2
+  exit 1
+fi
+
+cat > "${install_tmp}/sshd_config" <<EOF
+Port ${port}
+ListenAddress ${listen_address}
+HostKey "${state_dir}/ssh_host_ed25519_key"
+PidFile "${state_dir}/sshd.pid"
+
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+UsePAM no
+PubkeyAuthentication yes
+AuthorizedKeysFile "${state_dir}/authorized_keys"
+
+AllowUsers ${service_user}
+AllowTcpForwarding yes
+X11Forwarding no
+PrintMotd no
+Subsystem sftp internal-sftp
+EOF
+/usr/sbin/sshd -t -f "${install_tmp}/sshd_config"
+
+# Let plutil escape paths instead of interpolating them into XML.
+plutil -create xml1 "${install_tmp}/local.sshd.plist"
+plutil -insert Label -string "$launchd_label" "${install_tmp}/local.sshd.plist"
+plutil -insert ProgramArguments -json '["/usr/sbin/sshd", "-D", "-e", "-f"]' "${install_tmp}/local.sshd.plist"
+plutil -insert ProgramArguments.4 -string "${state_dir}/sshd_config" "${install_tmp}/local.sshd.plist"
+plutil -insert RunAtLoad -bool true "${install_tmp}/local.sshd.plist"
+plutil -insert KeepAlive -bool true "${install_tmp}/local.sshd.plist"
+plutil -insert StandardOutPath -string "${state_dir}/stdout.log" "${install_tmp}/local.sshd.plist"
+plutil -insert StandardErrorPath -string "${state_dir}/stderr.log" "${install_tmp}/local.sshd.plist"
+plutil -lint "${install_tmp}/local.sshd.plist" >/dev/null
+
+if launchctl print "${launchd_domain}/${launchd_label}" >/dev/null 2>&1; then
+  launchctl bootout "${launchd_domain}/${launchd_label}"
+fi
+
+# A different or manually started server may still own this port.
+for ((i = 0; i < 5; i++)); do
+  if ! nc -z -G 1 127.0.0.1 "$port" >/dev/null 2>&1; then
+    break
+  fi
+  sleep 1
+done
+if nc -z -G 1 127.0.0.1 "$port" >/dev/null 2>&1; then
+  echo "Port ${port} is already in use. No other server was stopped." >&2
+  lsof -nP -iTCP:"$port" -sTCP:LISTEN >&2 || true
+  exit 1
+fi
+
+echo "Installing system OpenSSH as ${launchd_label}"
+mkdir -p "$(dirname "$launchd_plist")"
+chmod 600 "${install_tmp}/authorized_keys" "${install_tmp}/sshd_config"
+chmod 644 "${install_tmp}/local.sshd.plist"
+mv "${install_tmp}/authorized_keys" "${state_dir}/authorized_keys"
+mv "${install_tmp}/sshd_config" "${state_dir}/sshd_config"
+mv "${install_tmp}/local.sshd.plist" "$launchd_plist"
+launchctl enable "${launchd_domain}/${launchd_label}"
+launchctl bootstrap "$launchd_domain" "$launchd_plist"
+
+# Check an actual SSH handshake and the expected host key, not just bootstrap.
+expected_key="$(awk '{print $1 " " $2}' "${state_dir}/ssh_host_ed25519_key.pub")"
+for ((i = 0; i < 10; i++)); do
+  actual_key="$(ssh-keyscan -T 3 -p "$port" -t ed25519 127.0.0.1 2>/dev/null |
+    awk '$2 == "ssh-ed25519" {print $2 " " $3}')" || actual_key=""
+  if [[ "$actual_key" == "$expected_key" ]]; then
+    echo "System SSH responds on ${listen_address}:${port}; local handshake verified."
+    echo "Authorized GitHub keys for: ${github_handle}"
+    echo "Connect with: ssh -p ${port} ${service_user}@<hostname-or-ip>"
+    echo "Access from another computer still depends on firewall and network settings."
+    exit 0
+  fi
+  sleep 1
+done
+
+launchctl bootout "${launchd_domain}/${launchd_label}" >/dev/null 2>&1 || true
+echo "SSH startup check failed; the service was unloaded to stop restart attempts." >&2
+if [[ -f "${state_dir}/stderr.log" ]]; then
+  tail -n 20 "${state_dir}/stderr.log" >&2
+fi
+exit 1

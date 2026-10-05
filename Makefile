@@ -9,6 +9,7 @@ prepare:
 update:
 	node scripts/stats-at-glance.mjs
 	node scripts/update-projects.mjs
+	$(MAKE) prepare
 
 deploy:
 	pnpm run format:check
