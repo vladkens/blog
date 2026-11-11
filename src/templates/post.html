@@ -15,11 +15,12 @@
 
 {% block h1 %}{{ post.title | keep_numbered }}{% endblock h1 %}
 
-{# One line under the title, as the old site had it, in groups: the date, the reading time, the tags, the mirrors, the
-source. The dot goes after a group, so a line never starts with one. An unlisted post's tag that no other post carries
-has no page. #}
+{# One line under the title, as the old site had it, in groups: the date, the word count, the reading time, the tags,
+the mirrors, the source. The dot goes after a group, so a line never starts with one. An unlisted post's tag that no
+other post carries has no page. #}
 {% block aside %}
   <p><time datetime="{{ post.date }}">{{ post.date }}</time></p>
+  <p>{{ words }}</p>
   <p>{{ t.minutes.format(post.minutes) }}</p>
   {% if post.tags %}
     <p>{% for tag in post.tags %}{% if not loop.first %} {% endif %}{{ tag_link(tag) }}{% endfor %}</p>

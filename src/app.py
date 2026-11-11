@@ -102,6 +102,7 @@ STRINGS = {
         "tags": "Tags",
         "tagged": "Posts tagged {}",
         "post_forms": ("post", "posts", "posts"),
+        "word_forms": ("word", "words", "words"),
         "blog_posts": "Blog posts",
         "stars": "GitHub stars",
         "descr": "Practical software engineering",
@@ -125,6 +126,7 @@ STRINGS = {
         "tags": "Теги",
         "tagged": "Посты с тегом {}",
         "post_forms": ("пост", "поста", "постов"),
+        "word_forms": ("слово", "слова", "слов"),
         "blog_posts": "Посты в блоге",
         "stars": "Звёзды на GitHub",
         "descr": "Практическая программная инженерия",
@@ -382,6 +384,7 @@ def post_page(slug: str, lang: str) -> str:
         descr=descr,
         schema=schema,
         post=post,
+        words=plural(post.words, lang, "word_forms"),
         html=html,
         toc=toc(sections),
         tilt=seal_tilt(slug),
@@ -445,14 +448,14 @@ def about_page(lang: str) -> str:
 
 
 def plural(n: int, lang: str, key: str) -> str:
-    """`n` with its word from STRINGS: one, a few, many. Russian picks by the last digits: 1, 21 one;
-    2-4, 22-24 a few; 11-14 and the rest many. English has only 1 and the rest."""
+    """`n`, grouped, with its word from STRINGS: one, a few, many. Russian picks by the last digits:
+    1, 21 one; 2-4, 22-24 a few; 11-14 and the rest many. English has only 1 and the rest."""
     if lang == "ru":
         i = 2 if n % 100 in range(11, 15) else 0 if n % 10 == 1 else 1 if n % 10 in (2, 3, 4) else 2
     else:
         i = 0 if n == 1 else 2
 
-    return f"{n} {STRINGS[lang][key][i]}"
+    return f"{grouped(n, lang)} {STRINGS[lang][key][i]}"
 
 
 def tag_ink(count: int) -> int:
