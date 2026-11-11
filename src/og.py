@@ -1,5 +1,5 @@
 """Open Graph cards, drawn with Pillow when the site is built: a sheet of the site's paper with the
-title and the signature."""
+title, the signature and the ink work in its corner."""
 
 from dataclasses import dataclass
 from functools import cache
@@ -7,7 +7,7 @@ from io import BytesIO
 
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
-from content import ASSETS_DIR
+from content import ASSETS_DIR, STATIC_DIR
 
 WIDTH, HEIGHT = 1200, 630
 MARGIN = 72
@@ -24,7 +24,7 @@ FONT = ASSETS_DIR / "spectral-300.ttf"
 AUTHOR = "vladkens"
 
 # A title starts at TITLE_MAX and steps down until it fits. What doesn't fit at TITLE_MIN stops the
-# build, as an image without a size does.
+# build, as an image without a size does. Everything stays left of the work: ART_BOX is its limit.
 TITLE_BOX = (850, 330)
 TITLE_TOP = 150
 TITLE_MAX = 96
@@ -33,6 +33,7 @@ NOTE_BOX = (760, 80)
 NOTE_MAX = 28
 NOTE_MIN = 20
 LEADING = 1.2
+ART_BOX = (270, 300)
 
 
 @dataclass(frozen=True)
@@ -116,6 +117,26 @@ def seal(size: int) -> Image.Image:
     return mask.resize((size, size), Image.Resampling.LANCZOS)
 
 
+@cache
+def work() -> Image.Image:
+    """The site's work in the left field, static/ink-roadworks.webp: the owner's avatar in ink."""
+    x = Image.open(STATIC_DIR / "ink-roadworks.webp").convert("RGBA")
+
+    # the avatar's empty margin cut away, so the ink itself reaches the corner
+    x = x.crop(x.getchannel("A").getbbox())
+    x.thumbnail(ART_BOX, Image.Resampling.LANCZOS)
+
+    # the ink is in the file's alpha, over no paper
+    return Image.alpha_composite(Image.new("RGBA", x.size, "white"), x).convert("RGB")
+
+
+def draw_work(sheet: Image.Image) -> None:
+    """Ink soaks into the paper: multiply. It stands in the corner."""
+    x = work()
+    left, top = WIDTH - x.width, HEIGHT - x.height
+    sheet.paste(ImageChops.multiply(sheet.crop((left, top, WIDTH, HEIGHT)), x), (left, top))
+
+
 def draw_lines(
     pen: ImageDraw.ImageDraw, x: ImageFont.FreeTypeFont, lines: list[str], top: float, fill: str
 ) -> None:
@@ -131,6 +152,7 @@ def draw_card(card: Card) -> bytes:
 
     sheet = paper().copy()
     pen = ImageDraw.Draw(sheet)
+    draw_work(sheet)
 
     # the signature, as in the page's header
     small = font(30)
