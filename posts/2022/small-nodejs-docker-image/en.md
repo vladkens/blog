@@ -1,5 +1,5 @@
 ---
-title: How to reduce NodeJS Docker Image Size?
+title: How to Make a Node.js Docker Image 4x Smaller
 date: 2022-01-16
 tags: ["docker", "nodejs"]
 medium: https://medium.com/p/dc5c8999cd96

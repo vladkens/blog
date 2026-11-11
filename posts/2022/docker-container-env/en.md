@@ -1,5 +1,5 @@
 ---
-title: How to see env in Docker container?
+title: How to See Env Variables of a Running Docker Container
 date: 2022-12-06
 tags: ["docker", "tricks"]
 medium: https://medium.com/p/514e1979ae35

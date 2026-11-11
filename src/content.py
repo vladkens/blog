@@ -194,6 +194,7 @@ class Post(Doc):
     devto: str | None = None
     draft: bool = False
     unlisted: bool = False
+    aliases: list[str] = field(default_factory=list)  # its old slugs, each redirected to it
 
     @property
     def folder(self) -> Path:
@@ -276,6 +277,25 @@ def check_slugs() -> None:
             raise ValueError(f"post {slug} is in more than one folder: {', '.join(sorted(xs))}")
 
 
+def check_aliases(posts: Posts) -> None:
+    """An old slug redirects to one post, in every language the post has, and never hides a slug
+    in use."""
+    slugs = {x.slug for x in posts.values()}
+    owners = {}
+    for x in posts.values():
+        en = posts.get((x.slug, "en"), x)
+        if x.aliases != en.aliases:
+            raise ValueError(f"{x.path}: `aliases` differ from {en.path}")
+
+        for alias in x.aliases:
+            if alias in slugs:
+                raise ValueError(f"{x.path}: alias {alias} is a post's slug")
+
+            owner = owners.setdefault(alias, x.slug)
+            if owner != x.slug:
+                raise ValueError(f"{x.path}: alias {alias} is already an alias of {owner}")
+
+
 def read_posts(drafts: bool) -> Posts:
     check_slugs()
 
@@ -285,6 +305,7 @@ def read_posts(drafts: bool) -> Posts:
         if year != str(x.date.year):
             raise ValueError(f"{x.path}: `date` is {x.date}, so its year folder isn't {year}")
 
+    check_aliases(rs)
     return {k: x for k, x in rs.items() if drafts or not x.draft}
 
 

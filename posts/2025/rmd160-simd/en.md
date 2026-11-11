@@ -1,5 +1,5 @@
 ---
-title: Optimizing RIPEMD-160 with SIMD
+title: RIPEMD-160 55% Faster with ARM Neon SIMD
 date: 2025-05-08
 tags: ["simd", "ecloop"]
 ---

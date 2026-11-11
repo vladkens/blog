@@ -1,5 +1,5 @@
 ---
-title: AWS ECS Cluster on EC2 with Terraform (2023)
+title: AWS ECS Cluster on EC2 with Terraform
 date: 2023-09-15
 tags: ["aws", "terraform", "tutorial"]
 medium: https://medium.com/p/fdb9f6b7db07

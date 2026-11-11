@@ -1,5 +1,5 @@
 ---
-title: asdf — a good tool to manage python, node, etc runtime
+title: "asdf: One Version Manager for Python, Node and More"
 date: 2022-12-10
 tags: ["tools"]
 medium: https://medium.com/p/1e713eac7345

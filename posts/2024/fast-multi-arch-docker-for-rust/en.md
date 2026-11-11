@@ -1,5 +1,5 @@
 ---
-title: Fast multi-arch Docker build for Rust projects
+title: Multi-arch Docker Builds for Rust 3.8x Faster
 date: 2024-10-04
 tags: ["rust", "docker", "ci", "webdev"]
 medium: https://medium.com/p/a7db42f3adde

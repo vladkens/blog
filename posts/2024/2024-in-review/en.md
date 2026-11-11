@@ -1,6 +1,6 @@
 ---
-title: 2024 In Review
-date: 2025-01-01
+title: "2024 in Review: Go to Rust and 1,394 Stars"
+date: 2024-12-31
 tags: ["personal", "opensource"]
 medium: https://medium.com/p/d4a0332c925d
 devto: https://dev.to/vladkens/2024-in-review-4jel

@@ -1,5 +1,5 @@
 ---
-title: REST API Deployment on AWS Lambda with Terraform (2023)
+title: REST API Deployment on AWS Lambda with Terraform
 date: 2023-10-12
 tags: ["aws", "tutorial", "terraform", "python"]
 medium: https://medium.com/p/87793b2a7866

@@ -1,7 +1,8 @@
 ---
-title: Мои итоги 2025
+title: "Итоги 2025: тихий год и погружение в крипту"
 date: 2025-12-31
 tags: ["personal", "opensource"]
+aliases: [2025-summary]
 ---
 
 ![post cover image](20251231.webp)

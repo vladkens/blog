@@ -63,7 +63,7 @@ AUTHOR = {
 # Images that lived at the root until posts got folders: <post>/<file>, once at /<file>
 MOVED_IMAGES = [
     "2024-in-review/2024-review-dalle.webp",
-    "2025-summary/20251231.webp",
+    "2025-in-review/20251231.webp",
     "aws-ecs-cluster/aws-ecs-cluster-1.png",
     "aws-ecs-cluster/aws-ecs-cluster-2.png",
     "aws-ecs-cluster/aws-ecs-cluster-3.png",
@@ -82,7 +82,7 @@ MOVED_IMAGES = [
     "rmd160-simd/20250508.png",
 ]
 
-# old address -> new one, for Flask and for public/_redirects
+# old address -> new one; a renamed post's come from its `aliases`, see redirects()
 REDIRECTS = {
     "/donate/": "/about/#support",
     "/ai-usage/": "/about/",
@@ -705,8 +705,27 @@ if app.debug:
         return stamps() | {"boot": BOOT}
 
 
-for old, new in REDIRECTS.items():
-    app.add_url_rule(old, old, lambda new=new: redirect(new, 301))
+def redirects() -> dict[str, str]:
+    """REDIRECTS, and a renamed post's old addresses: its pages, its files and its cards."""
+    posts = get_posts().values()
+    pages = [(page_url(old, x.lang), x.url) for x in posts for old in x.aliases]
+    files = [
+        (f"/{old}/{f.name}", f"/{x.slug}/{f.name}")
+        for x in posts
+        for old in x.aliases
+        for f in sorted(x.folder.iterdir())
+        if f.is_file() and not private(f.name)
+    ]
+    cards = [(og_path(old), og_path(new)) for old, new in pages]
+    return REDIRECTS | dict(pages + files + cards)
+
+
+# after static_file(), ahead of routing, as a post's address would take an old slug
+@app.before_request
+def moved():
+    new = redirects().get(request.path)
+    if new:
+        return redirect(new, 301)
 
 
 @app.get("/<slug>/")

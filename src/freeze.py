@@ -6,7 +6,7 @@ from collections import defaultdict, deque
 from html.parser import HTMLParser
 from urllib.parse import unquote, urljoin, urlsplit
 
-from app import BASE_URL, REDIRECTS, app, og_path, unlisted_urls
+from app import BASE_URL, app, og_path, redirects, unlisted_urls
 from content import ROOT, srcset_urls
 
 PUBLIC = ROOT / "public"
@@ -81,7 +81,7 @@ def write_redirects() -> None:
     https://developers.cloudflare.com/pages/configuration/redirects/"""
     rows = [
         f"{x} {new} 301"
-        for old, new in REDIRECTS.items()
+        for old, new in redirects().items()
         for x in dict.fromkeys((old.rstrip("/"), old))
     ]
     (PUBLIC / "_redirects").write_text("\n".join(rows) + "\n", encoding="utf-8")
@@ -125,7 +125,7 @@ def freeze(start: list[str]) -> dict[str, set[str]]:
             queue.append(target)
 
     # where a redirect lands is held to the same rules as a link
-    for new in REDIRECTS.values():
+    for new in redirects().values():
         follow(new, "_redirects")
 
     while queue:

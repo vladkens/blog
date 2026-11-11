@@ -1,7 +1,8 @@
 ---
-title: My 2025 Summary
+title: "2025 in Review: A Quiet Year and a Dive into Crypto"
 date: 2025-12-31
 tags: ["personal", "opensource"]
+aliases: [2025-summary]
 ---
 
 ![post cover image](20251231.webp)

@@ -1,5 +1,5 @@
 ---
-title: From iTerm To WezTerm
+title: Why I Moved from iTerm2 to WezTerm
 date: 2025-01-09
 tags: ["tools", "terminal", "cli"]
 medium: https://medium.com/p/24db2ccb8dc1

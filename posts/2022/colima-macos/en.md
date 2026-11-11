@@ -1,5 +1,5 @@
 ---
-title: Docker Desktop alternative for MacOS
+title: "Colima: A Free Docker Desktop Alternative for macOS"
 date: 2022-07-22
 tags: ["docker", "macos", "tools"]
 medium: https://medium.com/p/84a179040340
