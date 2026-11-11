@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="384" viewBox="0 0 480 384">
+  <style>
+    .line { fill: none; stroke: #100e0b; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .thin { stroke-width: 1; }
+    .faint { fill: none; stroke: #5e5950; stroke-width: 1; stroke-dasharray: 3 3; }
+    .link { fill: none; stroke: #5e5950; stroke-width: 1.2; stroke-dasharray: 4 4; }
+    .tint { fill: #100e0b; fill-opacity: 0.16; }
+    .vec { fill: #100e0b; }
+    .text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+    .start { text-anchor: start; }
+    .main { font-size: 20px; fill: #100e0b; }
+
+    @media (prefers-color-scheme: dark) {
+      .line { stroke: #f3eee3; }
+      .faint, .link { stroke: #8f897d; }
+      .tint, .vec, .main { fill: #f3eee3; }
+    }
+  </style>
+
+  <defs>
+    <filter id="ink" x="-5%" y="-10%" width="110%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" />
+      <feDisplacementMap in="SourceGraphic" scale="1.4" />
+    </filter>
+    <marker id="head" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="line" d="M1.5,1.5 L10,6 L1.5,10.5" />
+    </marker>
+  </defs>
+
+  <g transform="translate(0 12)">
+    <rect class="tint" x="44" y="58" width="96" height="96" rx="3" />
+    <rect class="tint" x="316" y="94" width="54" height="54" rx="2" />
+    <rect class="vec" x="50" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="66" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="82" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="98" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="114" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="130" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="22" y="64" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="80" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="96" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="112" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="128" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="144" width="14" height="4" rx="2" />
+    <g class="line" filter="url(#ink)">
+      <rect x="44" y="58" width="96" height="96" rx="3" />
+      <path class="thin" d="M60,58 V154 M44,74 H140 M76,58 V154 M44,90 H140 M92,58 V154 M44,106 H140 M108,58 V154 M44,122 H140 M124,58 V154 M44,138 H140" />
+      <rect x="226" y="58" width="234" height="96" rx="6" />
+      <rect x="316" y="94" width="54" height="54" rx="2" />
+      <path class="thin" d="M325,94 V148 M316,103 H370 M334,94 V148 M316,112 H370 M343,94 V148 M316,121 H370 M352,94 V148 M316,130 H370 M361,94 V148 M316,139 H370" />
+      <path d="M150,94 H216" marker-end="url(#head)" />
+      <path d="M216,118 H150" marker-end="url(#head)" />
+    </g>
+    <g class="text">
+      <text class="main start" x="20" y="18">attention</text>
+      <text class="main" x="343" y="76">память видеокарты</text>
+    </g>
+  </g>
+
+  <g transform="translate(0 212)">
+    <rect class="tint" x="76" y="90" width="32" height="32" rx="2" />
+    <rect class="tint" x="298" y="110" width="32" height="32" rx="2" />
+    <rect class="vec" x="50" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="66" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="82" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="98" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="114" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="130" y="38" width="4" height="14" rx="2" />
+    <rect class="vec" x="22" y="64" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="80" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="96" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="112" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="128" width="14" height="4" rx="2" />
+    <rect class="vec" x="22" y="144" width="14" height="4" rx="2" />
+    <g filter="url(#ink)">
+      <rect class="faint" x="44" y="58" width="96" height="96" rx="3" />
+      <path class="faint" d="M60,58 V154 M44,74 H140 M76,58 V154 M44,90 H140 M92,58 V154 M44,106 H140 M108,58 V154 M44,122 H140 M124,58 V154 M44,138 H140" />
+      <path class="link" d="M112,106 H222" />
+    </g>
+    <g class="line" filter="url(#ink)">
+      <rect x="76" y="90" width="32" height="32" rx="2" />
+      <path class="thin" d="M92,90 V122 M76,106 H108" />
+      <rect x="226" y="74" width="176" height="76" rx="6" />
+      <rect x="298" y="110" width="32" height="32" rx="2" />
+      <path class="thin" d="M314,110 V142 M298,126 H330" />
+    </g>
+    <g class="text">
+      <text class="main start" x="20" y="18">flash attention</text>
+      <text class="main" x="314" y="94">быстрая память</text>
+    </g>
+  </g>
+</svg>
