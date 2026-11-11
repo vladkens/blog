@@ -193,7 +193,8 @@ initZoom();
 // giscus, fetched a screen before the reader gets there. Its frame reports its height as it loads: a spinner first, then the
 // thread. The spinner's report counts for nothing. The block grows with the frame, at once, or the frame would show clipped, and
 // shrinks only once the reports settle; in whole rows either way, so the footer below stays on a line and the page moves at most
-// once. The frame shows once the thread's height settles, or after a wait, so a frame that never reports isn't lost.
+// once. The frame shows once the thread's height settles, or after a wait, so a frame that never reports isn't lost. Until the
+// thread settles a skeleton of an empty one stands in its place: made here, so a page without JS has no thread pretending to load.
 const SETTLE = 150; // ms without a new report
 const SPINNER = 160; // px: giscus's loading state reports less, a thread more
 const GIVE_UP = 5000; // ms
@@ -205,6 +206,12 @@ const initComments = (box) => {
   const theme = () => document.documentElement.dataset.theme ?? (dark.matches ? "dark" : "light");
   const row = () =>
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--row"));
+
+  const skeleton = document.createElement("div");
+  skeleton.className = "skeleton";
+  skeleton.setAttribute("aria-hidden", "true");
+  skeleton.append(document.createElement("div"));
+  box.prepend(skeleton);
 
   let shown = theme();
   let frame; // set by its first report: until then the iframe holds a blank document, which refuses the message
@@ -246,6 +253,7 @@ const initComments = (box) => {
     settle = setTimeout(() => {
       fit(height);
       reveal();
+      box.classList.add("loaded");
     }, SETTLE);
   });
 

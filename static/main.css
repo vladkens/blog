@@ -621,21 +621,62 @@ pre, table {
 }
 
 /* MARK: comments */
-/* the room an empty thread takes, held from the start: giscus draws it 282px tall, 9 rows of 32 and 10 of 30. main.js sets --rows from what the frame reports once it settles, and the block never shrinks under the empty one, so an empty thread never moves the page and a full one moves it once. A frame taller than the block is clipped, never laid over the footer */
+/* the room an empty thread takes, held from the start: giscus draws it 282px tall, 9 rows of 32 and 10 of 30. main.js sets --rows from what the frame reports once it settles, and the block never shrinks under the empty one, so an empty thread never moves the page and a full one moves it once. A frame taller than the block is clipped, never laid over the footer. Its one cell holds the skeleton and the frame on top of each other */
 .comments {
   --empty: 9;
   --rows: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   height: calc(max(var(--rows), var(--empty)) * var(--row));
   margin-top: var(--row);
   overflow: clip;
 }
 
 @media (width < 600px) { .comments { --empty: 10; } }
+.comments > * { grid-area: 1 / 1; }
 
 /* hidden until its height settles, then it fades in where it already has room */
 .comments iframe { opacity: 0; }
 .comments.ready iframe { opacity: 1; }
-@media (prefers-reduced-motion: no-preference) { .comments iframe { transition: opacity 260ms; } }
+
+/* main.js's stand-in while the thread loads: giscus's empty one in the paper's tints, as tall, its parts where giscus draws them. The count's line, then the editor's box from a row and a half down, with the button in its corner a quarter row in. It fades out as the thread fades in, and stays under a frame shown only because it never reported */
+.skeleton {
+  display: grid;
+  grid-template-rows: calc(var(--row) * 1.5) 1fr;
+  height: calc(var(--empty) * var(--row));
+}
+
+.skeleton::before {
+  content: "";
+  width: calc(var(--row) * 3);
+  height: calc(var(--row) / 2);
+  margin-top: calc(var(--row) / 4);
+  background: var(--panel);
+}
+
+.skeleton div {
+  display: grid;
+  place-items: end;
+  padding: calc(var(--row) / 4);
+  background: var(--panel);
+}
+
+.skeleton div::before {
+  content: "";
+  width: calc(var(--row) * 6);
+  height: var(--row);
+  background: var(--ink-5);
+}
+
+.comments.loaded .skeleton { opacity: 0; }
+
+/* the skeleton breathes, slowly: half its ink and back */
+@media (prefers-reduced-motion: no-preference) {
+  .comments iframe, .skeleton { transition: opacity 260ms; }
+  .skeleton::before, .skeleton div { animation: breathe 1.6s ease-in-out infinite alternate; }
+}
+
+@keyframes breathe { to { opacity: 0.5; } }
 
 /* MARK: toc */
 /* the thread of a hanging scroll, an entry a row. The build gives --n, an entry's place; main.js gives --at, how far the reader is, in entries */
