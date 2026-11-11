@@ -635,15 +635,19 @@ pre, table {
 @media (width < 600px) { .comments { --empty: 10; } }
 .comments > * { grid-area: 1 / 1; }
 
+/* the frame over the skeleton, whatever the skeleton's opacity makes of it */
+.giscus { z-index: 1; }
+
 /* hidden until its height settles, then it fades in where it already has room */
 .comments iframe { opacity: 0; }
 .comments.ready iframe { opacity: 1; }
 
-/* main.js's stand-in while the thread loads: giscus's empty one in the paper's tints, as tall, its parts where giscus draws them. The count's line, then the editor's box from a row and a half down, with the button in its corner a quarter row in. It fades out as the thread fades in, and stays under a frame shown only because it never reported */
+/* main.js's stand-in while the thread loads, under the frame and never in the way of a click: giscus's empty one in the paper's tints, as tall, its parts where giscus draws them. The count's line, then the editor's box from a row and a half down, with the button in its corner a quarter row in. It fades out as the thread fades in and is gone after, and stays under a frame shown only because it never reported */
 .skeleton {
   display: grid;
   grid-template-rows: calc(var(--row) * 1.5) 1fr;
   height: calc(var(--empty) * var(--row));
+  pointer-events: none;
 }
 
 .skeleton::before {
@@ -668,12 +672,16 @@ pre, table {
   background: var(--ink-5);
 }
 
-.comments.loaded .skeleton { opacity: 0; }
+.comments.loaded .skeleton {
+  visibility: hidden;
+  opacity: 0;
+}
 
 /* the skeleton breathes, slowly: half its ink and back */
 @media (prefers-reduced-motion: no-preference) {
-  .comments iframe, .skeleton { transition: opacity 260ms; }
-  .skeleton::before, .skeleton div { animation: breathe 1.6s ease-in-out infinite alternate; }
+  .comments iframe { transition: opacity 260ms; }
+  .skeleton { transition: opacity 260ms, visibility 0s 260ms; }
+  .comments:not(.loaded) .skeleton::before, .comments:not(.loaded) .skeleton div { animation: breathe 1.6s ease-in-out infinite alternate; }
 }
 
 @keyframes breathe { to { opacity: 0.5; } }

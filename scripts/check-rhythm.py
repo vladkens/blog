@@ -23,7 +23,7 @@ SCRIPTS = [STATIC / "main.js", STATIC / "debug-menu.js"]
 CONTENT = SRC / "content.py"
 PUBLIC = ROOT / "public"
 
-BUDGET = 827
+BUDGET = 835
 
 BANNED = {
     "round()": r"\bround\(",
