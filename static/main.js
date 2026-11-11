@@ -106,28 +106,11 @@ initCode();
 
 // MARK: zoom
 // Pictures in the text, one at a time: a click, a tap or Enter shows a copy over the page, and a click, Esc or a scroll puts
-// it back. A logo is a mark, and an image in a link goes where the link goes. The browser's view transition carries the
-// picture between its place and the copy, so nothing here measures it; without one, or with reduced motion, it just swaps.
-// The listeners are the document's, set once: a new article from the dev server only needs its pictures marked.
+// it back. A logo is a mark, and an image in a link goes where the link goes. CSS fits the copy to the window and fades it in
+// and out, so nothing here measures it. The listeners are the document's, set once: a new article from the dev server only
+// needs its pictures marked.
 const ZOOMED = 'article img:not(.logo, [alt="logo"], a img)';
-const still = matchMedia("(prefers-reduced-motion: reduce)");
 let zoomed; // the open one: { img, box, y, keyboard }
-let running; // the transition under way, if any
-
-// Settles either way: a transition the next one cuts short rejects `ready`, and that is no error.
-const transition = (update) => {
-  if (!document.startViewTransition || still.matches) return Promise.resolve(update());
-
-  const x = document.startViewTransition(update);
-  running = x;
-  x.ready.catch(() => {});
-
-  return x.finished
-    .catch(() => {})
-    .finally(() => {
-      if (running === x) running = null;
-    });
-};
 
 const openZoom = (img, keyboard) => {
   const box = document.createElement("div");
@@ -135,33 +118,26 @@ const openZoom = (img, keyboard) => {
 
   copy.classList.remove("zoomable");
   copy.removeAttribute("tabindex");
+  copy.removeAttribute("loading");
   box.className = "zoom";
   box.tabIndex = -1;
   box.setAttribute("role", "dialog");
   box.setAttribute("aria-modal", "true");
   box.setAttribute("aria-label", img.alt);
   box.append(copy);
+  document.body.append(box);
+  box.focus({ preventScroll: true });
   zoomed = { img, box, y: scrollY, keyboard };
-
-  // the picture's place is where the transition starts, the copy where it ends
-  img.style.viewTransitionName = "zoom";
-  transition(async () => {
-    img.style.removeProperty("view-transition-name");
-    document.body.append(box);
-    box.focus({ preventScroll: true });
-    await copy.decode().catch(() => {});
-  });
 };
 
+// It fades out and leaves once the fade ends, at once without one. Clicks already go through it to the page.
 const closeZoom = () => {
   const { img, box, keyboard } = zoomed;
   zoomed = null;
 
-  transition(() => {
-    box.remove();
-    img.style.viewTransitionName = "zoom";
-    if (keyboard) img.focus({ preventScroll: true });
-  }).finally(() => img.style.removeProperty("view-transition-name"));
+  box.classList.add("closing");
+  Promise.allSettled(box.getAnimations().map((x) => x.finished)).then(() => box.remove());
+  if (keyboard) img.focus({ preventScroll: true });
 };
 
 const initZoom = () => {
@@ -174,14 +150,9 @@ const initZoom = () => {
   });
 };
 
-// The transition lets clicks through to the page under it (main.css). A click while it opens closes it, and one while it
-// closes acts on where it ends.
 document.addEventListener("click", (e) => {
-  const opening = zoomed && running;
-  running?.skipTransition();
-
   if (zoomed) {
-    if (opening || zoomed.box.contains(e.target)) closeZoom();
+    if (zoomed.box.contains(e.target)) closeZoom();
     return;
   }
 

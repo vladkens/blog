@@ -417,7 +417,7 @@ img, svg {
 /* the build's class for an image clearly narrower than the text */
 .narrow { margin-inline: auto; }
 
-/* main.js's zoom: a copy of the picture on the paper, over the bar and under the debug menu, as big as the window holds up to its own size. The browser's view transition carries it there and back, both pictures fitted to the box it grows, and lets clicks through to the page */
+/* main.js's zoom: a copy of the picture on the paper, over the bar and under the debug menu, as big as the window holds with 16px round it, never past its own size. The one track is the window's, so the limits have a size to take their share of. It fades in and out, and lets clicks through as it goes */
 .zoomable { cursor: zoom-in; }
 
 .zoom {
@@ -425,27 +425,28 @@ img, svg {
   z-index: 2;
   inset: 0;
   display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
-  padding: 16px;
   background: var(--paper);
   outline: 0;
   cursor: zoom-out;
-  container-type: size;
+}
+
+.zoom.closing {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .zoom img {
   width: auto;
   height: auto;
-  max-width: 100cqw;
-  max-height: 100cqh;
-  view-transition-name: zoom;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
 }
 
-::view-transition { pointer-events: none; }
-
-::view-transition-old(zoom), ::view-transition-new(zoom) {
-  height: 100%;
-  object-fit: contain;
+@media (prefers-reduced-motion: no-preference) {
+  .zoom { transition: opacity 260ms; }
+  @starting-style { .zoom { opacity: 0; } }
 }
 
 /* MARK: art */
