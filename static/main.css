@@ -642,34 +642,41 @@ pre, table {
 .comments iframe { opacity: 0; }
 .comments.ready iframe { opacity: 1; }
 
-/* main.js's stand-in while the thread loads, under the frame and never in the way of a click: giscus's empty one in the paper's tints, as tall, its parts where giscus draws them. The count's line, then the editor's box from a row and a half down, with the button in its corner a quarter row in. It fades out as the thread fades in and is gone after, and stays under a frame shown only because it never reported */
+/* main.js's stand-in while the thread loads, under the frame and never in the way of a click: three faint strokes of the bands' dry brush over the room an empty thread takes, each a row tall, on rows 2, 4 and 7, of different lengths and starts. The short one takes the short wash, which keeps its soft ends at that length. It fades out as the thread fades in and is gone after, and stays under a frame shown only because it never reported */
 .skeleton {
   display: grid;
-  grid-template-rows: calc(var(--row) * 1.5) 1fr;
-  height: calc(var(--empty) * var(--row));
+  grid-auto-rows: var(--row);
+  align-content: start;
   pointer-events: none;
 }
 
-.skeleton::before {
+.skeleton::before, .skeleton::after, .skeleton div {
   content: "";
-  width: calc(var(--row) * 3);
-  height: calc(var(--row) / 2);
-  margin-top: calc(var(--row) / 4);
-  background: var(--panel);
+  background: url(wash.webp) 0 0 / 100% 100% no-repeat;
+  opacity: 0.45;
+}
+
+.skeleton::before {
+  grid-row: 2;
+  width: 76%;
 }
 
 .skeleton div {
-  display: grid;
-  place-items: end;
-  padding: calc(var(--row) / 4);
-  background: var(--panel);
+  grid-row: 4;
+  width: 40%;
+  margin-left: 34%;
+  background-image: url(wash-short.webp);
 }
 
-.skeleton div::before {
-  content: "";
-  width: calc(var(--row) * 6);
-  height: var(--row);
-  background: var(--ink-5);
+.skeleton::after {
+  grid-row: 7;
+  width: 58%;
+  margin-left: 9%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton::before, .skeleton::after { background-image: url(wash-dark.webp); }
+  .skeleton div { background-image: url(wash-short-dark.webp); }
 }
 
 .comments.loaded .skeleton {
@@ -681,10 +688,10 @@ pre, table {
 @media (prefers-reduced-motion: no-preference) {
   .comments iframe { transition: opacity 260ms; }
   .skeleton { transition: opacity 260ms, visibility 0s 260ms; }
-  .comments:not(.loaded) .skeleton::before, .comments:not(.loaded) .skeleton div { animation: breathe 1.6s ease-in-out infinite alternate; }
+  .comments:not(.loaded) .skeleton::before, .comments:not(.loaded) .skeleton::after, .comments:not(.loaded) .skeleton div { animation: breathe 2.4s ease-in-out infinite alternate; }
 }
 
-@keyframes breathe { to { opacity: 0.5; } }
+@keyframes breathe { to { opacity: 0.2; } }
 
 /* MARK: toc */
 /* the thread of a hanging scroll, an entry a row. The build gives --n, an entry's place; main.js gives --at, how far the reader is, in entries */
