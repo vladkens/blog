@@ -31,7 +31,7 @@ Work top down in `posts/drafts/<slug>.md`, in the language the owner starts in:
 
 1. Collect the owner's topics and raw notes in the file as they come, unsorted and unedited.
 2. Agree the headings with the owner before writing any prose.
-3. Develop one section at a time: the owner throws in points, the agent expands them and asks about what's missing.
-4. Keep the owner's voice: plain, concrete, short, avoiding `я` and `I` where the sentence works without them. Use only facts from the owner, the repo or checked sources; mark anything unverified with `TODO`.
+3. Develop one section at a time: the owner throws in points, the agent expands them and asks about what's missing. In proofreading, change the paragraph the owner is on right away, without asking; never touch the text below it, which the owner hasn't read yet.
+4. Keep the owner's voice: plain and concrete, without `я` and `I` except in rare cases. One sentence holds one thought, as long as that thought needs, with ordinary clauses; don't chop it into fragments, don't string several thoughts or lists of things through commas, and put a colon or a dash only where Russian punctuation calls for one, not to chop a thought into pieces. Asides and clarifications (an example, a definition) go in parentheses. Say it directly, without bookish turns («казалось бы», «взять тот же», «главный минус в том, что») and without joining clauses by a reflexive «а». Use only facts from the owner, the repo or checked sources; mark anything unverified with `TODO`.
 5. When the owner approves the text, move it to `posts/<year>/<slug>/`, translate it, and keep the same `slug` in both languages.
 6. To share it for proofreading, publish it with `unlisted: true`; removing the flag lists it at the same address.
