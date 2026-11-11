@@ -1,0 +1,46 @@
+---
+title: macmon – Mac Usage Monitor in Terminal
+date: 2024-08-06
+tags: ["rust", "macos", "cli"]
+medium: https://medium.com/p/3a3391995224
+---
+
+![macmon preview](macmon-1.png)
+
+When MacBook moved to ARM architecture (M1 processor), old system APIs stopped working and with them existing monitoring tools. However, macOS has a built-in console utility called `powermetrics`. It can show real-time resource consumption, but it does it in plain text.
+
+`asitop` is the first utility that allows users to view resource and energy consumption visually in a terminal. But it works on top of `powermetrics` which requires `sudo` to work. The program is written in Python and has compatibility issues with new M-processors.
+
+`macmon` attempts to solve these issues. Coded in Rust as a single binary file it uses an undocumented Apple API (the same API that uses powermetrics, but doesn’t require sudo) to get metrics on system utilization, power consumption and temperature.
+
+## Installation
+
+```sh
+brew install vladkens/tap/macmon
+```
+
+## Features
+
+- _No Sudo Required_: Run seamlessly without administrative privileges.
+- _Real-Time Metrics_: Monitor CPU/GPU/ANE power usage live.
+- _Detailed Utilisation_: Track CPU usage per cluster and RAM/Swap usage.
+- _Historical Data: View_ historical charts with average and max values.
+- _Customizable Interface_: Switch between six color variants.
+- _Compact Design_: Fits neatly in a small terminal window.
+- _Built with Rust_: Ensuring performance and reliability.
+
+## Interface Overview
+
+![macmon](macmon-2.webp)
+
+The top line shows the chip model, number of Effective (E) and Performance (P) cores, number of GPU cores, and RAM.
+
+The second line shows the chart of E and P cluster utilization of the CPU. MacOS uses E-cores for normal tasks, but when something complex needs to be done, process switches to P-cores.
+
+The third line shows memory usage and GPU loading (during gaming, video processing or LLM running 😈).
+
+And finally, the fourth line, the most interesting one, shows the power consumption for compute tasks, by system in general and separately for CPU, GPU and ANE (Apple Neural Engine). It also shows the average temperature of CPU and GPU.
+
+---
+
+`macmon` is an open-source program. You can view, star, request features or report bugs on [Github](https://github.com/vladkens/macmon).

@@ -1,8 +1,10 @@
 public/
-node_modules/
+.wrangler/
 .terraform/
 **/terraform.tfstate
 **/terraform.tfstate.backup
 **/.terraform.lock.hcl
 .env
- 
+.venv/
+__pycache__/
+.DS_Store

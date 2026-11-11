@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block h1 %}{{ t.tags }}{% endblock h1 %}
+
+{% block article %}
+  {# the list role: Safari drops it from a list with no markers #}
+  <ul class="cloud" role="list">
+    {% for name, url, posts, ink in tags %}
+      <li>
+        <a class="ink-{{ ink }}" href="{{ url }}" title="{{ posts }}" aria-label="{{ name }}, {{ posts }}">{{ name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock article %}

@@ -1,0 +1,8 @@
+{% if switch %}
+  <p>
+    {%- for code, url in switch -%}
+      {% if not loop.first %}&#32;/&#32;{% endif -%}
+      {% if url %}<a href="{{ url }}">{{ code }}</a>{% else %}{{ code }}{% endif -%}
+    {% endfor -%}
+  </p>
+{% endif %}

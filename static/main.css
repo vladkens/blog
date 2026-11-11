@@ -1,778 +1,785 @@
-@import url("https://cdn.jsdelivr.net/npm/modern-normalize@3.0.1/modern-normalize.min.css");
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-
+/* MARK: tokens */
 :root {
+  --row: 32px;
+  --text: 20px;
+  --paper: light-dark(#e9e4d8, #151412);
+  --ink-1: light-dark(#100e0b, #f3eee3);
+  --ink-2: light-dark(#27241f, #d8d2c5);
+  --ink-3: light-dark(#4d4942, #aca698);
+  --ink-4: light-dark(#5e5950, #8f897d);
+  --ink-5: light-dark(#a8a194, #47433c);
+  --panel: light-dark(#e1dbce, #1f1d1a);
+  --seal: light-dark(#8f4a3a, #d99a88);
+  --stamp: calc(var(--row) * 3);
   color-scheme: light dark;
-  --font-size-body: 18px;
-  --font-size-small: calc(var(--font-size-body) * 0.85);
-  --font-size-code: calc(var(--font-size-body) * 0.9);
-  --font-size-h1: calc(var(--font-size-body) * 1.75);
-  --font-size-h2: calc(var(--font-size-body) * 1.4);
-  --font-size-h3: calc(var(--font-size-body) * 1.2);
-  --font-size-h4: var(--font-size-body);
-  --font-size-h5: var(--font-size-body);
-  --font-size-h6: var(--font-size-body);
-  --rhythm: 26px;
-  --line-height-body: var(--rhythm);
-  --line-height-small: var(--line-height-body);
-  --line-height-code: var(--rhythm);
-  --space-1: calc(var(--rhythm) / 6);
-  --space-2: calc(var(--rhythm) / 3);
-  --space-3: calc(var(--rhythm) / 2);
-  --space-4: calc(var(--rhythm) * 2 / 3);
-  --space-6: var(--rhythm);
-  --space-12: calc(var(--rhythm) * 2);
-  --bg-color: light-dark(#f5f5f5, #0a0a0a);
-  --text-color: light-dark(#333333, #dddddd);
-  --link-color: light-dark(#0077cc, #ffb600);
-  --link-hover-color: light-dark(#005fa3, #ff8c00);
-  --title-color: light-dark(#000000, #ffffff);
-  --border-color: light-dark(#dddddd, #333333);
-  --code-bg-color: light-dark(#fefefe, #24292e);
 }
 
-html[data-theme="light"] {
-  color-scheme: light;
-}
+/* the debug menu's choice, over the system's */
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
 
-html[data-theme="dark"] {
-  color-scheme: dark;
-}
-
-html {
-  scrollbar-gutter: stable;
-  font-size: 16px;
-}
-
-html,
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: "Open Sans", Verdana, sans-serif;
-  padding: 0 4px;
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--link-hover-color);
-  text-decoration: underline;
-}
-
-a[target="_blank"]::after {
-  content: "↗";
-  display: inline-block;
-  margin-left: 0.14em;
-  font-family: system-ui, sans-serif;
-  font-size: 0.66em;
-  font-weight: 800;
-  line-height: 0;
-  vertical-align: 0.08em;
-  opacity: 0.72;
-}
-
-a[target="_blank"]:hover::after {
-  opacity: 1;
-}
-
-.social-share a[target="_blank"]::after {
-  content: none;
-}
-
-time {
-  white-space: nowrap;
-}
-
-pre {
-  --copy-code-gutter: calc(var(--line-height-body) + var(--space-2));
-  padding: var(--space-3) var(--copy-code-gutter) var(--space-3) var(--space-2);
-  font-size: var(--font-size-code);
-  line-height: var(--line-height-code);
-  font-family: "JetBrains Mono", monospace;
-  position: relative;
-  border: 0;
-  border-radius: 5px;
-  box-shadow: inset 0 0 0 1px var(--border-color);
-}
-
-pre code {
-  width: 100%;
-  display: block;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-pre .copy-code {
-  position: absolute;
-  top: var(--space-1);
-  right: var(--space-1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--line-height-body);
-  width: var(--line-height-body);
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  user-select: none;
-  background-color: transparent;
-  border: none;
-  color: var(--text-color);
-}
-
-pre .copy-code svg {
-  width: 18px;
-  height: 18px;
-}
-
-pre .copy-code:hover {
-  color: var(--link-color);
-}
-
-pre .copy-code.copied {
-  color: green !important;
-}
-
-p > code,
-li > code {
-  background-color: var(--code-bg-color);
-  font-size: var(--font-size-code);
-  padding: 0 var(--space-1);
-  border-radius: var(--space-1);
-  line-height: 1;
-  vertical-align: -0.04em;
-  white-space: nowrap;
-}
-
-td > code,
-th > code {
-  display: inline-block;
-  height: var(--line-height-body);
-  line-height: var(--line-height-body);
-  vertical-align: top;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.zola-anchor {
-  color: var(--title-color);
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-size: var(--font-size-h1);
-  margin-bottom: var(--space-6);
-  line-height: var(--space-12);
-}
-
-article h1 {
-  font-size: var(--font-size-h1);
-  line-height: var(--space-12);
-}
-
-.zola-anchor {
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-}
-
-.zola-anchor:hover {
-  color: inherit;
-  text-decoration: none;
-}
-
-.zola-anchor::before {
-  content: "§";
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-  color: var(--link-color);
-  opacity: 0.64;
-  visibility: hidden;
-}
-
-.zola-anchor:hover::before {
-  visibility: visible;
-}
-
-body {
-  margin: 0 auto;
-  max-width: 880px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: round(up, 100vh, var(--line-height-body));
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-}
-
-button i,
-button svg,
-button svg *,
-a i,
-a svg,
-a svg * {
-  pointer-events: none;
-}
-
-body > header {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--space-6) 0;
-  margin-bottom: var(--line-height-body);
-}
-
-body > main {
-  flex: 1;
-}
-
-body > footer {
-  box-shadow: inset 0 1px 0 var(--text-color);
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-  margin-top: var(--space-6);
-  padding: var(--space-6) 0;
-  text-align: center;
-}
-
-body > header > div {
-  display: flex;
-  gap: 1.5rem;
-}
-
-body > header a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 500;
-  box-shadow: inset 0 -2px 0 transparent;
-}
-
-body > header a:hover,
-body > header a.current {
-  color: var(--title-color);
-  box-shadow: inset 0 -2px 0 var(--link-color);
-  text-decoration: none;
-}
-
-@media (max-width: 560px) {
-  body > header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  body > header > div {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0 var(--space-4);
-    line-height: var(--line-height-body);
+/* the text keeps its share of the row: 20 on 32, 19 on 30 */
+@media (width < 600px) {
+  :root {
+    --row: 30px;
+    --text: 19px;
   }
 }
 
-main > h2 {
-  font-size: var(--font-size-h2);
-  line-height: var(--space-12);
-  margin: var(--line-height-body) 0 0;
+/* MARK: base */
+* { margin: 0; }
+
+body {
+  font: var(--text)/var(--row) ui-serif, Georgia, serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  overflow-wrap: break-word;
+  color: var(--ink-1);
+  background: var(--paper) url(paper.webp);
 }
 
-main > h2:first-child {
-  margin-top: 0;
+@media (prefers-color-scheme: dark) { body { background-image: url(paper-dark.webp); } }
+
+::selection {
+  color: var(--paper);
+  background: var(--ink-1);
 }
 
-.error-page {
-  margin: calc(var(--line-height-body) * 5) auto 0;
-  text-align: center;
-}
+/* the flow: one row between blocks. Inside an item only after a block, so a tight list stays tight */
+article > * + *,
+blockquote > * + *,
+li > :where(p, ul, ol, .code, blockquote, table, hr) + *,
+li + li > p:first-child,
+.apps > li + li { margin-top: var(--row); }
 
-main p,
-main ul,
-main ol,
-main pre,
-main blockquote,
-main table {
-  margin-top: 0;
-  margin-bottom: var(--line-height-body);
-}
-
-article h2,
-article h3,
-article h4,
-article h5,
-article h6 {
-  line-height: var(--space-12);
-  margin: var(--line-height-body) 0 0;
-}
-
-article h2 {
-  font-size: var(--font-size-h2);
-}
-
-article h3 {
-  font-size: var(--font-size-h3);
-}
-
-article h4,
-article h5,
-article h6 {
-  font-size: var(--font-size-h4);
-}
-
-article h5 {
-  font-size: var(--font-size-h5);
-}
-
-article h6 {
-  font-size: var(--font-size-h6);
-}
-
-article h2 > .zola-anchor,
-article h3 > .zola-anchor,
-article h4 > .zola-anchor,
-article h5 > .zola-anchor,
-article h6 > .zola-anchor {
-  font-size: inherit !important;
-  line-height: inherit;
-}
-
-/*  */
-
-.posts-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.posts-list > li {
-  display: flex;
-  justify-content: space-between;
-  padding: 0;
-  line-height: var(--line-height-body);
-}
-
-article > header {
-  margin-bottom: var(--space-6);
-}
-
-article img,
-article svg {
-  width: 100%;
-  max-width: 720px;
-  display: block;
-  margin: 0 auto;
-}
-
-article > img {
-  margin-bottom: var(--line-height-body);
-}
-
-article > .rhythm-media {
-  margin-bottom: var(--line-height-body);
-}
-
-article > .rhythm-media > img,
-article > .rhythm-media > svg {
-  margin-bottom: 0;
-}
-
-.tags-cloud {
+/* MARK: sheet */
+/* the bar stands outside the sheet's grid, where a sticky item can't leave its row. Its padding is the space over and under it */
+header {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1rem;
+  column-gap: var(--row);
+  padding: var(--row) max(16px, 50% - 360px);
+}
+
+/* the text's row takes what a short page leaves: the footer goes to the bottom, and the work's field down with it */
+.sheet {
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: minmax(0, 720px);
+  grid-template-rows: auto 1fr auto;
+  justify-content: center;
+  gap: var(--row);
+  padding: 0 16px var(--row);
+}
+
+/* a short page fills the window, in whole rows, so the footer still lands on a line. The one round(): only the browser knows the window. Without it, a short page ends where it ends */
+@supports (height: round(down, 100svh, 1px)) {
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: round(down, 100svh, var(--row));
+  }
+}
+
+.sign {
+  display: flex;
+  justify-self: start;
+}
+
+/* the longest nav, in Russian, needs 652 for one row with a full gap */
+@media (width < 656px) { header { column-gap: calc(var(--row) / 2); } }
+
+/* a phone's two rows, never a word left alone on the second: the seal, the blog and the language switch, then the other links. The break is a zero tall line of its own */
+@media (width < 600px) {
+  nav::before {
+    content: "";
+    flex-basis: 100%;
+    order: 1;
+  }
+
+  nav > a + a { order: 2; }
+}
+
+/* without the arrows the Russian links fit 360, and a third of a row apart 320 */
+@media (width < 400px) { header .out { display: none; } }
+@media (width < 360px) { header { column-gap: calc(var(--row) / 3); } }
+
+/* a phone's two rows would eat its screen, and so would the bar in a window under 570 tall. The rows' bands are positioned and come later, so the bar takes a z-index over them, and a zoomed picture one over the bar */
+@media (width >= 640px) and (height >= 570px) {
+  :root { scroll-padding-top: calc(var(--row) * 3); }
+
+  /* the bar's paper is a shadow, for the soft edge: solid for two rows, and text dissolves in the third, the empty one under the links. An inset's blur runs round all four sides, so the -1 row takes the other three past the edge */
+  header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    box-shadow: inset 0 calc(var(--row) * 3.5) calc(var(--row) / 2) calc(var(--row) * -1) var(--paper);
+  }
+}
+
+/* one flow with the sign, so a narrow header takes two rows, not a row of its own for the sign */
+nav { display: contents; }
+nav a { color: var(--ink-3); }
+
+/* the section this page is in. A line under the word takes no room, so nothing in the bar moves */
+nav a[aria-current] {
+  color: var(--ink-1);
+  text-decoration-line: underline;
+}
+
+/* the word spacing holds the slash clear of the band */
+nav p {
+  margin-left: auto;
+  word-spacing: 6px;
+}
+
+nav p a { display: inline-block; }
+.sign, nav, .meta, footer { font-size: 16px; }
+.meta, footer { color: var(--ink-3); }
+footer { text-align: center; }
+
+/* the meta: one line under the title, as many as a narrow window needs. A group moves to the next line whole, and breaks between its items only when it's wider than a line. The dot is part of the group before it: a no-break space ties it there, so a line ends with one, and the next starts with a word. Its links stand a step darker than its ink, with no line: a hover lays the wash, as in the bar */
+.meta p { display: inline-block; }
+.meta p:not(:last-child)::after { content: "\a0·"; }
+
+/* beside the blog's link home the seal alone is enough */
+@media (width < 1054px) { .sign span { display: none; } }
+
+/* the text's column in the middle of the window, a field on each side and the one-row gap. The fields grow alike, and past 412 together the left one, the work's and the TOC's, goes on two rows further: 334 to 206, so the column sits that much right of the middle. Below this width they can't hold a full 720px column */
+@media (width >= 1054px) {
+  header, .sheet { grid-template-columns: minmax(0, 334px) 720px minmax(0, 206px); }
+
+  /* one row, so the bar stays three tall and the signature hangs out of it into the left field, sticky with it: from the nav's row down, two rows left of the text, a flag on the page's edge */
+  header {
+    display: grid;
+    grid-template-rows: var(--row);
+    justify-content: center;
+    padding-inline: 16px;
+  }
+
+  .sign {
+    align-self: start;
+    justify-self: end;
+    margin-right: var(--row);
+    letter-spacing: 0.22em;
+    writing-mode: vertical-rl;
+  }
+
+  .sign span { height: calc(var(--row) * 3); }
+  .head, main, footer { grid-column: 2; }
+
+  nav {
+    display: flex;
+    column-gap: var(--row);
+  }
+}
+
+/* MARK: text */
+h1 {
+  font-size: 44px;
+  line-height: calc(var(--row) * 2);
+}
+
+/* a heading belongs to the text below it, and what it takes adds up to whole rows: 1.5 and 0.5 here, so only the h2 itself sits on a half row */
+h2 {
+  margin-top: calc(var(--row) * 1.5);
+  font-size: 27px;
+  line-height: var(--row);
+}
+
+h2 + * { margin-top: calc(var(--row) / 2); }
+
+/* 1 and 0: the flow's row above, nothing below */
+:is(h3, h4, h5, h6) + :is(p, ul, ol) { margin-top: 0; }
+h3 { font-size: 23px; }
+h4, h5, h6 { font-size: 1em; }
+
+/* the seal's red, muted to pastel. The underline follows the colour, so a hover carries it along */
+a {
+  --side: 3px;
+  color: var(--seal);
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentcolor 45%, transparent);
+  transition: color 260ms;
+}
+
+a:not(nav a, .meta a):hover {
+  color: var(--ink-1);
+  transition-duration: 90ms;
+}
+
+.zola-anchor, .sign, .list a, footer a { color: var(--ink-1); }
+.meta a { color: var(--ink-2); }
+.zola-anchor, .sign, nav a, .meta a { text-decoration: none; }
+.sign:hover, .sign:focus-visible { color: var(--seal); }
+a code { color: inherit; }
+
+/* the arrow of a link off the site. Zero line height keeps the row, whatever font it falls back to */
+.out {
+  font-size: 0.7em;
+  line-height: 0;
+  color: color-mix(in srgb, currentcolor 70%, transparent);
+}
+
+/* the heading's own font and size, on its baseline. Zero wide and right to left, so it hangs left of the text and takes no room, and in that direction the indent is the gap. Zero line height keeps the row */
+.zola-anchor::before {
+  content: "#";
+  display: inline-block;
+  width: 0;
+  direction: rtl;
+  text-indent: 8px;
+  white-space: nowrap;
+  font-weight: 300;
+  line-height: 0;
+  color: var(--ink-4);
+  opacity: 0;
+  transition: opacity 260ms;
+}
+
+.zola-anchor:hover::before, .zola-anchor:focus-visible::before {
+  opacity: 1;
+  transition-duration: 90ms;
+}
+
+/* the sign and its gap need 24px, and from here down the gutter can't hold them */
+@media (width < 800px) { .zola-anchor::before { display: none; } }
+
+sup, sub {
+  font-size: 15px;
+  line-height: 0;
+}
+
+small, time {
+  vertical-align: top;
+  font-size: 16px;
+  color: var(--ink-3);
+}
+
+/* INDENT and QUOTE_RULE in content.py count on these two indents */
+ul, ol { padding-left: var(--row); }
+
+blockquote {
+  padding-left: var(--row);
+  border-left: 2px solid var(--ink-5);
+  color: var(--ink-2);
 }
 
 hr {
-  height: var(--line-height-body);
   border: 0;
-  margin: var(--line-height-body) 0 0;
-  background: linear-gradient(var(--text-color), var(--text-color)) top / 100% 1px no-repeat;
+  outline: 1px solid var(--ink-5);
 }
 
 table {
   display: block;
-  width: 100%;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 0 var(--row) 0 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+/* Georgia's line box is 1.136 em: 27px fills a 30px row past the pixel, and at a scale of 3 its selection leaves the row. A title of 44 would take three lines in a narrow column */
+@media (width < 600px) {
+  h1 { font-size: 36px; }
+  h2 { font-size: 26px; }
+}
+
+/* MARK: lists */
+.list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.list a {
+  display: flex;
+  justify-content: space-between;
+  column-gap: var(--row);
+  text-decoration: none;
+}
+
+.list a > :first-child { min-width: 0; }
+.list a > :last-child { flex: none; }
+
+/* MARK: cloud */
+/* the tags page: words in lines, inked and sized by how many posts carry them, as the build gives. Zero line height keeps each line a row, every word on its baseline */
+.cloud {
+  padding-left: 0;
+  list-style: none;
+}
+
+.cloud li {
+  display: inline;
+  margin-right: calc(var(--row) / 4);
+}
+
+.cloud a {
+  line-height: 0;
+  text-decoration: none;
+}
+
+.cloud a:hover { color: var(--ink-1); }
+
+.cloud .ink-1 {
+  font-size: 23px;
+  color: var(--ink-1);
+}
+
+.cloud .ink-2 {
+  font-size: 19px;
+  color: var(--ink-2);
+}
+
+.cloud .ink-3 {
+  font-size: 17px;
+  color: var(--ink-3);
+}
+
+.cloud .ink-4 {
+  font-size: 16px;
+  color: var(--ink-4);
+}
+
+/* MARK: band */
+/* a baked wash, always there on its own layer: a hover only fades it, so it makes no layer and paints nothing. Each url stands in its rule: through a var() every hover repaints the image. Absolute, so it takes no room and nothing moves. Links in a line stand a space apart, and only 3px clears the word before */
+nav a, .list a { --side: 10px; }
+nav a, .list a, .meta a, .cloud a, footer a { position: relative; }
+
+nav a::before, .list a::before, .meta a::before, .cloud a::before, footer a::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(var(--side) * -1);
+  background: url(wash-short.webp) 0 0 / 100% 100% no-repeat;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 260ms;
+}
+
+.list a::before { background-image: url(wash.webp); }
+
+@media (prefers-color-scheme: dark) {
+  nav a::before, .meta a::before, .cloud a::before, footer a::before { background-image: url(wash-short-dark.webp); }
+  .list a::before { background-image: url(wash-dark.webp); }
+}
+
+nav a:hover::before, .list a:hover::before, .meta a:hover::before, .cloud a:hover::before, footer a:hover::before {
+  opacity: 1;
+  transition-duration: 90ms;
+}
+
+/* a hover lays the wash from the left, a brush stroke, and a leave fades it as before: the clip goes back once it's gone */
+@media (prefers-reduced-motion: no-preference) {
+  nav a::before, .list a::before, .meta a::before, .cloud a::before, footer a::before {
+    clip-path: inset(0 100% 0 0);
+    transition: opacity 260ms, clip-path 0s 260ms;
+  }
+
+  nav a:hover::before, .list a:hover::before, .meta a:hover::before, .cloud a:hover::before, footer a:hover::before {
+    clip-path: inset(0);
+    transition: opacity 0s, clip-path 180ms ease-out;
+  }
+}
+
+/* MARK: media */
+.media { display: block; }
+
+img, svg {
+  --rows: var(--r320);
+  display: block;
+  height: calc(var(--rows) * var(--row));
+  width: auto;
   max-width: 100%;
+  object-fit: contain;
+}
+
+/* one line per IMAGE_STEPS in content.py: the build computes the rows, this only picks them */
+@media (min-width: 360px) { img, svg { --rows: var(--r360); } }
+@media (min-width: 375px) { img, svg { --rows: var(--r375); } }
+@media (min-width: 415px) { img, svg { --rows: var(--r415); } }
+@media (min-width: 432px) { img, svg { --rows: var(--r432); } }
+@media (min-width: 469px) { img, svg { --rows: var(--r469); } }
+@media (min-width: 490px) { img, svg { --rows: var(--r490); } }
+@media (min-width: 524px) { img, svg { --rows: var(--r524); } }
+@media (min-width: 547px) { img, svg { --rows: var(--r547); } }
+@media (min-width: 579px) { img, svg { --rows: var(--r579); } }
+@media (min-width: 600px) { img, svg { --rows: var(--r600); } }
+@media (min-width: 615px) { img, svg { --rows: var(--r615); } }
+@media (min-width: 642px) { img, svg { --rows: var(--r642); } }
+@media (min-width: 673px) { img, svg { --rows: var(--r673); } }
+@media (min-width: 703px) { img, svg { --rows: var(--r703); } }
+@media (min-width: 732px) { img, svg { --rows: var(--r732); } }
+@media (min-width: 752px) { img, svg { --rows: var(--r752); } }
+
+/* a mark, not a picture: three rows, or what the build gives it on a narrow window */
+.logo { height: calc(min(var(--rows), 3) * var(--row)); }
+
+/* the build's class for an image clearly narrower than the text */
+.narrow { margin-inline: auto; }
+
+/* main.js's zoom: a copy of the picture on the paper, over the bar and under the debug menu, as big as the window holds up to its own size. The browser's view transition carries it there and back, both pictures fitted to the box it grows, and lets clicks through to the page */
+.zoomable { cursor: zoom-in; }
+
+.zoom {
+  position: fixed;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: var(--paper);
+  outline: 0;
+  cursor: zoom-out;
+  container-type: size;
+}
+
+.zoom img {
+  width: auto;
+  height: auto;
+  max-width: 100cqw;
+  max-height: 100cqh;
+  view-transition-name: zoom;
+}
+
+::view-transition { pointer-events: none; }
+
+::view-transition-old(zoom), ::view-transition-new(zoom) {
+  height: 100%;
+  object-fit: contain;
+}
+
+/* MARK: art */
+/* the one work, in the left field under the head, held a row over the window's bottom: sticky is the one way, and it can't climb out of .art. Its height steps with the field: 3 rows fit 1054's, 5 1200's, and 1356's the whole work */
+.art { display: none; }
+
+@media (width >= 1054px) {
+  .art {
+    display: grid;
+    grid-area: 2 / 1 / 4;
+    align-content: end;
+    justify-items: end;
+  }
+
+  .art figure {
+    position: sticky;
+    bottom: var(--row);
+  }
+
+  .art img { height: calc(min(var(--rows), 3) * var(--row)); }
+}
+
+@media (width >= 1200px) { .art img { height: calc(min(var(--rows), 5) * var(--row)); } }
+@media (width >= 1356px) { .art img { height: calc(var(--rows) * var(--row)); } }
+
+/* MARK: code */
+/* a column of figures too: Georgia has no tnum or lnum, so tabular-nums on body finds nothing to switch there */
+pre, code, .list time, .apps [title] { font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+pre, .list time, .apps [title] {
+  vertical-align: top;
+  font-size: 15px;
+}
+
+pre, code { color: var(--ink-2); }
+
+/* 15 on a line of 21.3, and 14 on 20: the same share of the line on a phone's smaller row */
+@media (width < 600px) { pre, .list time, .apps [title] { font-size: 14px; } }
+
+/* in the text: Menlo's x-height at 0.85 em is Georgia's. Zero line height keeps the row and the text's baseline, and the tint covers only the glyphs, so no line moves */
+code {
+  padding-inline: 0.2em;
+  font-size: 0.85em;
+  line-height: 0;
+  background: var(--panel);
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  background: none;
+}
+
+/* three code lines to two rows. The build gives a block its whole rows, one of them air, and --lead is half of what the lines leave free. Both panel and stroke stand here, so the code scrolls clear of them */
+.code {
+  --lead: calc((var(--rows) - var(--lines) * 2 / 3) * var(--row) / 2);
+  display: grid;
+  grid-template-columns: 0 minmax(0, 1fr);
+  height: calc(var(--rows) * var(--row));
+  background: var(--panel);
+}
+
+/* the zero column's centre is the panel's edge, so the stroke straddles it and takes no room */
+.code::before {
+  content: "";
+  grid-area: 1 / 1 / -1 / 2;
+  justify-self: center;
+  width: 8px;
+  background: url(rule.svg) 0 0 / 100% max(100%, var(--row) * 12) no-repeat;
+}
+
+pre {
+  grid-area: 1 / 2;
+  margin-left: calc(var(--row) / 2);
+  padding: var(--lead) calc(var(--row) / 2) 0 0;
+  line-height: calc(var(--row) * 2 / 3);
+}
+
+/* Tab never gets here, but a click focuses the block, and the next key would draw the keyboard's ring */
+pre, table {
   overflow-x: auto;
   scrollbar-width: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  line-height: var(--line-height-body);
+  outline: 0;
 }
 
-table::-webkit-scrollbar {
+/* the panel's top right corner, in pre's own cell and outside what scrolls, so it stays put. The icon is centred on the panel's first row, whatever the lead; its paper ends with the first line, and only that line passes under it */
+.code button {
+  display: grid;
+  grid-area: 1 / 2;
+  place-self: start end;
+  width: calc(var(--row) + 4px);
+  height: calc(var(--lead) + var(--row) * 2 / 3);
+  padding: calc((var(--row) - 18px) / 2) 8px 0;
+  border: 0;
+  color: var(--ink-4);
+  background: var(--panel);
+  cursor: pointer;
+  transition: color 260ms, opacity 260ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.code svg {
+  width: 100%;
+  height: 18px;
+}
+
+.code:hover button { transition-duration: 90ms; }
+.code .copied { color: var(--ink-1); }
+
+/* a touch screen has no hover to wait for. Opacity, so a hidden button takes its paper off the first line too */
+@media (hover: hover) {
+  .code:not(:hover) button:not(:focus-visible, .copied) { opacity: 0; }
+  .code button:hover { color: var(--ink-1); }
+}
+
+/* MARK: about */
+.wallets-list code { cursor: pointer; }
+
+/* MARK: toast */
+/* tied to the window, over the page: it takes no room, and only its opacity ever changes. Auto margins centre it */
+.toast {
+  position: fixed;
+  inset: auto 0 var(--row);
+  width: fit-content;
+  margin-inline: auto;
+  padding-inline: calc(var(--row) / 2);
+  font-size: 16px;
+  color: var(--ink-2);
+  background: var(--panel);
+  outline: 1px solid var(--ink-5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms;
+}
+
+.toast.shown {
+  opacity: 1;
+  transition-duration: 90ms;
+}
+
+/* MARK: seal */
+/* a stamp under the last line, centred in the flow: three rows square, so the text after it stays on the grid. The build gives --tilt, by the page's slug */
+.seal {
+  width: var(--stamp);
+  height: var(--stamp);
+  margin-inline: auto;
+  background: url(seal.svg) center / contain no-repeat;
+  opacity: 0.85;
+  pointer-events: none;
+  rotate: var(--tilt);
+}
+
+@media (prefers-color-scheme: dark) { .seal { background-image: url(seal-dark.svg); } }
+
+/* pressed once, as it comes up from the window's bottom edge: done by the time it's whole, so it never stays half pressed. Driven by the scroll, so a browser without that, and a printed page, keep it still */
+@media screen and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .seal {
+      animation: stamp ease-out both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 100%;
+    }
+  }
+}
+
+@keyframes stamp {
+  from {
+    opacity: 0;
+    scale: 1.12;
+  }
+}
+
+/* MARK: comments */
+/* the room an empty thread takes, held from the start: giscus draws it 282px tall, 9 rows of 32 and 10 of 30. main.js sets --rows from what the frame reports once it settles, and the block never shrinks under the empty one, so an empty thread never moves the page and a full one moves it once. A frame taller than the block is clipped, never laid over the footer */
+.comments {
+  --empty: 9;
+  --rows: 0;
+  height: calc(max(var(--rows), var(--empty)) * var(--row));
+  margin-top: var(--row);
+  overflow: clip;
+}
+
+@media (width < 600px) { .comments { --empty: 10; } }
+
+/* hidden until its height settles, then it fades in where it already has room */
+.comments iframe { opacity: 0; }
+.comments.ready iframe { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) { .comments iframe { transition: opacity 260ms; } }
+
+/* MARK: toc */
+/* the thread of a hanging scroll, an entry a row. The build gives --n, an entry's place; main.js gives --at, how far the reader is, in entries */
+.toc {
+  --at: 0;
   display: none;
-}
-
-th,
-td {
-  padding: 0 var(--space-2);
-  vertical-align: top;
-  box-shadow: inset 0 -1px 0 var(--border-color);
-}
-
-th {
-  color: var(--title-color);
-  font-weight: 700;
-}
-
-th:first-child,
-td:first-child {
-  padding-left: 0;
-}
-
-th:last-child,
-td:last-child {
-  padding-right: 0;
-}
-
-th[align="right"],
-td[align="right"] {
+  font-size: 16px;
   text-align: right;
 }
 
-.post {
-  padding-bottom: var(--line-height-body);
-  box-shadow: inset 0 -1px 0 var(--text-color);
-}
-
-.post > :last-child {
-  margin-bottom: 0;
-}
-
-.post > header > h1 {
-  margin-bottom: 0;
-}
-
-.post-meta {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-}
-
-.post-meta > div {
-  vertical-align: middle;
-}
-
-.post-meta i {
-  margin: 0 0.15rem;
-}
-
-a.post-edit {
-  color: var(--text-color);
-  text-decoration: none;
-  opacity: 0.75;
-}
-
-a.post-edit:hover {
-  text-decoration: underline;
-}
-
-.post blockquote {
-  border-left: 2px solid var(--link-color);
-  padding-left: var(--space-4);
-  margin: 0 0 var(--line-height-body);
-  font-style: italic;
-}
-
-.post hr:last-of-type + ol {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-}
-
-.post hr:last-of-type + ol a {
-  color: var(--text-color);
-}
-
-.post hr:last-of-type + ol a:hover {
-  color: var(--link-hover-color);
-}
-
-.social-share {
-  display: flex;
-  gap: var(--space-2);
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
-  height: var(--line-height-body);
-  line-height: var(--line-height-body);
-  margin: var(--line-height-body) 0;
-}
-
-.social-share a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--line-height-body);
-  height: var(--line-height-body);
-  text-decoration: none;
-  color: var(--text-color);
-  padding: 0;
-}
-
-.social-share a:hover {
-  color: var(--link-hover-color);
-}
-
-/*  */
-
-.projects-list {
+.toc ol {
+  padding-left: 0;
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
-.projects-list li {
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-  line-height: var(--line-height-body);
-}
-
-.project-langs {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  height: var(--line-height-body);
-  line-height: var(--line-height-body);
-  vertical-align: top;
-}
-
-.project-langs > div {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid var(--border-color);
-  font-size: 0.75rem;
-  line-height: calc(var(--line-height-body) / 1.5);
-  border-radius: 0.25rem;
-  padding: 0rem 0.25rem;
-  background-color: var(--bg-color);
-}
-
-.wallets-list {
-  font-size: 1.25rem;
-  line-height: var(--space-12);
-  font-family: monospace;
-}
-
-.wallets-list code {
-  cursor: pointer;
-  font-size: 1.15rem;
-  text-overflow: ellipsis;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  transition:
-    border-color 3s ease,
-    color 0.15s ease;
-}
-
-.wallets-list code:hover {
-  color: var(--link-color);
-}
-
-.wallets-list code.copied {
-  border-color: green;
-  transition:
-    border-color 0s,
-    color 0.15s ease;
-}
-
-.wallets-list li:last-child code {
-  font-size: 13px;
-}
-
-/* Temporary usage dashboard */
-
-.ai-usage h1 {
-  margin-bottom: var(--space-6);
-}
-
-.usage-intro,
-.usage-status {
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-  font-size: var(--font-size-small);
-}
-
-.usage-section {
-  margin-top: var(--space-12);
-}
-
-.usage-section h2 {
-  margin: 0 0 var(--space-6);
-  font-size: var(--font-size-h2);
-  line-height: var(--space-12);
-}
-
-.usage-chart-wrap {
-  position: relative;
-  height: 320px;
-}
-
-.usage-chart-wrap-models {
-  height: 390px;
-}
-
-.usage-period-toggle,
-.usage-year-toggle {
-  display: flex;
-  gap: var(--space-1);
-}
-
-.usage-period-toggle {
-  position: relative;
-  z-index: 1;
-  justify-content: flex-end;
-  margin-top: var(--space-12);
-  margin-bottom: calc(var(--space-12) * -1);
-}
-
-.usage-period-toggle button,
-.usage-year-toggle button {
-  padding: 0 var(--space-2);
-  border: 1px solid transparent;
-  border-radius: var(--space-1);
-  background: transparent;
-  color: var(--text-color);
-  font: inherit;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-  cursor: pointer;
-}
-
-.usage-period-toggle button:hover,
-.usage-year-toggle button:hover {
-  color: var(--link-hover-color);
-}
-
-.usage-period-toggle button.active,
-.usage-year-toggle button.active {
-  border-color: var(--border-color);
-  background: var(--code-bg-color);
-  color: var(--title-color);
-}
-
-.usage-activity-scroll {
-  width: 100%;
-  overflow-x: auto;
-  scrollbar-width: thin;
-}
-
-.usage-activity-graph {
-  --usage-cell: 12px;
-  --usage-gap: 3px;
-  width: max-content;
-  min-width: 100%;
-}
-
-.usage-activity-months {
+.toc li {
   display: grid;
-  grid-template-columns: repeat(var(--usage-weeks), var(--usage-cell));
-  column-gap: var(--usage-gap);
-  height: var(--line-height-small);
-  margin-left: 34px;
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-  font-size: 11px;
-  line-height: var(--line-height-small);
+  grid-template-columns: minmax(0, 1fr) 11px;
+  column-gap: 10px;
+  color: var(--ink-4);
 }
 
-.usage-activity-months span {
+/* ahead is ink-4, read ink-2, current ink-1 and heavier: the palest still reads at 5.3:1 */
+.toc .read { color: var(--ink-2); }
+
+.toc .now {
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.toc a {
+  grid-area: 1 / 1;
+  overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  color: inherit;
+  text-decoration: none;
 }
 
-.usage-activity-body {
+/* the notch, across the thread */
+.toc li::before {
+  content: "";
+  grid-area: 1 / 2;
+  place-self: center;
+  width: 7px;
+  height: 1px;
+  background: currentcolor;
+}
+
+.toc .now::before {
+  width: 11px;
+  height: 2px;
+}
+
+/* the thread, pale, inked from the top as far as the reader is: an entry's piece takes what of --at falls in its row */
+.toc li::after {
+  content: "";
+  grid-area: 1 / 2;
+  justify-self: center;
+  width: 1px;
+  background: var(--ink-5);
+  box-shadow: inset 0 calc(clamp(0, var(--at) - var(--n), 1) * var(--row)) var(--ink-2);
+}
+
+/* in the left field beside the text, a row clear of the signature's seal, once the field is whole: 16 + 334 + 32 + 720 + 32 + 206 + 16. main.js shows it only where the window holds the whole list over the work */
+@media (width >= 1356px) {
+  .toc {
+    display: block;
+    position: sticky;
+    top: calc(var(--row) * 6);
+    grid-area: 2 / 1;
+    align-self: start;
+    margin-left: calc(var(--row) * 2);
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .toc.shown {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toc { transition: opacity 260ms, visibility 260ms; }
+  .toc li { transition: color 260ms; }
+}
+
+/* MARK: thread */
+/* where the TOC can't show, how far into the article the reader is: a 2px line of ink along the window's top edge, filled by the scroll. Zero tall, so it takes no room: the outline's lower half is the line, the upper is past the edge. Only a browser that drives it by the scroll draws it */
+.thread { display: none; }
+
+@media screen and (width < 1356px) and (prefers-reduced-motion: no-preference) {
+  @supports (timeline-scope: --a) {
+    body { timeline-scope: --article; }
+    article { view-timeline: --article; }
+
+    .thread {
+      display: block;
+      position: sticky;
+      z-index: 2;
+      top: 0;
+      height: 0;
+      outline: 2px solid var(--ink-2);
+      animation: read linear both;
+      animation-timeline: --article;
+      animation-range: contain;
+    }
+  }
+}
+
+@keyframes read {
+  from { clip-path: inset(-2px 100% -2px 0); }
+  to { clip-path: inset(-2px 0); }
+}
+
+/* MARK: debug */
+/* above the grid it draws: debug-menu.js adds both, and only for who opens it. A row of one-row buttons in the corner whose five presses open it, close last, on the corner itself; the toast keeps the row above, in the middle */
+.debug {
+  position: fixed;
+  z-index: 3;
+  right: 0;
+  bottom: env(safe-area-inset-bottom, 0px);
   display: flex;
-  gap: var(--space-2);
+  background: var(--panel);
 }
 
-.usage-activity-weekdays {
+.debug button {
   display: grid;
-  grid-template-rows: repeat(7, var(--usage-cell));
-  row-gap: var(--usage-gap);
-  width: 26px;
-  flex: 0 0 26px;
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-  font-size: 10px;
-  line-height: var(--usage-cell);
+  place-items: center;
+  width: var(--row);
+  height: var(--row);
+  padding: 0;
+  border: 0;
+  color: var(--ink-4);
+  background: none;
+  cursor: pointer;
 }
 
-.usage-activity-grid {
-  display: grid;
-  grid-template-rows: repeat(7, var(--usage-cell));
-  grid-auto-flow: column;
-  grid-auto-columns: var(--usage-cell);
-  gap: var(--usage-gap);
+.debug button:hover, .debug [aria-pressed="true"] { color: var(--ink-1); }
+
+.debug svg {
+  width: 16px;
+  height: 16px;
 }
 
-.usage-activity-cell {
-  display: inline-block;
-  width: var(--usage-cell);
-  height: var(--usage-cell);
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--border-color) 55%, transparent);
-}
-
-.usage-activity-cell[data-level="1"] {
-  background: color-mix(in srgb, var(--link-color) 28%, var(--bg-color));
-}
-
-.usage-activity-cell[data-level="2"] {
-  background: color-mix(in srgb, var(--link-color) 48%, var(--bg-color));
-}
-
-.usage-activity-cell[data-level="3"] {
-  background: color-mix(in srgb, var(--link-color) 70%, var(--bg-color));
-}
-
-.usage-activity-cell[data-level="4"] {
-  background: var(--link-color);
-}
-
-.usage-activity-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-  font-size: var(--font-size-small);
-}
-
-.usage-activity-legend {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  color: color-mix(in srgb, var(--text-color) 72%, transparent);
-  font-size: 11px;
-}
-
-.usage-activity-legend .usage-activity-cell {
-  --usage-cell: 11px;
-}
-
-@media (max-width: 700px) {
-  .usage-period-toggle {
-    justify-content: flex-start;
-    margin-bottom: 0;
-  }
-
-  .usage-section {
-    margin-top: var(--space-6);
-  }
-
-  .usage-chart-wrap {
-    height: 280px;
-  }
-
-  .usage-chart-wrap-models {
-    height: 420px;
-  }
-
-  .usage-activity-footer {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
+/* MARK: print */
+@media print { header, .code button, .debug { display: none; } }

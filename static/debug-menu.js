@@ -1,259 +1,219 @@
+// The owner's menu over the page, a row of buttons in the window's bottom right corner: the row grid, a forced theme, the OG card,
+// and close on the corner itself. ?debug=1 or five quick clicks in that corner open it, and it stays open from page to page until
+// closed. Nothing of it shows on a page that hasn't asked.
 (() => {
-  const debugParam = "debug";
-  const debugKey = "debug-menu-enabled";
-  const gridKey = "debug-menu-grid-enabled";
-  const themeKey = "debug-menu-theme";
   const root = document.documentElement;
-  const url = new URL(window.location.href);
-  const requestedDebug = url.searchParams.get(debugParam);
+  const DARK = "(prefers-color-scheme: dark)";
+  const PRESSES = 5;
+  const PRESS_WINDOW = 2000;
+  const OPEN_WAIT = 1000;
 
-  const hasStorage = () => {
+  const svg = (body) =>
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${body}</svg>`;
+
+  const ICONS = {
+    grid: svg(`<path d="M3 8h18M3 16h18M8 3v18M16 3v18"/>`),
+    light: svg(
+      `<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>`,
+    ),
+    dark: svg(`<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/>`),
+    og: svg(`<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/>`),
+    close: svg(`<path d="M5 5l14 14M19 5L5 19"/>`),
+  };
+
+  // A private window or blocked site data can refuse these: the menu then works for this page and forgets.
+  const read = (key) => {
     try {
-      localStorage.setItem("__debug_menu_test__", "1");
-      localStorage.removeItem("__debug_menu_test__");
-      return true;
+      return localStorage.getItem(key);
     } catch {
-      return false;
+      return null;
     }
   };
 
-  const storageAvailable = hasStorage();
-
-  const getStored = (key) => (storageAvailable ? localStorage.getItem(key) : null);
-  const setStored = (key, value) => {
-    if (storageAvailable) localStorage.setItem(key, value);
-  };
-  const removeStored = (key) => {
-    if (storageAvailable) localStorage.removeItem(key);
+  const write = (key, value) => {
+    try {
+      if (value === null) localStorage.removeItem(key);
+      else localStorage.setItem(key, value);
+    } catch {}
   };
 
-  const clearDebugParam = () => {
-    if (!url.searchParams.has(debugParam)) return;
+  // Tokens follow color-scheme, but an image can't: the rules and sources that swap one ask the system. Everyone else's page never
+  // needs another answer, so the stylesheet stays as it is, and here they get a query that's always true, or never.
+  const rules = [...document.querySelector('link[href*="main.css"]').sheet.cssRules]
+    .filter((x) => x.media?.mediaText === DARK)
+    .map((x) => x.media);
+  const sources = document.querySelectorAll(`source[media="${DARK}"]`);
 
-    const nextUrl = new URL(window.location.href);
-    nextUrl.searchParams.delete(debugParam);
-    window.history.replaceState(window.history.state, "", nextUrl);
+  const force = (theme) => {
+    const media = { light: "not all", dark: "all" }[theme] ?? DARK;
+
+    rules.forEach((x) => (x.mediaText = media));
+    sources.forEach((x) => (x.media = media));
+
+    if (theme === "auto") delete root.dataset.theme;
+    else root.dataset.theme = theme;
   };
 
-  const setTheme = (theme) => {
-    if (theme === "light" || theme === "dark") {
-      root.dataset.theme = theme;
-      setStored(themeKey, theme);
-      return;
-    }
+  const setParam = (open) => {
+    const url = new URL(location.href);
 
-    root.removeAttribute("data-theme");
-    removeStored(themeKey);
+    if (open) url.searchParams.set("debug", "1");
+    else url.searchParams.delete("debug");
+
+    history.replaceState(history.state, "", url);
   };
 
-  const resetTheme = () => {
-    root.removeAttribute("data-theme");
+  // A line at y = N * --row from the page top, over everything.
+  const grid = document.createElement("div");
+
+  grid.hidden = true;
+  grid.style.cssText = `
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(rgb(0 119 204 / 0.6) 1px, transparent 1px) 0 0 / 100% var(--row);
+  `;
+
+  const panel = document.createElement("div");
+  panel.className = "debug";
+
+  const label = (el, text) => {
+    el.title = text;
+    el.setAttribute("aria-label", text);
   };
 
-  const isGridEnabled = () => getStored(gridKey) !== "0";
+  // the corner's presses, and when the last five opened the menu
+  let presses = [];
+  let opened = -Infinity;
 
-  const setGridEnabled = (enabled) => {
-    setStored(gridKey, enabled ? "1" : "0");
-  };
+  const add = (text, icon, onclick) => {
+    const el = document.createElement("button");
 
-  const applyGrid = (enabled) => {
-    document.body?.classList.toggle("rhythm-grid-hidden", !enabled);
-  };
+    el.type = "button";
+    el.innerHTML = icon;
+    label(el, text);
 
-  const exitDebugMode = () => {
-    removeStored(debugKey);
-    resetTheme();
-    root.classList.remove("rhythm-grid-enabled");
-    document.body?.classList.remove("rhythm-grid-enabled", "rhythm-grid-hidden");
-    document.querySelector(".debug-menu")?.remove();
-  };
+    // The fifth tap opens the menu on its pointerdown and puts a button under the finger, so that tap's click and the next ones'
+    // land on it: the buttons wait a moment. A click leaves the focus here, and the next key would draw the ring.
+    el.onclick = (e) => {
+      if (e.timeStamp - opened < OPEN_WAIT) return;
 
-  if (requestedDebug === "1") {
-    setStored(debugKey, "1");
-  } else if (requestedDebug === "0") {
-    exitDebugMode();
-  }
-
-  clearDebugParam();
-
-  const isDebugEnabled = () => getStored(debugKey) === "1";
-
-  if (isDebugEnabled()) {
-    setTheme(getStored(themeKey));
-  }
-
-  const installStyles = () => {
-    if (document.getElementById("debug-menu-styles")) return;
-
-    const style = document.createElement("style");
-    style.id = "debug-menu-styles";
-    style.textContent = `
-      body.rhythm-grid-enabled:not(.rhythm-grid-hidden) {
-        background-image: repeating-linear-gradient(
-          to bottom,
-          rgb(0 119 204 / 0.28) 0,
-          rgb(0 119 204 / 0.28) 1px,
-          transparent 1px,
-          transparent var(--line-height-body, 24px)
-        );
-      }
-
-      .debug-menu {
-        position: fixed;
-        right: var(--space-4, 1rem);
-        bottom: calc(var(--line-height-body, 24px) * 3);
-        z-index: 10000;
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-1, 0.25rem);
-        height: calc(var(--line-height-body, 24px) + var(--space-1, 0.25rem));
-        padding: var(--space-1, 0.25rem);
-        border: 1px solid var(--border-color, color-mix(in srgb, canvastext 18%, canvas));
-        border-radius: var(--space-1, 0.25rem);
-        background-color: var(--code-bg-color, color-mix(in srgb, canvastext 6%, canvas));
-        color: var(--text-color, canvastext);
-        font: inherit;
-        font-size: var(--font-size-small, 0.875rem);
-        line-height: var(--line-height-body, 24px);
-      }
-
-      .debug-menu button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: var(--line-height-body, 24px);
-        height: var(--line-height-body, 24px);
-        padding: 0;
-        border: 0;
-        border-radius: var(--space-1, 0.25rem);
-        background-color: transparent;
-        color: var(--text-color, canvastext);
-        font: inherit;
-        outline: none;
-        cursor: pointer;
-      }
-
-      .debug-menu button:focus,
-      .debug-menu button:focus-visible {
-        outline: none;
-      }
-
-      .debug-menu button:hover {
-        background-color: var(--code-bg-color, color-mix(in srgb, canvastext 8%, canvas));
-        color: var(--link-hover-color, currentcolor);
-      }
-
-      .debug-menu button[aria-pressed="true"] {
-        color: var(--link-color, currentcolor);
-      }
-
-      .debug-menu button[aria-pressed="false"],
-      .debug-menu-close {
-        opacity: 0.72;
-      }
-
-      .debug-menu-close:hover {
-        opacity: 1;
-      }
-    `;
-
-    document.head.appendChild(style);
-  };
-
-  const createButton = ({ className, label, text }) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = className;
-    button.setAttribute("aria-label", label);
-    button.title = label;
-    button.textContent = text;
-    return button;
-  };
-
-  const initDebugMenu = () => {
-    if (!isDebugEnabled()) return;
-
-    installStyles();
-
-    root.classList.add("rhythm-grid-enabled");
-    document.body.classList.add("rhythm-grid-enabled");
-    applyGrid(isGridEnabled());
-
-    const panel = document.createElement("div");
-    panel.className = "debug-menu";
-
-    const gridButton = createButton({
-      className: "debug-menu-grid",
-      label: "Toggle grid",
-      text: "▦",
-    });
-    gridButton.setAttribute("aria-pressed", "false");
-
-    const themeButton = createButton({
-      className: "debug-menu-theme",
-      label: "Theme: system",
-      text: "◐",
-    });
-    themeButton.setAttribute("aria-pressed", "false");
-
-    const closeButton = createButton({
-      className: "debug-menu-close",
-      label: "Exit debug mode",
-      text: "×",
-    });
-
-    const renderGrid = () => {
-      const enabled = isGridEnabled();
-      gridButton.setAttribute("aria-pressed", String(enabled));
+      onclick();
+      if (e.detail) el.blur();
     };
 
-    const renderTheme = () => {
-      const theme = getStored(themeKey);
-      const normalizedTheme = theme === "light" || theme === "dark" ? theme : "system";
-      const labels = {
-        system: ["Theme: system", "◐"],
-        light: ["Theme: light", "☀"],
-        dark: ["Theme: dark", "☾"],
-      };
-
-      themeButton.title = labels[normalizedTheme][0];
-      themeButton.setAttribute("aria-label", labels[normalizedTheme][0]);
-      themeButton.textContent = labels[normalizedTheme][1];
-      themeButton.setAttribute("aria-pressed", String(normalizedTheme !== "system"));
-    };
-
-    gridButton.addEventListener("click", () => {
-      const nextEnabled = !isGridEnabled();
-      setGridEnabled(nextEnabled);
-      applyGrid(nextEnabled);
-      renderGrid();
-      gridButton.blur();
-    });
-
-    themeButton.addEventListener("click", () => {
-      const currentTheme = getStored(themeKey);
-      const nextTheme =
-        currentTheme === "light" ? "dark" : currentTheme === "dark" ? "system" : "light";
-      setTheme(nextTheme);
-      renderTheme();
-      themeButton.blur();
-    });
-
-    closeButton.addEventListener("click", () => {
-      closeButton.blur();
-      exitDebugMode();
-      clearDebugParam();
-    });
-
-    renderGrid();
-    renderTheme();
-    panel.append(gridButton, themeButton, closeButton);
-    document.body.appendChild(panel);
+    panel.append(el);
+    return el;
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initDebugMenu);
-  } else {
-    initDebugMenu();
-  }
+  // The grid stays as it was left. A theme is forced only while the menu is open, from page to page with it, and only light or dark:
+  // with none, the page shows the system's.
+  let gridOn = read("debug-grid") !== "0";
+  let theme = ["light", "dark"].includes(read("debug-theme")) ? read("debug-theme") : null;
+
+  const shown = () => theme ?? (matchMedia(DARK).matches ? "dark" : "light");
+
+  const closeMenu = () => {
+    theme = null;
+    write("debug-theme", null);
+    write("debug", null);
+    setParam(false);
+    force("auto");
+    grid.remove();
+    panel.remove();
+    root.style.position = "";
+    presses = [];
+  };
+
+  const show = () => {
+    grid.hidden = !gridOn;
+    gridButton.setAttribute("aria-pressed", gridOn);
+    themeButton.innerHTML = ICONS[shown()];
+    label(themeButton, `Theme: ${shown()}`);
+    force(theme ?? "auto");
+  };
+
+  const gridButton = add("Grid", ICONS.grid, () => {
+    gridOn = !gridOn;
+    write("debug-grid", gridOn ? "1" : "0");
+    show();
+  });
+
+  const themeButton = add("Theme", ICONS[shown()], () => {
+    theme = shown() === "dark" ? "light" : "dark";
+    write("debug-theme", theme);
+    show();
+  });
+
+  // with no theme forced, the button shows the system's, which can change under it
+  matchMedia(DARK).addEventListener("change", () => {
+    if (panel.isConnected) show();
+  });
+
+  // The tag holds the site's address: the same path here, so a local page shows its local card.
+  add("OG preview", ICONS.og, () => {
+    const card = document.querySelector('meta[property="og:image"]').content;
+
+    open(new URL(card).pathname, "_blank", "noopener");
+  });
+
+  add("Close", ICONS.close, closeMenu);
+
+  const openMenu = () => {
+    write("debug", "1");
+    setParam(true);
+    root.style.position = "relative";
+    document.body.append(grid, panel);
+    show();
+    presses = [];
+  };
+
+  // The corner is two rows square: close and the OG card on its bottom row when open.
+  const corner = () => parseFloat(getComputedStyle(root).getPropertyValue("--row")) * 2;
+
+  // By coordinates, with no element in the corner while the menu is closed. A link or button in it, the menu's own too, takes its
+  // clicks as ever, so the press that closes the menu doesn't count to reopen it; the empty rest of the corner takes its own: they
+  // select no text and move no focus. What's under the point, not the press's target: a phone snaps a tap near a link onto it.
+  // Pointerdown, because iOS sends no click for what isn't a link. Past clientWidth is a classic scrollbar; innerHeight, not
+  // clientHeight, follows a phone's toolbar as the fixed menu does.
+  const inCorner = (e) =>
+    e.clientX <= root.clientWidth &&
+    root.clientWidth - e.clientX <= corner() &&
+    innerHeight - e.clientY <= corner() &&
+    !document.elementFromPoint(e.clientX, e.clientY)?.closest("a, button");
+
+  // The click after a press the corner took goes too, wherever a snapped tap puts it. A key's click or a script's has no press
+  // before it, and no detail.
+  let took = false;
+
+  document.addEventListener(
+    "click",
+    (e) => {
+      if (!took || !e.detail) return;
+
+      took = false;
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    true,
+  );
+
+  document.addEventListener("pointerdown", (e) => {
+    took = inCorner(e);
+    if (!took) return;
+
+    e.preventDefault();
+    presses = [...presses, e.timeStamp].filter((x) => e.timeStamp - x < PRESS_WINDOW);
+    if (presses.length < PRESSES) return;
+
+    // open, the corner's empty part closes the menu as it opened it
+    if (panel.isConnected) return closeMenu();
+
+    opened = e.timeStamp;
+    openMenu();
+  });
+
+  if (new URLSearchParams(location.search).get("debug") === "1" || read("debug") === "1")
+    openMenu();
 })();

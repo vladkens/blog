@@ -1,0 +1,4 @@
+{
+  "embeddedLanguageFormatting": "off",
+  "ignorePatterns": ["code/", "src/templates/", "static/*.css"]
+}

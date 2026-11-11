@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ descr }}" />
+    {%- if noindex %}
+    <meta name="robots" content="noindex" />
+    {%- endif %}
+    {% if canonical %}
+      <link rel="canonical" href="{{ canonical }}" />
+    {% endif %}
+    {% for code, url in alternates %}
+      <link rel="alternate" hreflang="{{ code }}" href="{{ url }}" />
+    {% endfor %}
+    <link rel="alternate" type="application/atom+xml" title="{{ site }}" href="{{ atom_url }}" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site }}" href="{{ rss_url }}" />
+
+    <meta property="og:site_name" content="{{ site }}" />
+    <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}" />
+    <meta property="og:title" content="{{ og_title }}" />
+    <meta property="og:description" content="{{ descr }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{ og_title }}" />
+    <meta property="og:locale" content="{{ locale }}" />
+    {% for x in other_locales %}
+      <meta property="og:locale:alternate" content="{{ x }}" />
+    {% endfor %}
+
+    <meta property="twitter:domain" content="{{ site }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@uid127" />
+    <meta name="twitter:title" content="{{ og_title }}" />
+    <meta name="twitter:description" content="{{ descr }}" />
+    <meta name="twitter:image" content="{{ og_image }}" />
+    {% if canonical %}
+      <meta property="og:url" content="{{ canonical }}" />
+      <meta property="twitter:url" content="{{ canonical }}" />
+    {% endif %}
+    {% block meta %}
+    {% endblock meta %}
+    {% if schema %}
+      <script type="application/ld+json">{{ schema | tojson }}</script>
+    {% endif %}
+
+    <link rel="icon" href="{{ asset('favicon.ico') }}" />
+    <link href="{{ asset('main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('code.css') }}" rel="stylesheet" />
+    <script defer src="{{ asset('debug-menu.js') }}"></script>
+  </head>
+  <body>
+    {% block thread %}{% endblock thread %}
+    <header>
+      <a class="sign" href="{{ home }}" aria-label="vladkens.me">
+        <span>vladkens</span>
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcset="{{ asset('seal-dark.svg') }}"
+          />
+          <img
+            src="{{ asset('seal.svg') }}"
+            width="1288"
+            height="1291"
+            style="--rows: 1"
+            alt=""
+          />
+        </picture>
+      </a>
+      <nav>
+        <a href="{{ home }}"{% if section == "blog" %} aria-current="page"{% endif %}>{{ t.nav_blog }}</a>
+        <a href="{{ apps_url }}"{% if section == "apps" %} aria-current="page"{% endif %}>{{ t.nav_apps }}</a>
+        <a href="{{ tags_url }}"{% if section == "tags" %} aria-current="page"{% endif %}>{{ t.nav_tags }}</a>
+        <a href="{{ about_url }}"{% if section == "about" %} aria-current="page"{% endif %}>{{ t.nav_about }}</a>
+        <a href="https://github.com/vladkens" target="_blank"
+          >github<span class="out">↗&#xFE0E;</span></a
+        >
+        <a href="https://x.com/uid127" target="_blank">x.com<span class="out">↗&#xFE0E;</span></a>
+        {% include "lang-switch.html" %}
+      </nav>
+    </header>
+    <div class="sheet">
+      <div class="head">
+        <h1>{% block h1 %}{% endblock h1 %}</h1>
+        <aside class="meta">{% block aside %}{% endblock aside %}</aside>
+      </div>
+      {% block toc %}{% endblock toc %}
+      {# Lazy, so a narrow window, which hides it, never fetches it #}
+      <div class="art">
+        <figure>
+          <picture>
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcset="{{ asset('ink-' ~ work.name ~ '-dark.webp') }}"
+            />
+            <img
+              src="{{ asset('ink-' ~ work.name ~ '.webp') }}"
+              width="{{ work.size[0] }}"
+              height="{{ work.size[1] }}"
+              loading="lazy"
+              style="--rows: {{ work.rows }}"
+              alt="{{ work[lang] }}"
+            />
+          </picture>
+        </figure>
+      </div>
+      <main>
+        <article>
+          {% block article %}{% endblock article %}
+          {% if tilt %}<div class="seal" style="--tilt: {{ tilt }}deg"></div>{% endif %}
+        </article>
+        {% block after %}{% endblock after %}
+      </main>
+      <script src="{{ asset('main.js') }}"></script>
+      <footer>
+        <p>© {{ today.year }} {{ t.footer }}</p>
+        <p>
+          {{ t.built }} {{ today }}, {{ t.commit }}
+          <a href="{{ sha_url }}">{{ sha }}</a>,
+          <a href="{{ rss_url }}">rss</a>,
+          <a href="{{ atom_url }}">atom</a>
+        </p>
+      </footer>
+    </div>
+    {% if config.DEBUG %}
+      <script src="{{ asset('live.js') }}"></script>
+    {% endif %}
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="2314c16c-b72f-4f6e-8f5e-ee3abe39383e"
+      data-domains="{{ site }}"
+      data-exclude-search="true"
+    ></script>
+  </body>
+</html>

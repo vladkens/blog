@@ -1,0 +1,35 @@
+/* Pygments classes in groups, on the tokens of main.css and a soft colour of its own. The rest inherits. */
+
+/* MARK: keywords */
+.k, .kd, .kr, .kt, .kc, .kn, .kp {
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+/* MARK: strings */
+/* .cpf is the file of an #include */
+.s, .s1, .s2, .si, .sb, .se, .sa, .sd, .sh, .sc, .sx, .sr, .dl, .cpf { color: var(--seal); }
+
+/* MARK: comments */
+.c, .c1, .cm, .cs, .ch {
+  font-style: italic;
+  color: var(--ink-4);
+}
+
+/* MARK: numbers */
+/* a soft blue-green. true and false in Terraform come as .no */
+.m, .mi, .mf, .mh, .mo, .il, .no { color: light-dark(#3b6661, #8fbab2); }
+
+/* MARK: functions and types */
+.nf, .nc, .nb, .fm {
+  font-style: italic;
+  color: var(--ink-1);
+}
+
+/* MARK: attributes and variables */
+.na, .nv, .nt { font-style: italic; }
+
+/* MARK: shell sessions */
+/* a fence with prompts, by the build: the commands in full ink, the prompt and the output behind them */
+.language-session { color: var(--ink-1); }
+.gp, .go { color: var(--ink-4); }

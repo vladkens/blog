@@ -1,6 +1,0 @@
-{% extends "base.html" %}
-
-{% block main_content %}
-  <h1>{{ trans(key="tagged_with") }}: {{ term.name }}</h1>
-  {{ <list_posts pages={term.pages} /> }}
-{% endblock main_content %}

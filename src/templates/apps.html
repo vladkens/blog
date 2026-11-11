@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block h1 %}{{ t.apps }}{% endblock h1 %}
+
+{% block article %}
+  <ol class="list apps">
+    {% for x in apps %}
+      <li>
+        <a href="{{ x.url }}">
+          <span>{{ x.title }}<br /><small>{{ x.tagline }}</small></span>
+          <small title="{{ t.stars }}">{{ x.language }} ★ {{ x.stars | grouped(lang) }}</small>
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+{% endblock article %}

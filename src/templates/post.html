@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block og_type %}article{% endblock og_type %}
+
+{% block meta %}
+  <meta property="article:published_time" content="{{ post.date | atom_date }}" />
+  <meta property="article:modified_time" content="{{ post.modified | atom_date }}" />
+  {% if post.tags %}
+    <meta name="keywords" content="{{ post.tags | join(', ') }}" />
+  {% endif %}
+  <meta name="twitter:creator" content="@uid127" />
+  <meta name="twitter:label1" content="{{ t.reading_time }}" />
+  <meta name="twitter:data1" content="{{ t.minutes.format(post.minutes) }}" />
+{% endblock meta %}
+
+{% block h1 %}{{ post.title | keep_numbered }}{% endblock h1 %}
+
+{# One line under the title, as the old site had it, in groups: the date, the reading time, the tags, the mirrors, the
+source. The dot goes after a group, so a line never starts with one. An unlisted post's tag that no other post carries
+has no page. #}
+{% block aside %}
+  <p><time datetime="{{ post.date }}">{{ post.date }}</time></p>
+  <p>{{ t.minutes.format(post.minutes) }}</p>
+  {% if post.tags %}
+    <p>{% for tag in post.tags %}{% if not loop.first %} {% endif %}{{ tag_link(tag) }}{% endfor %}</p>
+  {% endif %}
+  {% if post.mirrors %}
+    <p>{% for name, url in post.mirrors %}{% if not loop.first %} {% endif %}{{ out(name, url) }}{% endfor %}</p>
+  {% endif %}
+  <p>{{ out(t.markdown, raw_url) }} {{ out(t.edit, edit_url) }}</p>
+{% endblock aside %}
+
+{% macro tag_link(tag) -%}
+  {% if tag in tag_urls %}<a href="{{ tag_urls[tag] }}">#{{ tag }}</a>{% else %}#{{ tag }}{% endif %}
+{%- endmacro %}
+
+{% macro out(name, url) -%}
+  <a target="_blank" href="{{ url }}">{{ name }}<span class="out">↗&#xFE0E;</span></a>
+{%- endmacro %}
+
+{% block thread %}<div class="thread" aria-hidden="true"></div>{% endblock thread %}
+
+{% block toc %}
+  {% if toc %}
+    <div class="toc" role="navigation" aria-label="{{ t.toc }}">
+      <ol>
+        {% for x in toc %}
+          <li style="--n: {{ loop.index0 }}">
+            <a href="#{{ x.id }}"{% if x.label != x.title %} title="{{ x.title }}"{% endif %}>{{ x.label }}</a>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  {% endif %}
+{% endblock toc %}
+
+{% block article %}
+  {{ html }}
+{% endblock article %}
+
+{% block after %}
+  {# main.js loads the client on the way here, and passes these on to it. #}
+  <section
+    class="comments"
+    data-client="https://giscus.app/client.js"
+    data-repo="vladkens/blog"
+    data-repo-id="R_kgDOMlJ4xA"
+    data-category="General"
+    data-category-id="DIC_kwDOMlJ4xM4CjC_Y"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-lang="{{ lang }}"
+    data-loading="lazy"
+  >
+    <div class="giscus"></div>
+  </section>
+{% endblock after %}

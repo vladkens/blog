@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block h1 %}{{ app.title }}{% endblock h1 %}
+
+{% block aside %}
+  <p>{{ app.language }}</p>
+  <p title="{{ t.stars }}">★ {{ app.stars | grouped(lang) }}</p>
+  {% for name, url in app.repos.items() %}
+    <p><a target="_blank" href="{{ url }}">{{ name }}<span class="out">↗&#xFE0E;</span></a></p>
+  {% endfor %}
+  {% for name, url in app.links.items() %}
+    <p><a target="_blank" href="{{ url }}">{{ name }}<span class="out">↗&#xFE0E;</span></a></p>
+  {% endfor %}
+{% endblock aside %}
+
+{% block article %}
+  <p>{{ app.tagline }}</p>
+  {{ html }}
+{% endblock article %}
+
+{% block after %}
+  {% if posts %}
+    <h2>{{ t.blog_posts }}</h2>
+    {% include "post-list.html" %}
+  {% endif %}
+{% endblock after %}

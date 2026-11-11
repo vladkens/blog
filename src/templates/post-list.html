@@ -1,0 +1,13 @@
+<ol class="list">
+  {% for post in posts %}
+    <li>
+      <a href="{{ post.url }}">
+        <span>
+          {{- post.title }}
+          {% if post.lang != lang %}<small>{{ post.lang }}</small>{% endif -%}
+        </span>
+        <time datetime="{{ post.date }}">{{ post.date }}</time>
+      </a>
+    </li>
+  {% endfor %}
+</ol>

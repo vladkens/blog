@@ -6,10 +6,14 @@ Live at **[vladkens.me](https://vladkens.me)** · also cross-posted to [Medium](
 
 ## Stack
 
-- [Zola](https://github.com/getzola/zola/) — static site generator
-- [Tera](https://keats.github.io/tera/docs/) — templating
-- [Giscus](https://giscus.app/) — comments via GitHub Discussions
-- Cloudflare Pages — hosting
+- [Flask](https://flask.palletsprojects.com/) — routes and dev server, frozen to static files by `src/freeze.py`
+- [Jinja](https://jinja.palletsprojects.com/) — templating
+- [markdown-it-py](https://github.com/executablebooks/markdown-it-py) and [Pygments](https://pygments.org/) — Markdown and code highlighting
+- [Pillow](https://python-pillow.github.io/) — reads post image sizes and draws Open Graph images at build time
+- [giscus](https://giscus.app/) — comments
+- [Umami](https://umami.is/) — analytics
+- [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) — formatting: `brew install oxfmt` here, `npx` in CI
+- Cloudflare Pages — hosting, deployed with `npx wrangler`
 
 ## Cross-post tools
 

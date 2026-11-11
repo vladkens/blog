@@ -1,0 +1,596 @@
+---
+title: Optimizing RIPEMD-160 with SIMD
+date: 2025-05-08
+tags: ["simd", "ecloop"]
+---
+
+<!-- # Optimizing RIPEMD-160 with SIMD -->
+
+![post cover image](20250508.png)
+
+I have a hobby project – [ecloop](https://github.com/vladkens/ecloop) – a Bitcoin key "calculator" designed to find Bitcoin puzzles, verify brain wallets, and so on. The mathematical chances of finding a private key from a used address tend toward zero. I'm interested in this program as a collection of tricks involving the elliptic curve (secp256k1) and as a way to practice low-level programming (fast 256-bit arithmetic), so I continue to develop it from time to time.
+
+To calculate a Bitcoin address from a private key, several operations need to be performed:
+
+1. Calculate the point on the elliptic curve (public key): `P = G * PrivKey`.
+2. Compute SHA-256 from the compressed public key: `(P.y % 2 == 0 ? 0x02 : 0x03) + P.x`.
+3. Compute RIPEMD-160 from the resulting SHA-256 hash.
+
+The result is the so-called `hash160`, which is then encoded into a Bitcoin address using either `base58` or `bech32`.
+
+As slow as elliptic curve operations are, the slowest part of address generation is the RIPEMD-160 (RMD160) calculation. In fact, it takes about half of the total execution time (SHA-256 is hardware-accelerated on modern processors).
+
+Almost all modern processors have SIMD support: AVX2 on amd64 and Neon on arm64. That's why I decided it would be worthwhile to speed up RMD160 by implementing it using parallel calculations. Moreover, I had never written SIMD code before, so I was interested in trying it out.
+
+My main computer is a MacBook with Apple Silicon (M-series chips). Initially, I wanted to implement RMD160 SIMD using SVE (256-bit / 8-lane), but it turned out that Apple chips do not support SVE 🤦. (To clarify: the M2 chip implements the ARMv8.6 standard, while SVE was introduced in ARMv8.2 as an optional feature). So I had to use Neon (128-bit / 4-lane). If that's not the case and there is a way to run SVE instructions on M-series chips, I'd be happy to hear about it.
+
+## What is RMD160?
+
+RIPEMD-160 (RMD160) is a cryptographic hash function that produces a 160-bit hash from arbitrary data. It was developed as a secure alternative to earlier algorithms such as MD5 and SHA-1. RMD160 is widely used in blockchain technology, particularly in Bitcoin, where it is used to generate wallet addresses: the public key is first hashed using SHA-256, and then hashed again with RMD160 to improve security and reduce length.
+
+The RMD160 algorithm consists of five rounds. Each round includes basic logical functions, cyclic shifts (ROTL), and addition. A distinctive feature of RMD160 is that each round is executed in two parallel branches: the main (left) branch and the parallel (right) branch. These two branches use different constants, word orders, and logic functions, and their results are later combined.
+
+There is a [classic](https://homes.esat.kuleuven.be/~bosselae/ripemd160/ps/AB-9601/rmd160.h) [C implementation](https://homes.esat.kuleuven.be/~bosselae/ripemd160/ps/AB-9601/rmd160.c) of RMD160 that uses a bunch of macros to define rounds, logical functions, and so on—but such code is hard to read. So I prefer the [Golang implementation](https://cs.opensource.google/go/x/crypto/+/refs/tags/v0.37.0:ripemd160/ripemd160block.go), which I previously ported to `ecloop`. I plan to continue the porting to Neon based on this codebase.
+
+Stepping back a bit, SIMD instructions aren't extremely complex, but they lack "syntactic sugar" — so instead of writing `a + b`, you need to write something like `vaddq_u32(a, b)`. There are special functions like this for every standard operation multiplied by the number of numeric types (u/i 8/16/32/64, f16/32/64).
+
+RMD160 (like other hash functions) should not be too difficult to port to SIMD because their algorithms contain no branching. Essentially, the logic stays the same; it's just a matter of replacing all operations with SIMD-specific instructions.
+
+## Simple Neon Program
+
+To understand how to write using Neon, we should start with the simplest possible program, such as multiplying 42 × 2. Since SIMD involves parallel computations, its operations are applied to the entire vector at once, and the result should be the same across all parts of the vector. To verify this, the result can be printed to the console.
+
+```c
+#include <arm_neon.h>
+#include <stdint.h>
+#include <stdio.h>
+
+void print_check(uint32x4_t *a) {
+  uint32_t arr[4];
+  vst1q_u32(arr, *a); // store 4x32-bit vector into a regular array
+  for (int i = 0; i < 4; i++) {
+    printf("%x%c", arr[i], i == 3 ? '\n' : ' ');
+  }
+}
+
+int main() {
+  uint32_t a = 42;
+  uint32x4_t b = vdupq_n_u32(42); // load u32 to all 4 lanes (42, 42, 42, 42)
+  printf("%x = ", a);
+  print_check(&b); // out: 2a = 2a 2a 2a 2a
+
+  a = a * 2;
+  b = vmulq_n_u32(b, 2); // multiply each lane by 2
+  printf("%x = ", a);
+  print_check(&b); // out: 54 = 54 54 54 54
+
+  return 0;
+}
+```
+
+In general, I think the concept of how SIMD calculations work is clear. From here on, `print_check` will be used frequently to check the correctness of the hashing algorithm.
+
+## Basic Functions and ROTL
+
+The RMD160 calculation uses 5 basic functions and ROTL; everything else is a shuffling of data in a specific order. GPT has rewritten these macros, and I have verified that they are correct:
+
+```c
+// original functions
+#define OLD_F1(x, y, z) ((x) ^ (y) ^ (z))
+#define OLD_F2(x, y, z) (((x) & (y)) | (~(x) & (z)))
+#define OLD_F3(x, y, z) (((x) | ~(y)) ^ (z))
+#define OLD_F4(x, y, z) (((x) & (z)) | ((y) & ~(z)))
+#define OLD_F5(x, y, z) ((x) ^ ((y) | ~(z)))
+#define OLD_ROTL(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
+
+// simd functions
+#define F1(x, y, z) veorq_u32(veorq_u32(x, y), z)
+#define F2(x, y, z) vorrq_u32(vandq_u32(x, y), vandq_u32(vmvnq_u32(x), z))
+#define F3(x, y, z) veorq_u32(vorrq_u32(x, vmvnq_u32(y)), z)
+#define F4(x, y, z) vorrq_u32(vandq_u32(x, z), vandq_u32(y, vmvnq_u32(z)))
+#define F5(x, y, z) veorq_u32(x, vorrq_u32(y, vmvnq_u32(z)))
+#define ROTL(x, n) vorrq_u32(vshlq_n_u32(x, n), vshrq_n_u32(x, 32 - (n)))
+
+void print_check(char *l, uint32_t c, uint32x4_t a) {
+  printf("%s: %08x = ", l, c);
+  uint32_t arr[4];
+  vst1q_u32(arr, a); // store 4x32-bit vector into a regular array
+  for (int i = 0; i < 4; i++) {
+    printf("%08x%c", arr[i], i == 3 ? '\n' : ' ');
+    // assert(arr[i] == c);
+  }
+}
+
+uint32_t a1, b1, c1;
+uint32x4_t a2, b2, c2;
+
+a1 = 0x67452301, b1 = 0xefcdab89, c1 = 0x98badcfe;
+a2 = vdupq_n_u32(a1), b2 = vdupq_n_u32(b1), c2 = vdupq_n_u32(c1); // loading vectors
+
+// compare original and simd functions
+print_check("F1", OLD_F1(a1, b1, c1), F1(a2, b2, c2));
+print_check("F2", OLD_F2(a1, b1, c1), F2(a2, b2, c2));
+print_check("F3", OLD_F3(a1, b1, c1), F3(a2, b2, c2));
+print_check("F4", OLD_F4(a1, b1, c1), F4(a2, b2, c2));
+print_check("F5", OLD_F5(a1, b1, c1), F5(a2, b2, c2));
+print_check("RL", OLD_ROTL(a1, 12), ROTL(a2, 12));
+
+// output:
+// F1: 10325476 = 10325476 10325476 10325476 10325476
+// F2: ffffffff = ffffffff ffffffff ffffffff ffffffff
+// F3: efcdab89 = efcdab89 efcdab89 efcdab89 efcdab89
+// F4: 67452301 = 67452301 67452301 67452301 67452301
+// F5: 88888888 = 88888888 88888888 88888888 88888888
+// RL: 52301674 = 52301674 52301674 52301674 52301674
+```
+
+## Problem with Porting Golang Implementation
+
+The Golang implementation consists of 5 large loops, each performing 16 left and right rounds. Inside each operation, the input data is mixed at index `_n[i]`, and ROTL is performed at index `_r[i]`. The reference C implementation uses a series of consecutive macros, which makes it harder to read (in my opinion).
+
+```c
+// Golang implementation
+static const u8 _n[80] = { /* ... */ }; // Left DATA indexes
+static const u8 _r[80] = { /* ... */ }; // Left ROTL indexes
+
+// round 1
+for (; i < 16; ++i) {
+  // left branch
+  alpha = a1 + F1(b1, c1, d1) + x[_n[i]];
+  alpha = rotl32(alpha, _r[i]) + e1;
+  beta = rotl32(c1, 10);
+  a1 = e1, c1 = b1, e1 = d1, b1 = alpha, d1 = beta;
+  // right branch
+  // ...
+}
+
+// Reference C-implementation
+#define F(x, y, z)        ((x) ^ (y) ^ (z))
+#define FF(a, b, c, d, e, x, s)        {\
+      (a) += F((b), (c), (d)) + (x);\
+      (a) = ROL((a), (s)) + (e);\
+      (c) = ROL((c), 10);\
+   }
+
+// round 1 - left branch
+FF(aa, bb, cc, dd, ee, X[ 0], 11);
+FF(ee, aa, bb, cc, dd, X[ 1], 14);
+// ...
+FF(bb, cc, dd, ee, aa, X[14],  9);
+FF(aa, bb, cc, dd, ee, X[15],  8);
+```
+
+In general, if we rewrite the code directly using Neon instructions, the compilation crashes with an error stating that `vshlq_n_u32` and `vshrq_n_u32` require a known rotation value (the second argument) at compile time. See:
+
+```c
+// Golang implementation (original)
+#define F1(x, y, z) ((x) ^ (y) ^ (z))
+#define rotl32(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
+alpha = a1 + F1(b1, c1, d1) + x[_n[i]];
+alpha = rotl32(alpha, _r[i]) + e1;
+
+// Golang implementation (SIMD)
+#define F1(x, y, z) veorq_u32(veorq_u32(x, y), z)
+#define ROTL(x, n) vorrq_u32(vshlq_n_u32(x, n), vshrq_n_u32(x, 32 - (n)))
+alpha = vaddq_u32(a1, F1(b1, c1, d1));
+alpha = vaddq_u32(alpha, X[_n[i]]);
+alpha = vaddq_u32(ROTL(alpha, _r[i]), e1);
+// err: argument to '__builtin_neon_vshlq_n_v' must be a constant integer
+// err: argument to '__builtin_neon_vshrq_n_v' must be a constant integer
+```
+
+So, I have to use the macro version (C reference) because, in that case, the indexes are passed directly (the last argument in the FF macro) and expanded into constant values at compile time. Maybe this change is for the better (we will see why later).
+
+## Generic Round Macro
+
+If we look at RMD160 rounds, the same actions are performed, but with the following changes: base function, constant, data index, and rotation. In general, the round macro was shown above (I took a slightly different version from GitHub). My goal is to port the round macro to SIMD.
+
+In the round, we add up 4 variables, perform a ROTL + another addition, and a separate ROTL for another variable. Since the "+" operation is not available in SIMD, we need to use special instructions.
+
+I added some macros for vector addition and described the round itself:
+
+```c
+#define ADD2(a, b) vaddq_u32(a, b)
+#define ADD3(a, b, c) vaddq_u32(vaddq_u32(a, b), c)
+#define ADD4(a, b, c, d) vaddq_u32(vaddq_u32(vaddq_u32(a, b), c), d)
+
+#define RN(a, b, c, d, e, f, x, k, r) \
+  u = ADD4(a, f, x, vdupq_n_u32(k));  \
+  a = ADD2(ROTL(u, r), e);            \
+  c = ROTL(c, 10);
+```
+
+In the macro, `a`, `b`, `c`, `d`, `e` are the state variables, `f` is the value after the base function computation, `x` is the uint32 index data for the current iteration, `k` is a constant, and `r` is the rotation value for ROTL.
+
+`vdupq_n_u32(k)` loads a constant into a vector (the same value in all 4 lanes). Earlier, we wrote code to multiply a vector by a number, and for this purpose, [`vmulq_n_u32`](https://developer.arm.com/architectures/instruction-sets/intrinsics/vmulq_n_u32) is used. Logically, the instruction to add a number to a vector should be `vaddq_n_u32`, but it [does not exist](https://developer.arm.com/architectures/instruction-sets/intrinsics/vaddq_n_u32). Instead, it should be written in `vaddq_u32(vec1, vdupq_n_u32(2))` style (if anyone knows why this is the case – please leave a comment).
+
+Then, based on this round macro, we can define left and right rounds. The code here is similar to any other macro implementation (except that I named the rounds as `Li`/`Ri`).
+
+```c
+#define L1(a, b, c, d, e, x, r) RN(a, b, c, d, e, F1(b, c, d), x, 0, r)
+#define L2(a, b, c, d, e, x, r) RN(a, b, c, d, e, F2(b, c, d), x, 0x5A827999ul, r)
+#define L3(a, b, c, d, e, x, r) RN(a, b, c, d, e, F3(b, c, d), x, 0x6ED9EBA1ul, r)
+#define L4(a, b, c, d, e, x, r) RN(a, b, c, d, e, F4(b, c, d), x, 0x8F1BBCDCul, r)
+#define L5(a, b, c, d, e, x, r) RN(a, b, c, d, e, F5(b, c, d), x, 0xA953FD4Eul, r)
+#define R1(a, b, c, d, e, x, r) RN(a, b, c, d, e, F5(b, c, d), x, 0x50A28BE6ul, r)
+#define R2(a, b, c, d, e, x, r) RN(a, b, c, d, e, F4(b, c, d), x, 0x5C4DD124ul, r)
+#define R3(a, b, c, d, e, x, r) RN(a, b, c, d, e, F3(b, c, d), x, 0x6D703EF3ul, r)
+#define R4(a, b, c, d, e, x, r) RN(a, b, c, d, e, F2(b, c, d), x, 0x7A6D76E9ul, r)
+#define R5(a, b, c, d, e, x, r) RN(a, b, c, d, e, F1(b, c, d), x, 0, r)
+```
+
+Now, using these macros, we can write the first iteration of the first round and compare it with the working implementation. If everything is OK, we can copy the entire round, check it, and then move on to the remaining rounds. I compared the result with the `print_check` function I created earlier.
+
+First left round, first iteration:
+
+```c
+// RMD160 initial constants
+#define K1 0x67452301
+#define K2 0xEFCDAB89
+#define K3 0x98BADCFE
+#define K4 0x10325476
+#define K5 0xC3D2E1F0
+
+void rmd160_block(uint32x4_t *s, const uint32_t x[4][16]) {
+  // a1-e1 left rounds state, a2-e2 right rounds state, u - temp varible used in RD macro
+  uint32x4_t a1, b1, c1, d1, e1, a2, b2, c2, d2, e2, u;
+  // Load initial constants
+  a1 = a2 = vdupq_n_u32(K1);
+  b1 = b2 = vdupq_n_u32(K2);
+  c1 = c2 = vdupq_n_u32(K3);
+  d1 = d2 = vdupq_n_u32(K4);
+  e1 = e2 = vdupq_n_u32(K5);
+
+  uint32x4_t w[16]; // Load data to vector
+  for (int i = 0; i < 16; i++) {
+    // Load 4x32-bit integers from x[0][i], x[1][i], x[2][i], x[3][i]
+    // w[i] = vsetq_lane_u32(x[0][i], w[i], 0);
+    // w[i] = vsetq_lane_u32(x[1][i], w[i], 1);
+    // w[i] = vsetq_lane_u32(x[2][i], w[i], 2);
+    // w[i] = vsetq_lane_u32(x[3][i], w[i], 3);
+    w[i] = vld1q_u32(((uint32_t[4]){x[0][i], x[1][i], x[2][i], x[3][i]})); // A bit faster
+  }
+
+  L1(a1, b1, c1, d1, e1, w[0], 11);
+  print_check("a1", 0, a1);
+  print_check("b1", 0, b1);
+  print_check("c1", 0, c1);
+  print_check("d1", 0, d1);
+  print_check("e1", 0, e1);
+}
+
+uint32x4_t s[5] = {0}; // initial state
+s[0] = vdupq_n_u32(K1);
+s[1] = vdupq_n_u32(K2);
+s[2] = vdupq_n_u32(K3);
+s[3] = vdupq_n_u32(K4);
+s[4] = vdupq_n_u32(K5);
+
+uint32_t x[4][16] = {0}; // data block, filled with zeros
+rmd160_block((uint32x4_t *)s, x);
+```
+
+It should be noted that hash functions are usually tested on zero data (for simplicity). Data in hash functions are processed in blocks. A block in RMD160 is 32×16 = 512 bits. `rmd160_block` can be called several times with the same state (which changes) and new data, for cases where you need to calculate the hash of a message larger than one round. In my task (address generation), all messages are placed in one block. The result of the first round compare to current implementation:
+
+```
+// a1: 1602f864 1602f864 1602f864 1602f864 vs c3d2e1f0
+// a1: efcdab89 efcdab89 efcdab89 efcdab89 vs 1602f864
+// a1: eb73fa62 eb73fa62 eb73fa62 eb73fa62 vs efcdab89
+// a1: 10325476 10325476 10325476 10325476 vs eb73fa62
+// a1: c3d2e1f0 c3d2e1f0 c3d2e1f0 c3d2e1f0 vs 10325476
+```
+
+In general, these values ± are similar to the values from the current version, differing by one offset. This is not a problem, since there are 5 variables, and the offsets will be aligned by the end. It's just a difference in the implementations.
+
+I won't write all the rounds, as there are 80 on each side (160 total) – it would result in an overly large code block. Left and right rounds are independent of each other and can be calculated in any order: either first all left / all right, or alternating left / right, or alternating iterations within a round. This will not affect the final result.
+
+## Finalizing RMD160
+
+At the end of RMD160 block, we need to combine the old state with the local state – this also involves three additions with index offsets.
+
+```c
+void rmd160_block(uint32x4_t *s, const uint32_t x[4][16]) {
+  // ... 160 rounds
+
+  uint32x4_t t = s[0];
+  s[0] = ADD3(s[1], c1, d2);
+  s[1] = ADD3(s[2], d1, e2);
+  s[2] = ADD3(s[3], e1, a2);
+  s[3] = ADD3(s[4], a1, b2);
+  s[4] = ADD3(t, b1, c2);
+}
+```
+
+The final step is to change the endianness of the values (RMD160 uses a different endianness) and unload the values from the vector into the resulting array.
+
+```c
+// ... init & rmd160_block
+
+for (int i = 0; i < 5; ++i) {
+  // swap32 for uint32x4_t (can it be shorter?)
+  s[i] = vreinterpretq_u32_u8(vrev32q_u8(vreinterpretq_u8_u32(s[i])));
+}
+
+uint32_t r[4][5] = {0}; // result stored as 4x5 uint32_t
+for (int i = 0; i < 5; i++) { // load it from uint32x4_t
+  r[0][i] = vgetq_lane_u32(s[i], 0);
+  r[1][i] = vgetq_lane_u32(s[i], 1);
+  r[2][i] = vgetq_lane_u32(s[i], 2);
+  r[3][i] = vgetq_lane_u32(s[i], 3);
+}
+```
+
+That is all – `r` can be used further where needed (`r[0]`, `r[1]`, `r[2]`, `r[3]` are the computed hashes — four at once).
+
+To summarize this section, the complete parallel RMD160 algorithm looks like this:
+
+1. Initialize a state of length 160 bits × 4 lanes (`uint32x4_t s[5]`).
+2. Split the message (data) into blocks of 512 bits × 4 lanes (`uint32_t x[4][16]`).
+3. Iterate RMD160 rounds until the data runs out (`rmd160_block` reads the data into the vector itself).
+4. Change the endianness in the final state.
+5. Unload the vector of the final state into a hash array (`int32_t r[4][5]`).
+
+## Performance of RMD160 SIMD
+
+Now, it's time to measure the performance of this code – to compare the performance of the original and SIMD implementations. For this purpose, I created a small benchmark:
+
+```c
+size_t tsnow() {
+  struct timespec ts;
+  clock_gettime(CLOCK_REALTIME, &ts);
+  return ts.tv_sec * 1000 + ts.tv_nsec / 1e6;
+}
+
+void rmd160_simd() {
+  uint32_t r[4][5] = {0};
+  uint32_t x[4][16] = {0};
+
+  size_t stime = tsnow();
+  size_t iters = 1000 * 1000 * 32;
+  for (size_t i = 0; i < iters; ++i) rmd160_4w(r, x);
+  double dt = (tsnow() - stime) / 1000.0;
+  double ir = iters / dt / 1000000;
+  double hr = ir * 4; // 4 hash per iter
+  printf("%.2fM it/s ~ %.2fM h/s ~ %.2fs\n", ir, hr, dt);
+
+  printf("s[0]: %08x\n", r[0][0]);
+  printf("s[1]: %08x\n", r[0][1]);
+  printf("s[2]: %08x\n", r[0][2]);
+  printf("s[3]: %08x\n", r[0][3]);
+  printf("s[4]: %08x\n", r[0][4]);
+}
+
+void rmd160_naive() {
+  uint32_t s[5] = {0};
+  uint32_t x[16] = {0};
+
+  size_t stime = tsnow();
+  size_t iters = 1000 * 1000 * 32;
+  for (size_t i = 0; i < iters; ++i) rmd160_1w(s, x);
+  double dt = (tsnow() - stime) / 1000.0;
+  double ir = iters / dt / 1000000;
+  double hr = ir * 1; // 1 hash per iter
+  printf("%.2fM it/s ~ %.2fM h/s ~ %.2fs\n", ir, hr, dt);
+
+  printf("s[0]: %08x\n", s[0]);
+  printf("s[1]: %08x\n", s[1]);
+  printf("s[2]: %08x\n", s[2]);
+  printf("s[3]: %08x\n", s[3]);
+  printf("s[4]: %08x\n", s[4]);
+}
+```
+
+I compiled both programs with `-O3` and ran them (on a basic Apple M2):
+
+```sh
+❯ clang -O3 -march=native ./lib/rmd160.c && ./a.out # original
+5.50M it/s ~ 5.50M h/s ~ 5.81s
+
+❯ clang -O3 -march=native ./lib/rmd160s.c && ./a.out # neon
+2.14M it/s ~ 8.55M h/s ~ 14.98s
+```
+
+The Neon version (128-bit / 4 lanes) is 55% faster. This is a great result, but it's unfortunate that M-chips don't have SVE for 256/512 bits (8/16 lanes), as that would make it even better!
+
+## One More Thing
+
+While I was writing about the results above, I became **curious** to see what would happen if I changed the order of the rounds in RMD160. The original order of rounds was as follows: first all left rounds, then all right rounds. I thought this was good for the processor, because it seemed to require less "context switching".
+
+I changed the order of rounds to alternating left and right rounds (L1 / R1, L2 / R2), and the performance increased significantly. Initially, I thought there was a data error, but `print_check` (as tests) confirms everything is fine.
+
+I decided to try alternating iterations (L1_1 R1_1 L1_2 R1_2 R1_2, etc.). To be honest, rearranging 160 lines is not the most fun, but the result surprised me even more.
+
+Comparison of different round/iteration placements (3 tests of RMD160 function itself and a full cycle of `ecloop` logic):
+
+```sh
+# L1_1 L2_2 .. L5_16 R1_1 R2_2 .. R5_16 (+56%)
+2.25M it/s ~ 9.02M h/s ~ 14.19s
+2.23M it/s ~ 8.93M h/s ~ 14.33s
+2.23M it/s ~ 8.94M h/s ~ 14.32s
+ecloop (addr33 x 8 core) ~ 19.53M it/s (+22%)
+
+# L1_1-L1_16 R1_1-R1_16 L2_1-L2_16 .. (+165%)
+3.70M it/s ~ 14.80M h/s ~ 8.65s
+3.85M it/s ~ 15.42M h/s ~ 8.30s
+3.87M it/s ~ 15.46M h/s ~ 8.28s
+ecloop (addr33 x 8 core) ~ 22.46M it/s (+40%)
+
+# L1_1 R1_1 L1_2 R1_2 .. L5_16 R5_16 (+175%)
+3.96M it/s ~ 15.82M h/s ~ 8.09s
+3.94M it/s ~ 15.78M h/s ~ 8.11s
+3.94M it/s ~ 15.76M h/s ~ 8.12s
+ecloop (addr33 x 8 core) ~ 24.83M it/s (+55%)
+```
+
+It's a mystery to me why it works this way, and maybe there is an even more effective arrangement. Who knows? Please, write in the comments.
+
+## Support for AVX2 (AMD64)
+
+Initially, I didn't plan to implement this, but RMD160 algorithm using macros was quite abstract, and further porting to AVX2 seemed fairly simple. The main difference between AVX2 and Neon (aside from the different instruction sets) is the vector size – 256 bits vs 128 bits – which allows us to process 8 hashes in parallel (vs 4 in Neon).
+
+Currently, the following Neon instructions are used directly in the algorithm code: vector type (`uint32x4_t`), state initialization via `vdupq_n_u32`, endian-swap, and load / dump data into the vector.
+
+I'm moving these things to macros (just in case, I added `RMD_` prefix to avoid conflicts with other files):
+
+```c
+#define RMD_LEN 4                    // vector length
+#define RMD_VEC uint32x4_t           // vector type
+#define RMD_LD_NUM(x) vdupq_n_u32(x) // load same number into all lanes
+
+#define RMD_SWAP(x) vreinterpretq_u32_u8(vrev32q_u8(vreinterpretq_u8_u32(x)))
+#define RMD_LOAD(x, i) vld1q_u32(((uint32_t[4]){x[0][i], x[1][i], x[2][i], x[3][i]}))
+#define RMD_DUMP(r, s, i)                                                                        \
+  do {                                                                                           \
+    r[0][i] = vgetq_lane_u32(s[i], 0);                                                           \
+    r[1][i] = vgetq_lane_u32(s[i], 1);                                                           \
+    r[2][i] = vgetq_lane_u32(s[i], 2);                                                           \
+    r[3][i] = vgetq_lane_u32(s[i], 3);                                                           \
+  } while (0);
+```
+
+And update the current code to something like this:
+
+```c
+void rmd160_block(RMD_VEC *s, const uint32_t x[RMD_LEN][16]) {
+  RMD_VEC a1, b1, c1, d1, e1, a2, b2, c2, d2, e2, u;
+  a1 = a2 = RMD_LD_NUM(RMD_K1);
+  b1 = b2 = RMD_LD_NUM(RMD_K2);
+  c1 = c2 = RMD_LD_NUM(RMD_K3);
+  d1 = d2 = RMD_LD_NUM(RMD_K4);
+  e1 = e2 = RMD_LD_NUM(RMD_K5);
+
+  RMD_VEC w[16];
+  for (int i = 0; i < 16; i++) w[i] = RMD_LOAD(x, i);
+  // ... rounds and iterations
+}
+
+// new function to process full single block
+void rmd160_batch(uint32_t r[RMD_LEN][5], const uint32_t x[RMD_LEN][16]) {
+  RMD_VEC s[5] = {0}; // load initial state
+  s[0] = RMD_LD_NUM(RMD_K1);
+  s[1] = RMD_LD_NUM(RMD_K2);
+  s[2] = RMD_LD_NUM(RMD_K3);
+  s[3] = RMD_LD_NUM(RMD_K4);
+  s[4] = RMD_LD_NUM(RMD_K5);
+
+  rmd160_block((RMD_VEC *)s, x);                     // round
+  for (int i = 0; i < 5; ++i) s[i] = RMD_SWAP(s[i]); // change endian
+  for (int i = 0; i < 5; ++i) RMD_DUMP(r, s, i);     // dump data to array
+}
+```
+
+Of course, it's already quite magical, but there aren't really many changes. Now, I should add redefined macros for AVX2. In addition, I wrapped a series of architecture-specific macros in `#ifdef`. In fact, I have a single codebase for RMD160 algorithm, and the necessary macros are included depending on which processor the program is being compiled for.
+
+```c
+#if defined(__aarch64__) && defined(__ARM_NEON)
+  #include <arm_neon.h>
+
+  #define RMD_LEN 4                    // vector length
+  #define RMD_VEC uint32x4_t           // vector type
+  // ... move all current Neon related macros here
+#elif defined(__x86_64__) && defined(__AVX2__)
+  #include <immintrin.h>
+
+  #define RMD_LEN 8
+  #define RMD_VEC __m256i
+  #define RMD_LD_NUM(x) _mm256_set1_epi32(x)
+
+  #define RMD_SWAP(x)                                                                              \
+    _mm256_shuffle_epi8((x), _mm256_setr_epi8(3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13,    \
+                                              12, 19, 18, 17, 16, 23, 22, 21, 20, 27, 26, 25, 24,  \
+                                              31, 30, 29, 28))
+
+  #define RMD_LOAD(x, i)                                                                           \
+    _mm256_set_epi32(x[0][i], x[1][i], x[2][i], x[3][i], x[4][i], x[5][i], x[6][i], x[7][i])
+
+  #define RMD_DUMP(r, s, i)                                                                        \
+    do {                                                                                           \
+      r[0][i] = _mm256_extract_epi32(s[i], 0);                                                     \
+      r[1][i] = _mm256_extract_epi32(s[i], 1);                                                     \
+      r[2][i] = _mm256_extract_epi32(s[i], 2);                                                     \
+      r[3][i] = _mm256_extract_epi32(s[i], 3);                                                     \
+      r[4][i] = _mm256_extract_epi32(s[i], 4);                                                     \
+      r[5][i] = _mm256_extract_epi32(s[i], 5);                                                     \
+      r[6][i] = _mm256_extract_epi32(s[i], 6);                                                     \
+      r[7][i] = _mm256_extract_epi32(s[i], 7);                                                     \
+    } while (0);
+
+  #define _mm256_not_si256(x) _mm256_xor_si256((x), _mm256_set1_epi32(0xffffffff))
+  #define RMD_F1(x, y, z) _mm256_xor_si256(x, _mm256_xor_si256(y, z))
+  #define RMD_F2(x, y, z) _mm256_or_si256(_mm256_and_si256(x, y), _mm256_andnot_si256(x, z))
+  #define RMD_F3(x, y, z) _mm256_xor_si256(_mm256_or_si256(x, _mm256_not_si256(y)), z)
+  #define RMD_F4(x, y, z) _mm256_or_si256(_mm256_and_si256(x, z), _mm256_andnot_si256(z, y))
+  #define RMD_F5(x, y, z) _mm256_xor_si256(x, _mm256_or_si256(y, _mm256_not_si256(z)))
+
+  #define RMD_ROTL(x, n) _mm256_or_si256(_mm256_slli_epi32(x, n), _mm256_srli_epi32(x, 32 - (n)))
+  #define RMD_ADD2(a, b) _mm256_add_epi32(a, b)
+  #define RMD_ADD3(a, b, c) _mm256_add_epi32(_mm256_add_epi32(a, b), c)
+  #define RMD_ADD4(a, b, c, d) _mm256_add_epi32(_mm256_add_epi32(a, b), _mm256_add_epi32(c, d))
+#else
+  #error "Unsupported arch for RIPEMD-160 (AVX2 or NEON required)"
+#endif
+```
+
+The main differences are:
+
+- A different header file.
+- A different vector type (8 lanes instead of 4 in Neon) and different names for intrinsics.
+- AVX2 has no Bitwise NOT, so I had to add it separately as `_mm256_not_si256`.
+- No separate function for endian-swap, but there is a more generalized function to rearrange bits in a given order: `_mm256_shuffle_epi8` (the first argument specifies where to rearrange the bits, and the second specifies how to rearrange them).
+- `_mm256_set_epi32` makes it more convenient to load data into different lanes, while in Neon we had to use a temporary array (the variant with setting each lane separately (`vsetq_lane_u32`) is slower).
+
+The rewriting of the macros was mostly handled by GPT; I just checked the correctness once again.
+
+## Performance of AVX2 Version
+
+I have a small fanless PC running Linux on an Intel N100, which I use for native application testing. I ran the benchmark written earlier on it and got the following results:
+
+```sh
+❯ clang -O3 -march=native ./lib/rmd160.c && ./a.out # original (on Intel N100)
+4.26M it/s ~ 4.26M h/s ~ 7.51s
+
+❯ clang -O3 -march=native ./lib/rmd160s.c && ./a.out # avx2 (on Intel N100)
+2.25M it/s ~ 17.96M h/s ~ 14.25s
+```
+
+8 lanes of AVX2 and the correct arrangement of rounds in the algorithm (zebra iterations) result in a 320% increase in the number of hashes per second compared to the original code. What's interesting is that AVX2 on the Intel N100 runs 20% faster than Neon on the Apple M2 (mainly because of the vector size). Overall `ecloop` speedup: `5.45M it/s vs 7.73M it/s (+42%)`.
+
+## Fallback Implementation for Older Processors / VMs
+
+In the `#ifdef` above, I left the `#else` section with `#error` to prevent compilation on unsupported systems. In general, this is not ideal, and I would like the program to work everywhere (mainly for potential runs in VMs). Since the whole algorithm is already written in macros, adding a new implementation is not difficult. I simply redefine all macros to use a vector size of 1 and `uint32_t` as the "vector" type. In reality, the program will work with a single array, which, from a memory perspective in C, is essentially the same as just using `uint32_t`.
+
+```c
+// ... #ifdef for neon / avx2
+#else
+  #warning "Fallback RIPEMD-160 implementation used. AVX2 or NEON required for SIMD"
+
+  #define RMD_LEN 1
+  #define RMD_VEC uint32_t
+  #define RMD_LD_NUM(x) x
+
+  #define RMD_SWAP(x) __builtin_bswap32(x)
+  #define RMD_LOAD(x, i) x[0][i]
+  #define RMD_DUMP(r, s, i) r[0][i] = s[i]
+
+  #define RMD_F1(x, y, z) ((x) ^ (y) ^ (z))
+  #define RMD_F2(x, y, z) (((x) & (y)) | (~(x) & (z)))
+  #define RMD_F3(x, y, z) (((x) | ~(y)) ^ (z))
+  #define RMD_F4(x, y, z) (((x) & (z)) | ((y) & ~(z)))
+  #define RMD_F5(x, y, z) ((x) ^ ((y) | ~(z)))
+
+  #define RMD_ROTL(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
+  #define RMD_ADD2(a, b) (a + b)
+  #define RMD_ADD3(a, b, c) (a + b + c)
+  #define RMD_ADD4(a, b, c, d) (a + b + c + d)
+#endif
+```
+
+I ran it and checked it – it works correctly, except that the speed became a bit faster due to the new order of rounds. It is not difficult to add an implementation for AVX512 (16 lanes) in the same way, but I don't have a processor to test it, so I didn't do it. Also, the article was already getting quite long, so I’m wrapping it up here.
+
+# Fin
+
+SIMD programming turned out to be easier than it seemed. The necessary intrinsics can be "Googled" in GPT; it is difficult to search for them yourself because there are thousands of combinations. RMD160 itself is mostly used in cryptocurrencies (at least I don't know of other popular use cases), so the usefulness of the obtained code outside of the learning factor is questionable.
+
+SIMD calculations give a good boost to execution speed, but, of course, you should take into account the specifics of the task: you need to have a lot of data to process, and these data should have the same size. It makes no sense to use SIMD if some data to be hashed fits into one block and others into 100 (for example, when processing files). Also, the main program should be able to process data in batches.
+
+The final code as a single file is available on [Github](https://github.com/vladkens/ecloop/blob/main/lib/rmd160s.c).
