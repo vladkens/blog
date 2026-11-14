@@ -3,6 +3,8 @@ title: Wanted a Dictation App, Got Three Libraries
 description: A month of work with agents on Wavo, a dictation app that grew its own speech recognition engine, UI library and packager.
 date: 2026-11-11
 tags: ["rust", "ai", "wavo"]
+medium: https://medium.com/p/b3bfbe7dfda8
+devto: https://dev.to/vladkens/wanted-a-dictation-app-got-three-libraries-1mdo
 ---
 
 ![Wavo: dictating into TextEdit, a colored recording bar at the bottom, the app's settings window on the right](wavo.webp)
