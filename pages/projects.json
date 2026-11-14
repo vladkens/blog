@@ -1,15 +1,15 @@
 [
   {
     "name": "vladkens/twscrape",
-    "stars": 2945
+    "stars": 2964
   },
   {
     "name": "vladkens/macmon",
-    "stars": 2103
+    "stars": 2113
   },
   {
     "name": "vladkens/ghstats",
-    "stars": 198
+    "stars": 200
   },
   {
     "name": "vladkens/ecloop",
@@ -25,11 +25,11 @@
   },
   {
     "name": "vladkens/wavo",
-    "stars": 27
+    "stars": 29
   },
   {
     "name": "vladkens/wavo-app",
-    "stars": 17
+    "stars": 18
   },
   {
     "name": "vladkens/url-normalize",
