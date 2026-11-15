@@ -64,7 +64,7 @@ TAGS_MAX = 5
 # Medium's paragraph, markup and delta types, as its editor sends them
 P, H3, IMG, BQ, PRE, ULI, OLI, H4 = 1, 3, 4, 6, 8, 9, 10, 13
 STRONG, EM, LINK, CODE = 1, 2, 3, 10
-INSERT, DELETE, UPDATE, SECTION = 1, 2, 3, 8
+INSERT, DELETE, UPDATE, SECTION, UNSECTION = 1, 2, 3, 8, 9
 KINDS = {P: "P", H3: "H3", IMG: "IMG", BQ: "BQ", PRE: "PRE", ULI: "UL", OLI: "OL", H4: "H4"}
 
 # every API answer starts with this, against JSON hijacking
@@ -349,7 +349,8 @@ SET_CANONICAL = """mutation UpdateCanonicalUrl($input: UpdateCanonicalUrlInput!)
   updateCanonicalUrl(input: $input) { __typename }
 }"""
 # a story, as `mirrors.py` compares and counts it
-STORY = """id title mediumUrl canonicalUrl firstPublishedAt latestPublishedAt
+STORY = """id title mediumUrl canonicalUrl
+  firstPublishedAt latestPublishedAt isPublished hasUnpublishedEdits
   totalStats { views reads } clapCount postResponses { count }
   content { bodyModel { paragraphs { type text } } }"""
 GET_STORY = f"""query PostQuery($id: ID!) {{ post(id: $id) {{ {STORY} }} }}"""
@@ -448,6 +449,10 @@ class Medium:
                         pass
                     case 8:  # SECTION
                         sections += 1
+                    case 9:  # UNSECTION
+                        sections -= 1
+                    case 12:  # no content: where the story went out, as far as seen
+                        pass
                     case _:
                         raise RuntimeError(f"{pid}: a delta of unknown kind: {x['delta']}")
 
@@ -529,14 +534,13 @@ def publish(post: Post, pid: str | None, tags: list[str] | None, medium: Medium)
     upload_images(post, doc, medium)
 
     rev, old, sections = medium.state(pid) if pid else (-1, 0, 0)
-    if sections > 1:
-        raise RuntimeError(f"{pid} has {sections} sections, which this can't remove: use --new")
-
     if not pid:
         pid = medium.create()
         save_draft(post.slug, pid)  # before anything else can fail
 
     deltas = [] if sections else [section(0, 0)]
+    # every section but the first goes, and the post's own come back after the text
+    deltas += [{"type": UNSECTION, "index": k} for k in range(sections - 1, 0, -1)]
     deltas += [{"type": INSERT, "index": k, "paragraph": x} for k, x in enumerate(doc)]
     # what was there before sits after the new text now
     deltas += [{"type": DELETE, "index": len(doc)} for _ in range(old)]
@@ -555,6 +559,9 @@ def publish(post: Post, pid: str | None, tags: list[str] | None, medium: Medium)
     want = len(doc), len(breaks) + 1
     if (paras, sections) != want:
         warn(f"{pid} has {paras} paragraphs in {sections} sections, not {want[0]} in {want[1]}")
+
+    if (x := medium.story(pid))["isPublished"] and x["hasUnpublishedEdits"]:
+        print("  published: Medium keeps the change aside till Save and publish in its editor")
 
     return pid
 

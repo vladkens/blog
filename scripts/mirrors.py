@@ -37,6 +37,8 @@ STATS = Path.home() / ".local" / "share" / "vladkens.me" / "mirrors.jsonl"
 # what tells two texts apart only in typography
 SPACES = re.compile(r"\s+")  # a hair or no-break space too
 QUOTES = str.maketrans({"’": "'", "‘": "'", "“": '"', "”": '"'})
+# a picture's address: dev.to's upload of an SVG is not the site's
+PICTURE = re.compile(r"(!\[[^\]]*\])\([^)]*\)")
 
 
 @dataclass
@@ -46,6 +48,8 @@ class Copy:
     url: str
     title: str
     published: date | None  # None for a draft
+    sent: date | None  # its text went out last
+    held: bool  # Medium's edits kept aside till Save and publish
     canonical: str | None  # None when it is the copy's own address
     text: list[str]
     views: int
@@ -56,7 +60,7 @@ class Copy:
 
 
 def norm(lines: list[str]) -> list[str]:
-    rs = (SPACES.sub(" ", x.translate(QUOTES)).strip() for x in lines)
+    rs = (SPACES.sub(" ", PICTURE.sub(r"\1", x).translate(QUOTES)).strip() for x in lines)
     return [x for x in rs if x]
 
 
@@ -64,13 +68,17 @@ def norm(lines: list[str]) -> list[str]:
 
 
 def medium_copy(x: dict) -> Copy:
-    at = x["firstPublishedAt"]
+    def day(at: int) -> date | None:
+        return datetime.fromtimestamp(at / 1000, UTC).date() if at else None
+
     return Copy(
         site="medium",
         id=x["id"],
         url=x["mediumUrl"],
         title=x["title"],
-        published=datetime.fromtimestamp(at / 1000, UTC).date() if at else None,
+        published=day(x["firstPublishedAt"]),
+        sent=day(x["latestPublishedAt"]),
+        held=x["isPublished"] and x["hasUnpublishedEdits"],
         canonical=x["canonicalUrl"] if x["canonicalUrl"] != x["mediumUrl"] else None,
         text=norm(
             [p["text"] for p in x["content"]["bodyModel"]["paragraphs"] if p["type"] != "IMG"]
@@ -84,12 +92,15 @@ def medium_copy(x: dict) -> Copy:
 
 def devto_copy(x: dict) -> Copy:
     own = x["canonical_url"].startswith("https://dev.to/")
+    at = date.fromisoformat(x["published_at"][:10]) if x["published"] else None
     return Copy(
         site="devto",
         id=str(x["id"]),
         url=x["url"],
         title=x["title"],
-        published=date.fromisoformat(x["published_at"][:10]) if x["published"] else None,
+        published=at,
+        sent=at,  # the API gives no time of the last edit
+        held=False,
         canonical=None if own else x["canonical_url"],
         text=norm(x["body_markdown"].splitlines()),
         views=x["page_views_count"],
@@ -146,8 +157,9 @@ def copies(posts: list[Post]) -> list[Copy]:
 
 def status(posts: list[Post], rs: list[Copy]) -> None:
     """A copy is off when it points elsewhere, when its text is not the post's of today, or when
-    the post changed after the copy went out."""
-    print(f"{'post':<40} {'Medium':<26} dev.to")
+    the post's `updated` came after the copy went out; "held" is a Medium edit that waits for Save
+    and publish in its editor."""
+    print(f"{'post':<40} {'Medium':<31} dev.to")
     for post in posts:
         cells = []
         for site in SITES:
@@ -159,10 +171,12 @@ def status(posts: list[Post], rs: list[Copy]) -> None:
             same = SequenceMatcher(None, x.text, local_text(site, post)).ratio()
             flags = ["out" if x.published else "draft", f"{same:4.0%}"]
             flags += [] if x.canonical == SITE + post.url else ["no canonical"]
-            flags += ["post newer"] if x.published and post.modified > x.published else []
+            # only `updated` marks a change: the post's own date may come after its copy's
+            flags += ["post newer"] if x.sent and post.updated and post.updated > x.sent else []
+            flags += ["held"] if x.held else []
             cells.append(" ".join(flags))
 
-        print(f"{post.slug[:40]:<40} {cells[0]:<26} {cells[1]}")
+        print(f"{post.slug[:40]:<40} {cells[0]:<31} {cells[1]}")
 
     if lost := [x for x in rs if not x.slug]:
         print("\nno post here:")
