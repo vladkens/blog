@@ -19,7 +19,7 @@ from curl_cffi import requests
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from content import Post, describe, read_posts
+from content import Post, describe, page_url, read_posts
 
 SITE = "https://vladkens.me"
 API = "https://api.buttondown.com/v1"
@@ -77,8 +77,10 @@ class Buttondown:
         return rs
 
     def find(self, post: Post) -> dict | None:
-        """The email already made for the post, by its canonical address."""
-        return next((x for x in self.emails() if x["canonical_url"] == SITE + post.url), None)
+        """The email already made for the post, by its canonical address, the one it had before a
+        rename too."""
+        urls = {SITE + post.url} | {SITE + page_url(x, post.lang) for x in post.aliases}
+        return next((x for x in self.emails() if x["canonical_url"] in urls), None)
 
 
 def push(post: Post, bd: Buttondown) -> str:
