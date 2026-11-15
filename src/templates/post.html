@@ -57,6 +57,15 @@ other post carries has no page. #}
 {% endblock article %}
 
 {% block after %}
+  {# The newsletter is in English, so only an English post offers it. A plain form, as Buttondown asks:
+  it may need its reply for a CAPTCHA, so the reply opens in a tab of its own. #}
+  {% if lang == "en" %}
+    <form class="subscribe" action="https://buttondown.com/api/emails/embed-subscribe/vladkens" method="post" target="_blank">
+      <label for="subscribe">{{ t.subscribe }}</label>
+      <input id="subscribe" type="email" name="email" placeholder="Email" autocomplete="email" required />
+      <button>{{ t.subscribe_button }}</button>
+    </form>
+  {% endif %}
   {# main.js loads the client on the way here, and passes these on to it. #}
   <section
     class="comments"

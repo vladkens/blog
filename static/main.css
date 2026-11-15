@@ -85,10 +85,10 @@ header {
   justify-self: start;
 }
 
-/* the longest nav, in Russian, needs 652 for one row with a full gap */
-@media (width < 656px) { header { column-gap: calc(var(--row) / 2); } }
+/* the longest nav, in Russian, needs 728 for one row with a full gap */
+@media (width < 732px) { header { column-gap: calc(var(--row) / 2); } }
 
-/* a phone's two rows, never a word left alone on the second: the seal, the blog and the language switch, then the other links. The break is a zero tall line of its own */
+/* a phone's two rows, never a word left alone on the second: the seal, the blog, the coffee and the language switch, then the other links. The break is a zero tall line of its own */
 @media (width < 600px) {
   nav::before {
     content: "";
@@ -97,6 +97,7 @@ header {
   }
 
   nav > a + a { order: 2; }
+  nav > .coffee { order: 0; }
 }
 
 /* without the arrows the Russian links fit 360, and a third of a row apart 320 */
@@ -194,7 +195,7 @@ h3 { font-size: 23px; }
 h4, h5, h6 { font-size: 1em; }
 
 /* the seal's red, muted to pastel. The underline follows the colour, so a hover carries it along */
-a {
+a, .subscribe button {
   --side: 3px;
   color: var(--seal);
   text-decoration-thickness: 1px;
@@ -202,7 +203,7 @@ a {
   transition: color 260ms;
 }
 
-a:not(nav a, .meta a):hover {
+a:not(nav a, .meta a):hover, .subscribe button:hover {
   color: var(--ink-1);
   transition-duration: 90ms;
 }
@@ -619,6 +620,45 @@ pre, table {
     scale: 1.12;
   }
 }
+
+/* MARK: subscribe */
+/* a plain panel in whole rows: the line on half a row of air, however many rows it wraps to, then the field and its button as one box, centred in two and a half */
+.subscribe {
+  display: grid;
+  grid-template: auto calc(var(--row) * 2.5) / minmax(0, 1fr) auto;
+  margin-top: var(--row);
+  padding-inline: calc(var(--row) / 2);
+  background: var(--panel);
+}
+
+.subscribe label {
+  grid-column: 1 / 3;
+  padding-top: calc(var(--row) / 2);
+  color: var(--ink-2);
+}
+
+.subscribe input, .subscribe button {
+  align-self: center;
+  height: calc(var(--row) * 1.25);
+  padding: 0 calc(var(--row) / 2);
+  border: 1px solid var(--ink-5);
+  box-sizing: border-box;
+  font: inherit;
+  background: var(--paper);
+}
+
+.subscribe input {
+  min-width: 0;
+  border-right: 0;
+  color: var(--ink-1);
+  outline: 0;
+}
+
+.subscribe input:focus { border-color: var(--ink-3); }
+.subscribe input::placeholder { color: var(--ink-4); }
+
+/* a link's ink and hover, as a button */
+.subscribe button { cursor: pointer; }
 
 /* MARK: comments */
 /* the room an empty thread takes, held from the start: giscus draws it 282px tall, 9 rows of 32 and 10 of 30. main.js sets --rows from what the frame reports once it settles, and the block never shrinks under the empty one, so an empty thread never moves the page and a full one moves it once. A frame taller than the block is clipped, never laid over the footer. Its one cell holds the skeleton and the frame on top of each other */
