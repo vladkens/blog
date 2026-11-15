@@ -190,7 +190,7 @@ class Post(Doc):
     date: date
     tags: list[str]
     updated: date | None = None  # a change worth telling readers and search engines of
-    medium: str | None = None
+    medium: str | None = None  # the copies, for the scripts that push and count them; not shown
     devto: str | None = None
     draft: bool = False
     unlisted: bool = False
@@ -203,10 +203,6 @@ class Post(Doc):
     @property
     def modified(self) -> date:
         return self.updated or self.date
-
-    @property
-    def mirrors(self) -> list[tuple[str, str]]:
-        return [(k, v) for k, v in (("devto", self.devto), ("medium", self.medium)) if v]
 
     @property
     def words(self) -> int:
