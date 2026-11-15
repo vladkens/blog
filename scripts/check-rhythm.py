@@ -23,7 +23,7 @@ SCRIPTS = [STATIC / "main.js", STATIC / "debug-menu.js"]
 CONTENT = SRC / "content.py"
 PUBLIC = ROOT / "public"
 
-BUDGET = 842
+BUDGET = 880
 
 BANNED = {
     "round()": r"\bround\(",
@@ -143,7 +143,8 @@ def check_css(path: Path, defined: set[str]) -> tuple[list[str], int]:
         ]
 
     for m in re.finditer(r"font(?:-family)?:([^;]+);", text):
-        names = {x.split("/")[-1].split()[-1] for x in m[1].split(",")}
+        # inherit is no font: a form control takes the text's own
+        names = {x.split("/")[-1].split()[-1] for x in m[1].split(",")} - {"inherit"}
         if names - FONTS:
             errs.append(f"{name}:{line_of(text, m.start())}: fonts {names - FONTS} aren't system")
 

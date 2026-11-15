@@ -85,10 +85,10 @@ header {
   justify-self: start;
 }
 
-/* the longest nav, in Russian, needs 652 for one row with a full gap */
-@media (width < 656px) { header { column-gap: calc(var(--row) / 2); } }
+/* the longest nav, in Russian, needs 728 for one row with a full gap */
+@media (width < 732px) { header { column-gap: calc(var(--row) / 2); } }
 
-/* a phone's two rows, never a word left alone on the second: the seal, the blog and the language switch, then the other links. The break is a zero tall line of its own */
+/* a phone's two rows, never a word left alone on the second: the seal, the blog, the coffee and the language switch, then the other links. The break is a zero tall line of its own */
 @media (width < 600px) {
   nav::before {
     content: "";
@@ -97,6 +97,7 @@ header {
   }
 
   nav > a + a { order: 2; }
+  nav > .coffee { order: 0; }
 }
 
 /* without the arrows the Russian links fit 360, and a third of a row apart 320 */
@@ -194,7 +195,7 @@ h3 { font-size: 23px; }
 h4, h5, h6 { font-size: 1em; }
 
 /* the seal's red, muted to pastel. The underline follows the colour, so a hover carries it along */
-a {
+a, .subscribe button {
   --side: 3px;
   color: var(--seal);
   text-decoration-thickness: 1px;
@@ -202,7 +203,7 @@ a {
   transition: color 260ms;
 }
 
-a:not(nav a, .meta a):hover {
+a:not(nav a, .meta a):hover, .subscribe button:hover {
   color: var(--ink-1);
   transition-duration: 90ms;
 }
@@ -618,6 +619,43 @@ pre, table {
     opacity: 0;
     scale: 1.12;
   }
+}
+
+/* MARK: subscribe */
+/* two rows under the post: the line, then the field and its button. The field is a rule to write on, a row tall with the line inside it, so nothing leaves the grid */
+.subscribe {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--row);
+  margin-top: var(--row);
+}
+
+.subscribe label { flex-basis: 100%; }
+.subscribe input, .subscribe button { font: inherit; }
+
+.subscribe input {
+  flex: 1 1 calc(var(--row) * 5);
+  max-width: calc(var(--row) * 10);
+  min-width: 0;
+  height: var(--row);
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink-5);
+  box-sizing: border-box;
+  color: var(--ink-1);
+  background: none;
+  outline: 0;
+}
+
+.subscribe input:focus { border-bottom-color: var(--ink-3); }
+.subscribe input::placeholder { color: var(--ink-4); }
+
+/* a link's ink and hover, as a button */
+.subscribe button {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 
 /* MARK: comments */
