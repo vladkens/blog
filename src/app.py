@@ -116,7 +116,8 @@ STRINGS = {
         "built": "Built on",
         "commit": "commit",
         "toc": "Contents",
-        "subscribe": "New posts by email, nothing else.",
+        "subscribe": "Get new posts by email",
+        "subscribe_note": "One email per new post, nothing else.",
         "subscribe_button": "Subscribe",
     },
     "ru": {

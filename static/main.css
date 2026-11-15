@@ -195,7 +195,7 @@ h3 { font-size: 23px; }
 h4, h5, h6 { font-size: 1em; }
 
 /* the seal's red, muted to pastel. The underline follows the colour, so a hover carries it along */
-a, .subscribe button {
+a {
   --side: 3px;
   color: var(--seal);
   text-decoration-thickness: 1px;
@@ -203,7 +203,7 @@ a, .subscribe button {
   transition: color 260ms;
 }
 
-a:not(nav a, .meta a):hover, .subscribe button:hover {
+a:not(nav a, .meta a):hover {
   color: var(--ink-1);
   transition-duration: 90ms;
 }
@@ -512,7 +512,7 @@ pre code {
 }
 
 /* the zero column's centre is the panel's edge, so the stroke straddles it and takes no room */
-.code::before {
+.code::before, .subscribe::before {
   content: "";
   grid-area: 1 / 1 / -1 / 2;
   justify-self: center;
@@ -622,40 +622,60 @@ pre, table {
 }
 
 /* MARK: subscribe */
-/* two rows under the post: the line, then the field and its button. The field is a rule to write on, a row tall with the line inside it, so nothing leaves the grid */
+/* a panel like a code block's, with its stroke in the zero column: the heading on half a row of air, the note, then the field and its button, a row and a half tall with half a row above and below. Whole rows, whatever the note wraps to */
 .subscribe {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: var(--row);
+  display: grid;
+  grid-template: calc(var(--row) * 1.5) auto calc(var(--row) * 2.5) / 0 minmax(0, 1fr) auto;
   margin-top: var(--row);
+  padding-right: calc(var(--row) / 2);
+  background: var(--panel);
 }
 
-.subscribe label { flex-basis: 100%; }
-.subscribe input, .subscribe button { font: inherit; }
+.subscribe label, .subscribe p {
+  grid-column: 2 / 4;
+  margin-left: calc(var(--row) / 2);
+}
+
+.subscribe label {
+  align-self: end;
+  font-size: 23px;
+}
+
+.subscribe p { color: var(--ink-3); }
+
+.subscribe input, .subscribe button {
+  align-self: center;
+  height: calc(var(--row) * 1.5);
+  padding: 0 calc(var(--row) / 2);
+  box-sizing: border-box;
+  font: inherit;
+}
 
 .subscribe input {
-  flex: 1 1 calc(var(--row) * 5);
-  max-width: calc(var(--row) * 10);
   min-width: 0;
-  height: var(--row);
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid var(--ink-5);
-  box-sizing: border-box;
+  margin-left: calc(var(--row) / 2);
+  border: 1px solid var(--ink-5);
+  border-right: 0;
   color: var(--ink-1);
-  background: none;
+  background: var(--paper);
   outline: 0;
 }
 
-.subscribe input:focus { border-bottom-color: var(--ink-3); }
+.subscribe input:focus { border-color: var(--ink-3); }
 .subscribe input::placeholder { color: var(--ink-4); }
 
-/* a link's ink and hover, as a button */
+/* the seal's red as ink, the way a link turns on a hover */
 .subscribe button {
-  padding: 0;
   border: 0;
-  background: none;
+  color: var(--paper);
+  background: var(--seal);
   cursor: pointer;
+  transition: background-color 260ms;
+}
+
+.subscribe button:hover {
+  background: var(--ink-1);
+  transition-duration: 90ms;
 }
 
 /* MARK: comments */

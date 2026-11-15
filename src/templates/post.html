@@ -65,7 +65,8 @@ other post carries has no page. #}
   {% if lang == "en" %}
     <form class="subscribe" action="https://buttondown.com/api/emails/embed-subscribe/vladkens" method="post" target="_blank">
       <label for="subscribe">{{ t.subscribe }}</label>
-      <input id="subscribe" type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+      <p>{{ t.subscribe_note }}</p>
+      <input id="subscribe" type="email" name="email" placeholder="Email" autocomplete="email" required />
       <button>{{ t.subscribe_button }}</button>
     </form>
   {% endif %}
